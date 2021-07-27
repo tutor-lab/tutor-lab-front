@@ -11,9 +11,31 @@ import EditorComponent from "../components/quillEditor/EditorComponent";
 const NewClass02 = ({ form, nextStep, prevStep, handleChange, showModal }) => {
 
   const [picture, setPicture] = useState('');
+  
   function onEditorChange(value) {
+
     setPicture(value)
   }
+  async function imageHandler(){  
+    console.log('dsfdsfs')
+    const input = document.createElement('input');  
+    
+    input.setAttribute('type', 'file');  
+    input.setAttribute('accept', 'image/*');  
+    input.click();  
+    
+    input.onchange = async () => {  
+        var file = input.files[0];  
+        var formData = new FormData();  
+    
+        formData.append('image', file);  
+    
+        var fileName = file.name;  
+    
+        // const res = await this.uploadFiles(file, fileName, quillObj);  
+    };  
+}  
+  
   
   return (
     <>
@@ -136,7 +158,7 @@ const NewClass02 = ({ form, nextStep, prevStep, handleChange, showModal }) => {
             }}
             onChange={handleChange("ckEditor")}
           /> */}
-          <EditorComponent value={picture} onChange={onEditorChange}/>
+          <EditorComponent value={picture} imageHandler={imageHandler} onChange={onEditorChange}/>
         </div>
         {/* //<resources location="/WEB-INF/views/ckeditor/" mapping="/ckeditor/**"></resources>을 servlet-context.xml에 추가
              -> 이미지를 서버로 전송 시 404 에러 발생... 위 코드로 해결 가능?
