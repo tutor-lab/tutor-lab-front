@@ -2,9 +2,35 @@ import router from "next/router";
 import styles from "../styles/myclass.module.scss";
 import ClassCard from "../components/classcard";
 import BottomTab from "../components/bottomtab";
-import Data from "../data.json";
+import axios from "axios";
+import { useEffect, useState } from "react";
+axios.defaults.baseURL = "http://3.35.255.192:8081";
+axios.interceptors.request.use(function (config) {
+  const token = localStorage.getItem("accessToken");
+  if (token) {
+    config.headers.Authorization = "Bearer " + token;
+  }
+  return config;
+});
 
 const MyClass = ({}) => {
+  const [response, setResponse] = useState("");
+  const [res, setRes] = useState(false);
+  const ClassLists = async () => {
+    try {
+      setResponse(await axios.get("/tutors/mylectures"));
+      setRes(true);
+      return response;
+    } catch (e) {
+      setRes(false);
+      return Promise.reject(e);
+    }
+  };
+
+  useEffect(() => {
+    ClassLists();
+  }, []);
+
   return (
     <>
       <div className={styles.whitesection}>
@@ -28,16 +54,16 @@ const MyClass = ({}) => {
       </div>
       <div className={styles.graysection}>
         <h3 className={styles.smallheadingB}>
-          등록한 강의 총 {Data.registercnt}개
+          등록한 강의 총 {response.data?.length}개
         </h3>
-        {Data.classes.map((data, i) => {
-          return data.register ? (
-            <ClassCard data={data} key={i}></ClassCard>
-          ) : (
-            <></>
-          );
-        })}
-        {/* -> unique한 key값 필요 ==> 강의마다 id 부여 -> key={data.id}로 해결 */}
+        {response.data ? (
+          response.data.map((data, i) => {
+            return <ClassCard data={data} key={i}></ClassCard>;
+          })
+        ) : (
+          <></>
+        )}
+
         <div className={styles.fixedTab}>
           <BottomTab />
         </div>
