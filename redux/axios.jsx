@@ -28,14 +28,11 @@ export const ClassReg = async (form) => {
       level = "BASIC";
   }
 
-  function Sub(language) {
-    this.krSubject = language;
-    this.parent = "1";
-  }
-
   let languageArray = [];
   form.language.map((e, i) => {
-    let languageObject = new Sub(form.language[i]);
+    var languageObject = new Object();
+    languageObject.krSubject = form.language[i];
+    languageObject.parent = 1;
     languageArray.push(languageObject);
   });
 
