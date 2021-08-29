@@ -36,8 +36,16 @@ export const ClassReg = async (form) => {
     languageArray.push(languageObject);
   });
 
+  let systemArray = [];
+  if (form.online == "on") {
+    systemArray.push("ONLINE");
+  }
+  if (form.offline == "on") {
+    systemArray.push("OFFLINE");
+  }
+
   const data = {
-    content: form.content, //form.content
+    content: form.content,
     difficulty: level,
     introduce: form.introduction,
     lecturePrices: [
@@ -65,18 +73,20 @@ export const ClassReg = async (form) => {
     ],
     subTitle: form.subheading,
     subjects: languageArray,
-    systems: [form.online == "on" ? "ONLINE" : "OFFLINE"],
+    systems: systemArray,
     thumbnailUrl: form.image,
     title: form.maintitle,
   };
-  console.log(data);
   await axios({
     method: "POST",
     url: "/lectures",
     data: data,
   })
     .then((response) => {
-      console.log(data);
+      const back = document.getElementById("uploadBack");
+      const modal = document.getElementById("uploadModal");
+      modal ? (modal.style.display = "block") : "";
+      back ? (back.style.display = "block") : "";
       console.log(response);
       return response;
     })

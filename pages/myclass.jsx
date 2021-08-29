@@ -58,7 +58,7 @@ const MyClass = ({}) => {
         </h3>
         {response.data ? (
           response.data.map((data, i) => {
-            return <ClassCard data={data} key={i}></ClassCard>;
+            return <ClassCard data={data} key={i} />;
           })
         ) : (
           <></>

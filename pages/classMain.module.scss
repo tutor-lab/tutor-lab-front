@@ -13,6 +13,9 @@
       width: 187.5px;
       font-weight: 700;
       color: #3568ee;
+      cursor: pointer;
+      background-color: #fff;
+      border: 0;
       border-bottom: 2px solid #3568ee;
     }
 
@@ -20,6 +23,17 @@
       width: 187.5px;
       font-weight: 400;
       color: #858585;
+      cursor: pointer;
+      background-color: #fff;
+      border: 0;
+    }
+  }
+
+  .classIntroduce {
+    width: 376px;
+
+    img {
+      width: 376px;
     }
   }
 

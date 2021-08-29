@@ -1,7 +1,7 @@
 import Image from "next/image";
 import router from "next/router";
 import styles from "../styles/classposting.module.scss";
-import ClassCard from "../components/classcard";
+import ClassCardForPosting from "../components/classCardForPosting";
 import BottomTab from "../components/bottomtab";
 import Data from "../data.json";
 
@@ -57,7 +57,7 @@ const ClassPosting = ({}) => {
           </h3>
           {Data.classes.map((data, i) => {
             return data.testing ? (
-              <ClassCard data={data} key={i}></ClassCard>
+              <ClassCardForPosting data={data} key={i} />
             ) : (
               <></>
             );

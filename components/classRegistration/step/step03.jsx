@@ -102,17 +102,7 @@ const Step03 = ({ form, prevStep, handleChange, handleSubmit, MoveStep }) => {
           </div>
         )}
       </section>
-      <BottomSection
-        text={"강의 업로드"}
-        handleSubmit={handleSubmit}
-        onClick={() => {
-          const back = document.getElementById("uploadBack");
-          const modal = document.getElementById("uploadModal");
-          modal ? (modal.style.display = "block") : "";
-          back ? (back.style.display = "block") : "";
-        }}
-      />{" "}
-      {/*업로드되었습니다. 모달 창 띄우는 부분*/}
+      <BottomSection text={"강의 업로드"} handleSubmit={handleSubmit} />
     </div>
   );
 };
