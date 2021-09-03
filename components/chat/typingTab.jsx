@@ -1,5 +1,5 @@
 import styles from "./typingTab.module.scss";
-const TypingTab = () => {
+const TypingTab = ({sendMsgEnter}) => {
   return (
     <section className={styles.typingTab}>
       <button type="button" className={styles.addFile}>
@@ -10,7 +10,7 @@ const TypingTab = () => {
         className={styles.chatContent}
         placeholder={"튜티에게 메세지를 보내보세요."}
       />
-      <button type="button" className={styles.send} />
+      <button type="button" className={styles.send} onClick={sendMsgEnter} />
     </section>
   );
 };
