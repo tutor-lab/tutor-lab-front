@@ -14,16 +14,16 @@ const Discount = ({
           <div className={style.dc}>
             <strong className={style.discount}>{discount + "%"}</strong>
             <strong className={style.finalPrice}>
-              {finalPrice.toLocaleString("ko-KR") + "원"}
+              {/* {finalPrice.toLocaleString("ko-KR") + "원"} */}
             </strong>
             <span className={style.originPrice}>
-              {originPrice.toLocaleString("ko-KR") + "원"}
+              {/* {originPrice.toLocaleString("ko-KR") + "원"} */}
             </span>
           </div>
         </>
       ) : (
         <strong className={style.finalPrice}>
-          {finalPrice.toLocaleString("ko-KR") + "원"}
+          {/* {finalPrice.toLocaleString("ko-KR") + "원"} */}
         </strong>
       )}
     </section>

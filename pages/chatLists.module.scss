@@ -1,0 +1,35 @@
+.chatLists {
+  width: 376px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+
+  .listSection {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+
+    .titleBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 53px;
+      background-color: #fff;
+
+      .title {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.1875;
+        color: #595959;
+      }
+    }
+  }
+
+  .fixedTab {
+    position: absolute;
+    bottom: -15px;
+  }
+}

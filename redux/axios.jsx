@@ -44,33 +44,34 @@ export const ClassReg = async (form) => {
     systemArray.push("OFFLINE");
   }
 
+  let priceArray = [];
+  let priceObject = new Object();
+  if (form.personal == "on") {
+    priceObject.groupNumber = 0;
+    priceObject.isGroup = false;
+    priceObject.pertimeCost = form.PpricePerHour; //시간당 비용
+    priceObject.pertimeLecture = form.PtimePerClass; //1회당 강의 시간
+    priceObject.totalCost =
+      form.PpricePerHour * form.PnumOfTimes * form.PtimePerClass; //총 비용
+    priceObject.totalTime = form.PnumOfTimes * form.PtimePerClass; //총 강의 시간
+    priceArray.push(priceObject);
+  }
+  if (form.group == "on") {
+    priceObject.groupNumber = form.groupMax;
+    priceObject.isGroup = true;
+    priceObject.pertimeCost = form.GpricePerHour; //시간당 비용
+    priceObject.pertimeLecture = form.GtimePerClass; //1회당 강의 시간
+    priceObject.totalCost =
+      form.GpricePerHour * form.GnumOfTimes * form.GtimePerClass; //총 비용
+    priceObject.totalTime = form.GnumOfTimes * form.GtimePerClass; //총 강의 시간
+    priceArray.push(priceObject);
+  }
+
   const data = {
     content: form.content,
     difficulty: level,
     introduce: form.introduction,
-    lecturePrices: [
-      form.personal == "on"
-        ? {
-            //personal일 때
-            groupNumber: 0, //그룹 수용가능 인원
-            isGroup: false,
-            pertimeCost: form.PpricePerHour, //시간당 비용
-            pertimeLecture: form.PtimePerClass, //1회당 강의 시간
-            totalCost:
-              form.PpricePerHour * form.PnumOfTimes * form.PtimePerClass, //총 비용
-            totalTime: form.PnumOfTimes * form.PtimePerClass, //총 강의 시간
-          }
-        : {
-            //group일 때
-            groupNumber: form.groupMax, //그룹 수용가능 인원
-            isGroup: true,
-            pertimeCost: form.GpricePerHour, //시간당 비용
-            pertimeLecture: form.GtimePerClass, //1회당 강의 시간
-            totalCost:
-              form.GpricePerHour * form.GnumOfTimes * form.GtimePerClass, //총 비용
-            totalTime: form.GnumOfTimes * form.GtimePerClass, //총 강의 시간
-          },
-    ],
+    lecturePrices: priceArray,
     subTitle: form.subheading,
     subjects: languageArray,
     systems: systemArray,

@@ -70,7 +70,7 @@ const initialState = {
     personal: "off",
     group: "off",
     groupMax: 0,
-    content: "string",
+    content: "",
   },
   updateSuccess: false,
   updateError: false,

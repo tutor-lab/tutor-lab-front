@@ -57,8 +57,8 @@ const MyClass = ({}) => {
           등록한 강의 총 {response.data?.length}개
         </h3>
         {response.data ? (
-          response.data.map((data, i) => {
-            return <ClassCard data={data} key={i} />;
+          response.data.map((data) => {
+            return <ClassCard data={data} key={data.id} />;
           })
         ) : (
           <></>

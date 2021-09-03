@@ -7,9 +7,9 @@ const WhiteBtn = ({ text }) => {
   );
 };
 
-const BlueBtn = ({ text }) => {
+const BlueBtn = ({ text, onClick }) => {
   return (
-    <button type="button" className={styles.blueBtn}>
+    <button type="button" className={styles.blueBtn} onClick={onClick}>
       <span className={styles.whiteText}>{text}</span>
     </button>
   );

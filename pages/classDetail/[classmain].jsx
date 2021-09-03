@@ -11,44 +11,54 @@ import { useRouter } from "next/router";
 import renderHTML from "react-render-html";
 
 axios.defaults.baseURL = "http://3.35.255.192:8081";
-const ClassMain = ({}) => {
-  const router = useRouter();
+export async function getServerSideProps(context) {
+  return {
+    props: {},
+  };
+} //getServerSideProps 없으면 새로 고침 시 에러!
+
+const ClassMain = () => {
   const [select, setSelect] = useState(true);
   const [introduce, setIntroduce] = useState("");
+  const [data, setData] = useState("");
+  const router = useRouter();
   const classID = router.query.classmain;
-  console.log(classID);
 
   const ClassMainContent = async () => {
     try {
-      await axios
-        .get(`/lectures/30`) //main에서 넘겨주기
-        .then((res) => setIntroduce(res.data.content));
+      await axios.get(`/lectures/${classID}`).then((res) => {
+        setIntroduce(res.data.content);
+        setData(res.data);
+      });
     } catch (e) {
       return Promise.reject(e);
     }
   };
+
   useEffect(() => {
     ClassMainContent();
   }, []);
+
   return (
     <section className={style.main}>
-      <ImgSection thumbnail={"/images/classImage.jpg"} online={1} offline={1} />
+      <ImgSection thumbnail={data?.thumbnail} online={1} offline={1} />
       <IntroSection
-        tutorname={Data.tutor}
-        title={Data.title}
-        rating={Data.totalRating.toFixed(1)}
-        reviewCnt={Data.reviewCnt}
-        subheading={Data.explanation}
-        originPrice={Data.originPrice}
-        discount={Data.dc}
-        finalPrice={Data.originPrice * (100 - Data.dc) * 0.01}
-        notes={Data.notes}
+        // tutorname={testid}
+        title={data?.title}
+        // rating={Data.totalRating.toFixed(1)}
+        // reviewCnt={Data.reviewCnt}
+        subheading={data?.explanation}
+        // originPrice={Data.originPrice}
+        // discount={Data.dc}
+        // finalPrice={Data.originPrice * (100 - Data.dc) * 0.01}
+        // notes={Data.notes}
       ></IntroSection>
 
       <div className={style.category}>
         <button
           className={select ? style.selected : style.unselected}
-          onClick={() => setSelect(true)}
+          // onClick={() => setSelect(true)}
+          onClick={() => console.log(data)}
         >
           강의소개
         </button>
@@ -64,11 +74,11 @@ const ClassMain = ({}) => {
         <div className={style.classIntroduce}>{renderHTML(introduce)}</div>
       ) : (
         <>
-          <TotalReview
+          {/* <TotalReview
             totalRating={Data.totalRating}
             reviewCnt={Data.reviewCnt}
-          />
-          {Data.reviews.map((data, i) => {
+          /> */}
+          {/* {Data.reviews.map((data, i) => {
             return (
               <ReviewSection
                 Uprofile={"/images/classImage.jpg"}
@@ -83,7 +93,7 @@ const ClassMain = ({}) => {
                 key={i}
               ></ReviewSection>
             );
-          })}
+          })} */}
         </>
       )}
 

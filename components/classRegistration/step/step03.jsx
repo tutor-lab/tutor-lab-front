@@ -4,8 +4,30 @@ import BottomSection from "../BottomSection";
 import EllipseButton from "../btn_inputs/EllipseButton";
 import ClassCost from "../btn_inputs/ClassCost";
 import { BlueModal } from "../Modal";
+import { useState, useEffect } from "react";
 
 const Step03 = ({ form, prevStep, handleChange, handleSubmit, MoveStep }) => {
+  const [able, setAble] = useState(false);
+  useEffect(() => {
+    const test1 = form.online != "off" || form.offline != "off";
+    let test2 = false;
+    if (form.personal == "on" && form.group == "off") {
+      test2 = form.PpricePerHour * form.PtimePerClass * form.PnumOfTimes != 0;
+    } else if (form.personal == "off" && form.group == "on") {
+      test2 =
+        form.groupMax != 0 &&
+        form.groupMax != "" &&
+        form.GpricePerHour * form.GtimePerClass * form.GnumOfTimes != 0;
+    } else if (form.personal == "on" && form.group == "on") {
+      test2 =
+        form.PpricePerHour * form.PtimePerClass * form.PnumOfTimes != 0 &&
+        form.groupMax != 0 &&
+        form.groupMax != "" &&
+        form.GpricePerHour * form.GtimePerClass * form.GnumOfTimes != 0;
+    }
+    setAble(test1 && test2);
+  }, [form]);
+
   return (
     <div className={styles.step03}>
       <div className={styles.background} id="uploadBack">
@@ -13,7 +35,12 @@ const Step03 = ({ form, prevStep, handleChange, handleSubmit, MoveStep }) => {
           <BlueModal />
         </div>
       </div>{" "}
-      <WhiteSection step={3} onClick={prevStep} MoveStep={MoveStep} />
+      <WhiteSection
+        step={3}
+        onClick={prevStep}
+        MoveStep={MoveStep}
+        able={able}
+      />
       <section className={styles.graySection}>
         <div>
           <h1 className={styles.title}>1. 강의 방식1을 선택해주세요.</h1>
@@ -62,6 +89,7 @@ const Step03 = ({ form, prevStep, handleChange, handleSubmit, MoveStep }) => {
                     type="number"
                     onChange={handleChange("groupMax")}
                     className={styles.maxInput}
+                    value={form.groupMax}
                   />
                   <span className={styles.guide1}>최대</span>
                   <span className={styles.guide2}>명</span>
@@ -102,7 +130,11 @@ const Step03 = ({ form, prevStep, handleChange, handleSubmit, MoveStep }) => {
           </div>
         )}
       </section>
-      <BottomSection text={"강의 업로드"} handleSubmit={handleSubmit} />
+      <BottomSection
+        able={able}
+        text={"강의 업로드"}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 };

@@ -1,0 +1,17 @@
+.chat {
+  width: 375px;
+  height: 100vh;
+  margin: 0 auto;
+
+  .contentSection {
+    position: relative;
+    width: 100%;
+    padding: 20px 10px 160px;
+    background-color: #f9f9f9;
+  }
+
+  .fixedTab {
+    position: fixed;
+    bottom: -15px;
+  }
+}

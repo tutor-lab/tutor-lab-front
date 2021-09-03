@@ -7,7 +7,7 @@ import Quill from "../../quillEditor/QuillDynamic";
 import LanguageModal from "../LanguageModal";
 import { LevelModal } from "../LanguageModal";
 import { AddBtn, DeleteBtn } from "../btn_inputs/AddDeleteBtn";
-
+import { useEffect, useState } from "react";
 const Step02 = ({
   form,
   nextStep,
@@ -20,6 +20,11 @@ const Step02 = ({
   AddingClass,
   DeletingClass,
 }) => {
+  const [able, setAble] = useState(false);
+  useEffect(() => {
+    if (form.content != "") setAble(true);
+  }, [form]); //quill editor 입력 내용 여부 확인 방법..??? <p><br/><p> 구분방법..
+
   return (
     <div className={styles.step02} onClick={Close}>
       <div className={styles.background} id="LanBackground">
@@ -32,7 +37,12 @@ const Step02 = ({
           <LevelModal handleChange={handleChange} />
         </div>
       </div>
-      <WhiteSection step={2} onClick={prevStep} MoveStep={MoveStep} />
+      <WhiteSection
+        step={2}
+        onClick={prevStep}
+        MoveStep={MoveStep}
+        able={able}
+      />
       <section className={styles.graySection}>
         <div className={styles.margin}>
           <h1 className={styles.title}>1. 강의 종류를 선택해주세요.</h1>
@@ -83,7 +93,7 @@ const Step02 = ({
         </div>
         <Quill handleChange={handleChange} />
       </section>
-      <BottomSection text={"다음"} onClick={nextStep} />
+      <BottomSection text={"다음"} onClick={nextStep} able={able} />
     </div>
   );
 };

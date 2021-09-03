@@ -4,6 +4,7 @@ import WhiteSection from "../WhiteSection";
 import BottomSection from "../BottomSection";
 import { GrayModal } from "../Modal";
 import ImageCrop from "../btn_inputs/ImageCrop";
+import { useEffect, useState } from "react";
 const Step01 = ({
   form,
   nextStep,
@@ -12,6 +13,17 @@ const Step01 = ({
   hideGray,
   MoveStep,
 }) => {
+  const [able, setAble] = useState(false);
+  useEffect(() => {
+    if (
+      form.image != "" &&
+      form.maintitle != "" &&
+      form.subheading != "" &&
+      form.introduction != ""
+    )
+      setAble(true);
+  }, [form]);
+
   return (
     <div className={styles.step01}>
       <div className={styles.goBackModal} id="goBackModal">
@@ -19,7 +31,12 @@ const Step01 = ({
           <GrayModal hideGray={hideGray} id="grayOne" />
         </div>
       </div>
-      <WhiteSection step={1} onClick={showGray} MoveStep={MoveStep} />
+      <WhiteSection
+        step={1}
+        onClick={showGray}
+        MoveStep={MoveStep}
+        able={able}
+      />
       <section className={styles.graySection}>
         <div>
           <h3 className={styles.question}>
@@ -54,7 +71,7 @@ const Step01 = ({
           limit={25}
         />
       </section>
-      <BottomSection text={"다음"} onClick={nextStep} />
+      <BottomSection text={"다음"} onClick={nextStep} able={able} />
     </div>
   );
 };

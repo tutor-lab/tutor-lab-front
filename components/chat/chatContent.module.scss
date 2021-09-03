@@ -1,0 +1,54 @@
+.myChat {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 7px;
+
+  .content {
+    display: block;
+    max-width: 43%;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.66;
+    color: #fff;
+    background-color: #689afd;
+    border: 0;
+    border-radius: 10px;
+  }
+
+  .time {
+    margin-right: 5px;
+    font-size: 10px;
+    font-weight: 400;
+    color: #5d5e5f;
+  }
+}
+
+.otherChat {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 7px;
+
+  .content {
+    display: block;
+    max-width: 43%;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.66;
+    color: #5d5e5f;
+    background-color: #d9dadb;
+    border: 0;
+    border-radius: 10px;
+  }
+
+  .time {
+    margin-left: 5px;
+    font-size: 10px;
+    font-weight: 400;
+    color: #5d5e5f;
+  }
+}
