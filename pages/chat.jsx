@@ -30,7 +30,7 @@ const Chat = () => {
         return response;
       });
     } catch (error) {
-      console.log(error);
+      return error;
       // return Promise.reject(errormsg);
     }
   };
@@ -38,7 +38,6 @@ const Chat = () => {
   // 소켓 객체 생성
   useEffect(() => {
     getMy();
-    console.log("in");
     if (!ws.current) {
       ws.current = new WebSocket(webSocketUrl);
       ws.current.onopen = () => {
@@ -64,7 +63,6 @@ const Chat = () => {
 
   // 소켓이 연결되었을 시에 send 메소드
   useEffect(() => {
-    console.log(user);
     if (socketConnected) {
       ws.current.send(
         JSON.stringify({
@@ -80,10 +78,7 @@ const Chat = () => {
   }, [socketConnected]);
 
   const sendMsgEnter = (data) => {
-    console.log("user: " + user);
     alert(JSON.stringify(user.data.name));
-
-    console.log("gg");
     ws.current.send(
       JSON.stringify({
         username: user.data.name,
@@ -93,7 +88,6 @@ const Chat = () => {
         type: "message",
       })
     );
-    console.log(ws.current);
     setSendMsg(sendMsg + 1);
   };
 
@@ -102,7 +96,6 @@ const Chat = () => {
       <NameTab name={"김하나"} />
       <section className={styles.contentSection}>
         {items.map((data, i) => {
-          console.log(items);
           return (
             <>
               {user?.data.name == data.username ? (
