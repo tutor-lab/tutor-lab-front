@@ -5,29 +5,39 @@ const TypingTab = ({ sendMsgEnter }) => {
   const onChangeData = (e) => {
     setData(e.target.value);
   };
-  const enter = (e) => {
-    if (e.key == "Enter" && data != "") sendMsgEnter(data);
+
+  const enter = () => {
+    sendMsgEnter(data);
+    document.getElementById("messageInput").value = "";
   };
 
   return (
     <section className={styles.typingTab}>
-      <button type="button" className={styles.addFile}>
-        +
-      </button>
+      <button
+        type="button"
+        className={styles.addFile}
+        onClick={() => console.log("plus")}
+      />
       <input
         type="text"
         className={styles.chatContent}
-        placeholder={"튜티에게 메세지를 보내보세요."}
+        placeholder={"메세지를 입력하세요."}
         onChange={onChangeData}
-        onKeyPress={(e) => enter(e)}
+        onKeyPress={(e) => {
+          if (e.key == "Enter" && data != "") enter();
+        }}
+        id="messageInput"
       />
-      <button
+
+      {/* <button
         type="submit"
         className={styles.send}
         onClick={() => {
-          if (data != "") sendMsgEnter(data);
+          if (data != "") {
+            enter();
+          }
         }}
-      />
+      /> */}
     </section>
   );
 };
