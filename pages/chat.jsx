@@ -66,7 +66,7 @@ const Chat = () => {
     if (socketConnected) {
       ws.current.send(
         JSON.stringify({
-          username: user.data.name,
+          username: user?.data?.name,
           message: "tests",
           sessionId: "30ae0b1d-45bc-ed13-2f3a-ee5c402725c7",
           chatroomId: 1,
@@ -96,14 +96,10 @@ const Chat = () => {
       <NameTab name={"김하나"} />
       <section className={styles.contentSection}>
         {items.map((data, i) => {
-          return (
-            <>
-              {user?.data.name == data.username ? (
-                <MyChats key={i} text={data.message} />
-              ) : (
-                <OthersChats key={i} text={data.message} />
-              )}
-            </>
+          return user?.data.name == data.username ? (
+            <MyChats key={i} text={data.message} />
+          ) : (
+            <OthersChats key={i} text={data.message} />
           );
         })}
       </section>

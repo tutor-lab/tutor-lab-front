@@ -13,6 +13,7 @@
     font-weight: 700;
     line-height: 1.66;
     color: #fff;
+    word-break: break-all;
     background-color: #689afd;
     border: 0;
     border-radius: 10px;
@@ -35,12 +36,13 @@
 
   .content {
     display: block;
-    max-width: 30%;
+    max-width: 43%;
     padding: 8px;
     font-size: 12px;
     font-weight: 700;
     line-height: 1.66;
     color: #5d5e5f;
+    word-break: break-all;
     background-color: #d9dadb;
     border: 0;
     border-radius: 10px;
