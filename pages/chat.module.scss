@@ -2,17 +2,27 @@
   width: 375px;
   height: 100vh;
   margin: 0 auto;
-  background-color: #f9f9f9;
 
   .contentSection {
-    position: relative;
-    width: 100%;
-    padding: 20px 10px 160px;
-    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 80%;
+    overflow-y: auto;
+    background-color: #f3f5f8;
+
+    .content {
+      position: relative;
+      width: 100%;
+      padding: 20px 10px 80px;
+    }
+  }
+
+  .contentSection::-webkit-scrollbar {
+    width: 0;
   }
 
   .fixedTab {
     position: fixed;
-    bottom: -15px;
+    bottom: 0;
   }
 }
