@@ -54,19 +54,23 @@ const Chat = () => {
 
   // 소켓 객체 생성
   useEffect(() => {
-    getMy();
-    getPrevChat();
-    if (!ws.current) {
-      ws.current = new WebSocket(webSocketUrl);
-      ws.current.onopen = () => {
-        console.log("connected to " + webSocketUrl);
-        setSocketConnected(true);
-      };
-      ws.current.onerror = (error) => {
-        console.log("connection error " + webSocketUrl);
-        console.log(error);
-      };
-      console.log(ws.current);
+    if (user == "") {
+      router.push("/");
+    } else {
+      getMy();
+      getPrevChat();
+      if (!ws.current) {
+        ws.current = new WebSocket(webSocketUrl);
+        ws.current.onopen = () => {
+          console.log("connected to " + webSocketUrl);
+          setSocketConnected(true);
+        };
+        ws.current.onerror = (error) => {
+          console.log("connection error " + webSocketUrl);
+          console.log(error);
+        };
+        console.log(ws.current);
+      }
     }
   }, []);
 
@@ -109,7 +113,7 @@ const Chat = () => {
     setSendMsg(sendMsg + 1);
   };
 
-  return (
+  return user ? (
     <div className={styles.chat}>
       <NameTab name={"김하나"} />
       <section className={styles.contentSection}>
@@ -127,6 +131,8 @@ const Chat = () => {
         <TypingTab sendMsgEnter={sendMsgEnter} />
       </span>
     </div>
+  ) : (
+    <></>
   );
 };
 export default Chat;

@@ -28,10 +28,15 @@ const MyClass = ({}) => {
   };
 
   useEffect(() => {
-    ClassLists();
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      router.push("/");
+    } else {
+      ClassLists();
+    }
   }, []);
 
-  return (
+  return res ? (
     <>
       <div className={styles.whitesection}>
         <h1 className={styles.title}>튜터</h1>
@@ -50,7 +55,7 @@ const MyClass = ({}) => {
           >
             강의 등록
           </button>
-        </div>{" "}
+        </div>
       </div>
       <div className={styles.graysection}>
         <h3 className={styles.smallheadingB}>
@@ -69,6 +74,11 @@ const MyClass = ({}) => {
         </div>
       </div>
     </>
+  ) : (
+    <></>
   );
+  {
+    /*에러 페이지 */
+  }
 };
 export default MyClass;

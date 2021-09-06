@@ -21,7 +21,7 @@
     "**/*.tsx",
     "pages/_app.tsx",
     "components/bottomtab.jsx",
-    "pages/index.jsx",
+    "pages/login.jsx",
     "pages/classposted.jsx",
     "pages/myclass.jsx",
     "redux/reducers/index.jsx",

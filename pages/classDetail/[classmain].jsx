@@ -36,10 +36,15 @@ const ClassMain = () => {
   };
 
   useEffect(() => {
-    ClassMainContent();
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      router.push("/");
+    } else {
+      ClassMainContent();
+    }
   }, []);
 
-  return (
+  return data != "" ? (
     <section className={style.main}>
       <ImgSection thumbnail={data?.thumbnail} online={1} offline={1} />
       <IntroSection
@@ -101,6 +106,8 @@ const ClassMain = () => {
         <BottomTab />
       </div>
     </section>
+  ) : (
+    <></>
   );
 };
 export default ClassMain;
