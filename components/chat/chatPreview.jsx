@@ -5,7 +5,7 @@ const ChatPreview = ({ data, newChat }) => {
   return (
     <button
       className={styles.previewSection}
-      onClick={() => router.push(`/chatDetail/${data.id}`)}
+      onClick={() => router.push(`/chatDetail/${data.chatroomId}`)}
     >
       <div className={styles.profile}>
         {/* <Image src={data.profile} width="30px" height="30px" alt="프로필" /> */}
@@ -13,7 +13,7 @@ const ChatPreview = ({ data, newChat }) => {
       <div className={styles.chat}>
         <span className={styles.tuteeInfo}>
           <span className={styles.tutee}>튜티</span>
-          <span className={styles.name}>{data.name}</span>
+          <span className={styles.name}>{data.tuteeName}</span>
         </span>
         <span className={styles.last}>{data.last}</span>
       </div>
