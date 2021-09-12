@@ -11,9 +11,10 @@ import router from "next/router";
 const ChatLists = ({ newAlarm }) => {
   const [noChat, setNoChat] = useState(false);
   const [res, setRes] = useState(false);
+  const [response, setResponse] = useState("");
   const getChatLists = async () => {
     try {
-      await axios.get("/tutors/my-chatrooms");
+      setResponse(await axios.get("/tutors/my-chatrooms"));
       setRes(true);
     } catch (e) {
       setRes(false);
@@ -37,7 +38,7 @@ const ChatLists = ({ newAlarm }) => {
         <section className={styles.listSection}>
           <ChatListSearchBox />
           <div className={styles.chatPreviews}>
-            {Data.other.map((data, i) => {
+            {response.data.content.map((data, i) => {
               return data ? (
                 <ChatPreview data={data} key={i} newChat={2} />
               ) : (

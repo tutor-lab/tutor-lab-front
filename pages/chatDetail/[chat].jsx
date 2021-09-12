@@ -13,6 +13,7 @@ axios.interceptors.request.use(function (config) {
   }
   return config;
 });
+
 export async function getServerSideProps(context) {
   return {
     props: {},
@@ -32,7 +33,7 @@ const Chat = () => {
 
   const getMy = async () => {
     try {
-      await axios.get(`/users/me`).then((response) => {
+      await axios.get(`/users/my-info`).then((response) => {
         setUser(response);
         return response;
       });
@@ -43,7 +44,7 @@ const Chat = () => {
 
   const getPrevChat = async () => {
     try {
-      await axios.get(`/chat/${chatID}`).then((response) => {
+      await axios.get(`/tutors/my-chatrooms/${chatID}`).then((response) => {
         setItems(response.data);
         return response;
       });
@@ -54,23 +55,18 @@ const Chat = () => {
 
   // 소켓 객체 생성
   useEffect(() => {
-    if (user == "") {
-      router.push("/");
-    } else {
-      getMy();
-      getPrevChat();
-      if (!ws.current) {
-        ws.current = new WebSocket(webSocketUrl);
-        ws.current.onopen = () => {
-          console.log("connected to " + webSocketUrl);
-          setSocketConnected(true);
-        };
-        ws.current.onerror = (error) => {
-          console.log("connection error " + webSocketUrl);
-          console.log(error);
-        };
-        console.log(ws.current);
-      }
+    getMy();
+    getPrevChat();
+    if (!ws.current) {
+      ws.current = new WebSocket(webSocketUrl);
+      ws.current.onopen = () => {
+        console.log("connected to " + webSocketUrl);
+        setSocketConnected(true);
+      };
+      ws.current.onerror = (error) => {
+        console.log("connection error " + webSocketUrl);
+        console.log(error);
+      };
     }
   }, []);
 
