@@ -1,15 +1,13 @@
 
-import React, {useState, useEffect, useReducer} from 'react';
-import {Container, Row, Col, Label, InputGroup, Input} from 'reactstrap';
+import React, {useState, useEffect} from 'react';
+import {Container, Row, Col, Label, InputGroup} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BsChevronLeft} from 'react-icons/bs';
-import {CgMathPlus} from 'react-icons/cg';
 import styles from "../styles/signup2.module.scss";
 import Router from 'next/router';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { useRouter, withRouter } from 'next/router';
-//import { Scrollbars } from 'react-custom-scrollbars';
 
 const ageOptions = [
     {value: '', text: '나이'},
