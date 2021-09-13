@@ -1,15 +1,21 @@
 import Image from "next/image";
 import styles from "../styles/bottomtab.module.scss";
+import router from "next/router";
+
 const BottomTab = ({}) => {
   return (
     <>
       <ul className={styles.tab}>
-        <a href="/myclass">
+        <button
+          type="button"
+          onClick={() => router.push("/myclass")}
+          className={styles.elements}
+        >
           {/* 임시로 링크! */}
-          <li className={styles.elements}>
+          <li>
             <div className={styles.img}>
               <Image
-                src="/../public/images/class.png"
+                src="/images/class.png"
                 width="23px"
                 height="23px"
                 alt="강의"
@@ -18,13 +24,17 @@ const BottomTab = ({}) => {
             </div>
             <span>강의</span>
           </li>
-        </a>
+        </button>
 
-        <a href="/board">
-          <li className={styles.elements}>
+        <button
+          type="button"
+          onClick={() => router.push("/board")}
+          className={styles.elements}
+        >
+          <li>
             <div className={styles.img}>
               <Image
-                src="/../public/images/board.png"
+                src="/images/board.png"
                 width="23px"
                 height="23px"
                 alt="게시판"
@@ -33,13 +43,17 @@ const BottomTab = ({}) => {
             </div>
             <span>게시판</span>
           </li>
-        </a>
+        </button>
 
-        <a href="/promotion">
-          <li className={styles.elements}>
+        <button
+          type="button"
+          onClick={() => router.push("/promotion")}
+          className={styles.elements}
+        >
+          <li>
             <div className={styles.img}>
               <Image
-                src="/../public/images/promotion.png"
+                src="/images/promotion.png"
                 width="23px"
                 height="23px"
                 alt="프로모션"
@@ -47,13 +61,17 @@ const BottomTab = ({}) => {
             </div>
             <span>프로모션</span>
           </li>
-        </a>
+        </button>
 
-        <a href="/mypage">
-          <li className={styles.elements}>
+        <button
+          type="button"
+          onClick={() => router.push("/mypage")}
+          className={styles.elements}
+        >
+          <li>
             <div className={styles.img}>
               <Image
-                src="/../public/images/mypage.png"
+                src="/images/mypage.png"
                 width="23px"
                 height="23px"
                 alt="마이페이지"
@@ -61,7 +79,7 @@ const BottomTab = ({}) => {
             </div>
             <span>마이페이지</span>
           </li>
-        </a>
+        </button>
       </ul>
     </>
   );

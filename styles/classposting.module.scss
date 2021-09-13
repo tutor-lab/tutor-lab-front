@@ -45,18 +45,48 @@
 .graysection {
   background-color: #f3f3f3;
   width: 375px;
-  padding-bottom: 80px;
+  padding-bottom: 120px;
   margin: 0 auto;
-  .smallheadingB {
+  .smallheadingB,
+  .smallheadingM {
     font-size: 13px;
     line-height: 1.69230769;
     color: #949bad;
     padding: 16px 21px;
     margin: 0;
   }
+
   .smallheadingB {
     font-weight: 700;
   }
+
+  .smallheadingM {
+    font-weight: 400;
+  }
+
+  .add {
+    display: block;
+    width: 330px;
+    height: 141px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px 0 #949bad;
+    background-color: white;
+    margin: 0 auto;
+    cursor: pointer;
+    p {
+      text-align: center;
+      margin: 0;
+      margin-bottom: 20px;
+      font-size: 15px;
+      font-weight: 400;
+      color: #3568ee;
+    }
+    .pluspic {
+      text-align: center;
+    }
+  }
+
   .fixedTab {
     position: fixed;
     bottom: -15px;

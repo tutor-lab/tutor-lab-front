@@ -1,0 +1,151 @@
+.whitesection {
+  background-color: white;
+  width: 375px;
+  height: 80px;
+  margin: 0 auto;
+  position: relative;
+
+  .prev {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    cursor: pointer;
+  }
+
+  .title {
+    text-align: center;
+    padding-top: 22px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.46666;
+  }
+
+  .category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10px;
+
+    .selected,
+    .unselected {
+      width: 102px;
+      font-size: 15px;
+      text-align: center;
+      border: none;
+      margin: 0;
+      padding: 11px;
+    }
+
+    .selected {
+      font-weight: 700;
+      color: #3568ee;
+      border-bottom: 2px solid #3568ee;
+    }
+
+    .unselected {
+      font-weight: 400;
+      color: #949bad;
+    }
+  }
+}
+
+.graysection {
+  background-color: #f3f3f3;
+  width: 375px;
+  height: 729px;
+  margin: 0 auto;
+  padding: 26px 24px 31px 21px;
+
+  .question {
+    font-size: 13px;
+    font-weight: 400;
+    color: #283237;
+    margin: 0;
+    margin-bottom: 11px;
+  }
+
+  .add {
+    width: 330px;
+    height: 141px;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px 0 #949bad;
+    background-color: white;
+    margin-bottom: 14px;
+    cursor: pointer;
+
+    .pluspic {
+      padding-top: 60px;
+      text-align: center;
+    }
+
+    .placeholdertext {
+      font-size: 15px;
+      color: #949bad;
+      font-weight: 400;
+      text-align: center;
+    }
+  }
+
+  .add2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 330px;
+    height: 141px;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px 0 #949bad;
+    background-color: black;
+    margin-bottom: 14px;
+    cursor: pointer;
+  }
+
+  input {
+    display: none;
+  }
+
+  .inputBox {
+    display: block;
+    width: 330px;
+    height: 68px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px 0 #949bad;
+    padding: 11px 17px;
+    border: none;
+    outline: none;
+    resize: none;
+    margin-bottom: 4px;
+  }
+
+  .example {
+    font-size: 13px;
+    color: #949bad;
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 17px;
+    padding-left: 17px;
+  }
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -15px;
+
+  .next {
+    color: white;
+    background-color: #2354d5;
+    width: 375px;
+    height: 52px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .fixedTab {
+    margin-top: 0;
+  }
+}

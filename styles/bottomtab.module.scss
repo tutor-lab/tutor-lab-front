@@ -1,24 +1,25 @@
 .tab {
   background-color: white;
+  display: flex;
+  justify-content: space-around;
   width: 375px;
-  padding: 12px 13px;
   height: 66px;
+  padding: 12px 13px;
+  margin-top: 0;
   .elements {
-    width: 66px;
-    height: 39px;
-    float: left;
-    position: relative;
+    width: 67px;
+    height: 41px;
+    border: none;
     list-style-type: none;
     background-color: white;
-    margin-left: 10px;
-    margin-right: 10px;
+    cursor: pointer;
     .img {
-      text-align: center;
+      display: block;
       margin-bottom: 8px;
     }
     span {
-      display: block;
       font-size: 10px;
+      line-height: 1.48;
       text-align: center;
       color: #939393;
     }
