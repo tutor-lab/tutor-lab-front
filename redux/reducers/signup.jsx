@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
-import createRequestSaga from "./createRequestSaga";
+import createRequestSagaSignUp from "./createRequestSagaSignUp";
+import { createRequestActionTypesSignUp } from "./createRequestSagaSignUp";
 import * as API from "../api/signup";
 import { takeLatest } from "@redux-saga/core/effects";
 
@@ -9,7 +10,8 @@ const CHANGE_FIELD = "signup/CHANGE_FIELD";
 const NEXT_STEP = "signup/NEXT_STEP";
 const PREV_STEP = "signup/PREV_STEP";
 const MOVE_STEP = "signup/MOVE_STEP";
-const SIGNUP = "signup/SIGNUP";
+const [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAILURE] =
+  createRequestActionTypesSignUp("signup/SIGNUP");
 
 export const Initialize = createAction(INITIALIZE);
 export const ChangeField = createAction(
@@ -22,7 +24,7 @@ export const PrevStep = createAction(PREV_STEP, (form) => form);
 export const MoveStep = createAction(MOVE_STEP, (form) => form);
 export const SignUp = createAction(SIGNUP, (form) => form);
 
-const SignUpSaga = createRequestSaga(SIGNUP, API.SignUp);
+const SignUpSaga = createRequestSagaSignUp(SIGNUP, API.SignUp);
 export function* signupSaga() {
   yield takeLatest(SIGNUP, SignUpSaga);
 }
@@ -42,9 +44,11 @@ const initialState = {
     stateL: "",
     stateM: "",
     stateS: "",
+    disable: true,
   },
   signUpSuccess: false,
   signUpError: false,
+  errorText: "",
 };
 
 const SignUpR = handleActions(
@@ -66,6 +70,17 @@ const SignUpR = handleActions(
       produce(state, (draft) => {
         draft["signup"]["step"] = payload;
       }),
+    [SIGNUP_SUCCESS]: (state) => ({
+      ...state,
+      signUpSuccess: true,
+      signUpError: false,
+    }),
+    [SIGNUP_FAILURE]: (state, { payload }) => ({
+      ...state,
+      signUpSuccess: false,
+      signUpError: true,
+      errorText: payload,
+    }),
   },
   initialState
 );
