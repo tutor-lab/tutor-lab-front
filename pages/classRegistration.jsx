@@ -15,10 +15,8 @@ import MyClass from "./myclass";
 import Step01 from "../components/classRegistration/step/step01";
 import Step02 from "../components/classRegistration/step/step02";
 import Step03 from "../components/classRegistration/step/step03";
-import axios from "axios";
 
 const ClassRegistration = () => {
-  const [preview, setPreview] = useState("");
   const [currentI, setCurrentI] = useState(0);
   const dispatch = useDispatch();
   const { form } = useSelector(({ update }) => ({

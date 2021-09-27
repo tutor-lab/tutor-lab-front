@@ -1,6 +1,4 @@
 import axios from "axios";
-//테스트서버 주소
-// axios.defaults.baseURL = "http://localhost:8081";
 axios.defaults.baseURL = "http://3.35.255.192:8081";
 axios.interceptors.request.use(function (config) {
   const token = localStorage.getItem("accessToken");
