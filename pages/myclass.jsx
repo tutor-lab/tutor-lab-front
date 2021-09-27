@@ -62,13 +62,12 @@ const MyClass = ({}) => {
           등록한 강의 총 {response.data?.length}개
         </h3>
         {response.data ? (
-          response.data.map((data) => {
+          response.data.content.map((data) => {
             return <ClassCard data={data} key={data.id} />;
           })
         ) : (
           <></>
         )}
-
         <div className={styles.fixedTab}>
           <BottomTab />
         </div>
