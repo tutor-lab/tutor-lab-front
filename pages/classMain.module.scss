@@ -1,24 +1,42 @@
 .main {
   width: 376px;
-  margin: 0 auto;
   padding-bottom: 118px;
+  margin: 0 auto;
+
   .category {
     display: flex;
-    text-align: center;
     font-size: 14px;
     line-height: 1.44;
+    text-align: center;
+
     .selected {
       width: 187.5px;
-      color: #3568ee;
-      border-bottom: 2px solid #3568ee;
       font-weight: 700;
+      color: #3568ee;
+      cursor: pointer;
+      background-color: #fff;
+      border: 0;
+      border-bottom: 2px solid #3568ee;
     }
+
     .unselected {
       width: 187.5px;
-      color: #858585;
       font-weight: 400;
+      color: #858585;
+      cursor: pointer;
+      background-color: #fff;
+      border: 0;
     }
   }
+
+  .classIntroduce {
+    width: 376px;
+
+    img {
+      width: 376px;
+    }
+  }
+
   .fixedTab {
     position: fixed;
     bottom: -17px;

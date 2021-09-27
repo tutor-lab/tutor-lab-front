@@ -1,7 +1,5 @@
 import axios from "axios";
-//테스트서버 주소
-//http://3.35.255.192:8081
-axios.defaults.baseURL = "http://localhost:8081";
+axios.defaults.baseURL = "http://3.35.255.192:8081";
 axios.interceptors.request.use(function (config) {
   const token = localStorage.getItem("accessToken");
   if (token) {
@@ -27,53 +25,67 @@ export const ClassReg = async (form) => {
     default:
       level = "BASIC";
   }
+
+  let languageArray = [];
+  form.language.map((e, i) => {
+    var languageObject = new Object();
+    languageObject.krSubject = form.language[i];
+    languageObject.parent = 1;
+    languageArray.push(languageObject);
+  });
+
+  let systemArray = [];
+  if (form.online == "on") {
+    systemArray.push("ONLINE");
+  }
+  if (form.offline == "on") {
+    systemArray.push("OFFLINE");
+  }
+
+  let priceArray = [];
+  let priceObject = new Object();
+  if (form.personal == "on") {
+    priceObject.groupNumber = 0;
+    priceObject.isGroup = false;
+    priceObject.pertimeCost = form.PpricePerHour; //시간당 비용
+    priceObject.pertimeLecture = form.PtimePerClass; //1회당 강의 시간
+    priceObject.totalCost =
+      form.PpricePerHour * form.PnumOfTimes * form.PtimePerClass; //총 비용
+    priceObject.totalTime = form.PnumOfTimes * form.PtimePerClass; //총 강의 시간
+    priceArray.push(priceObject);
+  }
+  if (form.group == "on") {
+    priceObject.groupNumber = form.groupMax;
+    priceObject.isGroup = true;
+    priceObject.pertimeCost = form.GpricePerHour; //시간당 비용
+    priceObject.pertimeLecture = form.GtimePerClass; //1회당 강의 시간
+    priceObject.totalCost =
+      form.GpricePerHour * form.GnumOfTimes * form.GtimePerClass; //총 비용
+    priceObject.totalTime = form.GnumOfTimes * form.GtimePerClass; //총 강의 시간
+    priceArray.push(priceObject);
+  }
+
   const data = {
-    content: form.content, //form.content
+    content: form.content,
     difficulty: level,
     introduce: form.introduction,
-    lecturePrices: [
-      form.personal == "on"
-        ? {
-            //personal일 때
-            groupNumber: 0, //그룹 수용가능 인원
-            isGroup: false,
-            pertimeCost: form.PpricePerHour, //시간당 비용
-            pertimeLecture: form.PtimePerClass, //1회당 강의 시간
-            totalCost:
-              form.PpricePerHour * form.PnumOfTimes * form.PtimePerClass, //총 비용
-            totalTime: form.PnumOfTimes * form.PtimePerClass, //총 강의 시간
-          }
-        : {
-            //group일 때
-            groupNumber: form.groupMax, //그룹 수용가능 인원
-            isGroup: true,
-            pertimeCost: form.GpricePerHour, //시간당 비용
-            pertimeLecture: form.GtimePerClass, //1회당 강의 시간
-            totalCost:
-              form.GpricePerHour * form.GnumOfTimes * form.GtimePerClass, //총 비용
-            totalTime: form.GnumOfTimes * form.GtimePerClass, //총 강의 시간
-          },
-    ],
+    lecturePrices: priceArray,
     subTitle: form.subheading,
-    subjects: [
-      {
-        enSubject: form.language, //???
-        krSubject: form.language, //???
-        parent: "1",
-      },
-    ],
-    systems: [form.online == "on" ? "ONLINE" : "OFFLINE"],
+    subjects: languageArray,
+    systems: systemArray,
     thumbnailUrl: form.image,
     title: form.maintitle,
   };
-  console.log(data);
   await axios({
     method: "POST",
     url: "/lectures",
     data: data,
   })
     .then((response) => {
-      console.log(data);
+      const back = document.getElementById("uploadBack");
+      const modal = document.getElementById("uploadModal");
+      modal ? (modal.style.display = "block") : "";
+      back ? (back.style.display = "block") : "";
       console.log(response);
       return response;
     })

@@ -1,14 +1,16 @@
 .step03 {
-  margin: 0 auto;
   width: 375px;
   height: 100vh;
+  margin: 0 auto;
+
   .background {
-    display: none;
     position: fixed;
+    z-index: 9999;
+    display: none;
     width: 375px;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
-    z-index: 9999;
+
     .uploadModal {
       position: absolute;
       top: 50%;
@@ -16,53 +18,62 @@
       transform: translate(-50%, -50%);
     }
   }
+
   .graySection {
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: #f3f5f8;
     padding: 22px 33px 140px 21px;
+    background-color: #f3f5f8;
+
     .basic {
       height: 120px;
       background-color: #f3f5f8;
     }
+
     .title {
+      margin: 0;
       font-size: 13px;
       font-weight: 400;
       line-height: 1.69;
       color: #283237;
-      margin: 0;
     }
+
     .cf {
       display: block;
+      margin-bottom: 16px;
+      margin-left: 10px;
       font-size: 13px;
       font-weight: 400;
       line-height: 1.69;
       color: #949bad;
-      margin-bottom: 16px;
-      margin-left: 10px;
     }
+
     .classType {
       margin-bottom: 20px;
+
       .group {
         display: flex;
+
         .groupMax {
           position: relative;
           display: flex;
           align-items: center;
           margin-left: 5px;
+
           .maxInput {
             width: 105px;
             height: 24px;
+            padding: 8px 20px 5px 40px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #3568ee;
+            text-align: right;
             border: 0.5px solid #3568ee;
             border-radius: 10px;
-            text-align: right;
-            padding: 8px 20px 5px 40px;
             outline: none;
-            font-size: 12px;
-            color: #3568ee;
-            font-weight: 700;
           }
+
           .guide1 {
             position: absolute;
             left: 10px;
@@ -71,6 +82,7 @@
             line-height: 1.6666;
             color: #949bad;
           }
+
           .guide2 {
             position: absolute;
             right: 10px;

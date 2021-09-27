@@ -1,6 +1,6 @@
 import styles from "./whiteSection.module.scss";
 import Image from "next/image";
-const WhiteSection = ({ step, onClick, MoveStep }) => {
+const WhiteSection = ({ step, onClick, MoveStep, able }) => {
   return (
     <section className={styles.white}>
       <div className={styles.firstLine}>
@@ -18,7 +18,9 @@ const WhiteSection = ({ step, onClick, MoveStep }) => {
         <button
           type="button"
           className={styles.btn}
-          onClick={() => MoveStep(1)}
+          onClick={() => {
+            if (able) MoveStep(1);
+          }}
         >
           <h2 className={step == 1 ? styles.selected : styles.unselected}>
             1단계
@@ -27,7 +29,9 @@ const WhiteSection = ({ step, onClick, MoveStep }) => {
         <button
           type="button"
           className={styles.btn}
-          onClick={() => MoveStep(2)}
+          onClick={() => {
+            if (able) MoveStep(2);
+          }}
         >
           <h2 className={step == 2 ? styles.selected : styles.unselected}>
             2단계
@@ -36,7 +40,9 @@ const WhiteSection = ({ step, onClick, MoveStep }) => {
         <button
           type="button"
           className={styles.btn}
-          onClick={() => MoveStep(3)}
+          onClick={() => {
+            if (able) MoveStep(3);
+          }}
         >
           <h2 className={step == 3 ? styles.selected : styles.unselected}>
             3단계

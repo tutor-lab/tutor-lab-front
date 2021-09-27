@@ -5,7 +5,7 @@ const ImgSection = ({ thumbnail, online, offline }) => {
   return (
     <section className={style.imageSection}>
       <Image
-        src={thumbnail}
+        src={thumbnail ? thumbnail : "/images/classImage.jpg"}
         alt="강의 대표 이미지"
         width="376px"
         height="277px"

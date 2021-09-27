@@ -1,26 +1,29 @@
 .totalReview {
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: #f3f5f8;
+  justify-content: center;
   height: 108px;
+  background-color: #f3f5f8;
   border-top: 0.25px solid #b1b1b1;
+
   .rating {
-    color: black;
+    margin-right: 10px;
     font-size: 40px;
     font-weight: 700;
     line-height: 1.17;
-    margin-right: 10px;
+    color: #000;
   }
+
   .reviewInfo {
     display: flex;
     flex-direction: column;
+
     .reviewCnt {
-      color: #666666;
+      margin-bottom: 3px;
       font-size: 10px;
       font-weight: 400;
       line-height: 1.17;
-      margin-bottom: 3px;
+      color: #666;
     }
   }
 }

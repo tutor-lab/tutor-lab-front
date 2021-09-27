@@ -15,16 +15,15 @@ import MyClass from "./myclass";
 import Step01 from "../components/classRegistration/step/step01";
 import Step02 from "../components/classRegistration/step/step02";
 import Step03 from "../components/classRegistration/step/step03";
-import axios from "axios";
 
 const ClassRegistration = () => {
-  const [preview, setPreview] = useState("");
   const [currentI, setCurrentI] = useState(0);
   const dispatch = useDispatch();
   const { form } = useSelector(({ update }) => ({
     form: update.update,
   }));
   const step = form.step;
+
   const onChange = (name) => async (e) => {
     let value = e.target.value;
     switch (name) {
@@ -36,10 +35,6 @@ const ClassRegistration = () => {
       case "introduction":
         TextLimit(e, 25);
         value = e.target.value;
-        break;
-      case "image":
-        const previewImg = await ImagePreview(e);
-        value = previewImg;
         break;
       case "language":
         const selected = radiobox(1);
@@ -134,26 +129,6 @@ const ClassRegistration = () => {
     dispatch(MoveStep(step));
   };
 
-  const ImagePreview = (e) => {
-    //이미지 프리뷰
-    let resImg = "";
-    if (e.target.files[0]) {
-      // reader.readAsDataURL(e.target.files[0]);
-      const formData = new FormData();
-      formData.append("file", e.target.files[0]);
-      resImg = axios
-        .post("/uploads/images", formData)
-        .then((response) => {
-          setPreview(response.data.url);
-          return response.data.url;
-        })
-        .catch((e) => {});
-    }
-    console.log("resImg==", resImg);
-    return resImg;
-    // return fileName
-  };
-
   const TextLimit = (e, limit) => {
     //글자 수 제한
     if (e.target.value.length > limit) {
@@ -243,6 +218,17 @@ const ClassRegistration = () => {
   }, [dispatch]);
 
   switch (step) {
+    case 0:
+      return (
+        <Step03
+          type="update"
+          form={form}
+          prevStep={Prev}
+          handleChange={onChange}
+          handleSubmit={onSubmit}
+          MoveStep={RandomMove}
+        />
+      );
     case 1:
       return (
         <Step01
@@ -250,7 +236,6 @@ const ClassRegistration = () => {
           form={form}
           nextStep={Next}
           handleChange={onChange}
-          preview={preview}
           showGray={showGray}
           hideGray={hideGray}
           MoveStep={RandomMove}

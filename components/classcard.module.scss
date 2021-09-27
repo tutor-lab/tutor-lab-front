@@ -1,44 +1,49 @@
 .classCard {
   width: 330px;
   height: 254px;
-  border-radius: 10px;
-  box-shadow: 0 1px 5px 0 #949bad;
-  background-color: white;
+  margin-right: auto;
   margin-bottom: 24px;
   margin-left: auto;
-  margin-right: auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px 0 #949bad;
+
   .classCardImage {
     position: relative;
+
     .classCardImg {
       margin: 0;
-      border-top-left-radius: 10px;
       border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
     }
+
     .onoffMethod {
       position: absolute;
       top: 9px;
       right: 12px;
+
       .onoff {
-        font-size: 12px;
-        border: 0.5px solid white;
-        border-radius: 18px;
-        padding: 4px 8px;
-        color: white;
         float: left;
+        padding: 4px 8px;
         margin-left: 12px;
+        font-size: 12px;
+        color: #fff;
+        border: 0.5px solid #fff;
+        border-radius: 18px;
       }
     }
   }
 
   .classCardExplanation {
-    padding: 16px;
     position: relative;
+    padding: 16px;
+
     h1 {
+      margin-top: 0;
+      margin-bottom: 8px;
       font-size: 15px;
       font-weight: 700;
       color: #283237;
-      margin-top: 0;
-      margin-bottom: 8px;
     }
 
     .def,
@@ -64,22 +69,24 @@
 
     .likes {
       position: relative;
-      left: 0px;
+      left: 0;
       float: left;
       overflow: hidden;
+
       .heart {
-        padding: 0px;
-        padding-top: 2px;
         float: left;
-        border: none;
-        background-color: white;
+        padding: 0;
+        padding-top: 2px;
+        background-color: #fff;
+        border: 0;
       }
+
       .likeCnt {
         float: left;
+        margin-left: 8px;
         font-size: 13px;
         font-weight: 400;
         color: #949bad;
-        margin-left: 8px;
       }
     }
   }
