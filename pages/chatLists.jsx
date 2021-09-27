@@ -31,6 +31,7 @@ const ChatLists = ({ newAlarm }) => {
     }
   }, []);
 
+  console.log(response);
   return res ? (
     <>
       <div className={styles.chatLists}>
@@ -38,7 +39,7 @@ const ChatLists = ({ newAlarm }) => {
         <section className={styles.listSection}>
           <ChatListSearchBox />
           <div className={styles.chatPreviews}>
-            {response.data.content.map((data, i) => {
+            {response?.data?.content?.map((data, i) => {
               return data ? (
                 <ChatPreview data={data} key={i} newChat={2} />
               ) : (

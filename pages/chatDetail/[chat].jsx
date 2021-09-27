@@ -57,27 +57,27 @@ const Chat = () => {
   useEffect(() => {
     getMy();
     getPrevChat();
-    if (!ws.current) {
-      ws.current = new WebSocket(webSocketUrl);
-      ws.current.onopen = () => {
-        console.log("connected to " + webSocketUrl);
-        setSocketConnected(true);
-      };
+    // if (!ws.current) {
+    ws.current = new WebSocket(webSocketUrl);
+    ws.current.onopen = () => {
+      console.log("connected to " + webSocketUrl);
+      setSocketConnected(true);
+      // };
       ws.current.onerror = (error) => {
         console.log("connection error " + webSocketUrl);
         console.log(error);
       };
-    }
+    };
   }, []);
 
   useEffect(() => {
-    if (sendMsg) {
-      ws.current.onmessage = (evt) => {
-        const data = JSON.parse(evt.data);
+    ws.current.onmessage = (evt) => {
+      const data = JSON.parse(evt.data);
+      if (items) {
         setItems((prevItems) => [...prevItems, data]);
-      };
-    }
-  }, [sendMsg]);
+      }
+    };
+  }, []);
 
   // 소켓이 연결되었을 시에 send 메소드
   useEffect(() => {
@@ -109,18 +109,21 @@ const Chat = () => {
     setSendMsg(sendMsg + 1);
   };
 
+  console.log(items);
   return user ? (
     <div className={styles.chat}>
       <NameTab name={"김하나"} />
       <section className={styles.contentSection}>
         <div className={styles.content}>
-          {items.map((data, i) => {
-            return user?.data?.name == data.username ? (
-              <MyChats key={i} text={data.message} />
-            ) : (
-              <OthersChats key={i} text={data.message} name={data.username} />
-            );
-          })}
+          {items != undefined &&
+            items.length > 0 &&
+            items.map((data, i) => {
+              return user?.data?.name == data.username ? (
+                <MyChats key={i} text={data.message} />
+              ) : (
+                <OthersChats key={i} text={data.message} name={data.username} />
+              );
+            })}
         </div>{" "}
       </section>
       <span className={styles.fixedTab}>
