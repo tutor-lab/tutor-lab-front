@@ -11,7 +11,7 @@ import {
 } from "../redux/reducers/signup";
 import Main from ".";
 
-const Test = () => {
+const SignUpPage = () => {
   const dispatch = useDispatch();
   const { form } = useSelector(({ SignUpR }) => ({
     form: SignUpR.signup,
@@ -162,4 +162,4 @@ const Test = () => {
   }
 };
 
-export default Test;
+export default SignUpPage;
