@@ -4,7 +4,6 @@ import ClassCard from "../components/classcard";
 import BottomTab from "../components/bottomtab";
 import axios from "axios";
 import { useEffect, useState } from "react";
-axios.defaults.baseURL = "http://3.35.255.192:8081";
 axios.interceptors.request.use(function (config) {
   const token = localStorage.getItem("accessToken");
   if (token) {
@@ -18,7 +17,7 @@ const MyClass = ({}) => {
   const [res, setRes] = useState(false);
   const ClassLists = async () => {
     try {
-      setResponse(await axios.get("/tutors/mylectures"));
+      setResponse(await axios.get("/tutors/my-lectures"));
       setRes(true);
       return response;
     } catch (e) {
@@ -36,6 +35,7 @@ const MyClass = ({}) => {
     }
   }, []);
 
+  console.log(response);
   return res ? (
     <>
       <div className={styles.whitesection}>
