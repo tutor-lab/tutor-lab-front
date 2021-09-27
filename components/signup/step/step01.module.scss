@@ -33,6 +33,11 @@
       align-items: center;
       flex-direction: column;
       margin-bottom: 40px;
+
+      .errText {
+        font-size: 14px;
+        color: #f00;
+      }
     }
 
     .selectSection {

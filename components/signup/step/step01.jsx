@@ -1,11 +1,11 @@
 import styles from "./step01.module.scss";
 import InputBox from "../inputBox";
-import ErrBox from "../errBox";
 import TopBar from "../topBar";
 import BlueBtn from "../button";
 import SelectBox from "../selectBox";
 import Modal from "../modal";
 import Gender from "../gender";
+import { useState, useEffect } from "react";
 const Step01 = ({
   form,
   prevStep,
@@ -15,9 +15,47 @@ const Step01 = ({
   showGender,
   close,
 }) => {
+  const [error, setError] = useState("");
+  const [disable, setDisable] = useState(true);
+  useEffect(() => {
+    ErrCheck();
+    console.log(error);
+  });
+
   if (typeof window === "undefined" || !window.document) {
     return <></>;
   }
+
+  const ErrCheck = () => {
+    const regex =
+      /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (
+      form.email == "" ||
+      form.gender == "" ||
+      form.name == "" ||
+      form.password == "" ||
+      form.passwordConfirm == "" ||
+      form.phoneNumber == "" ||
+      form.stateL == ""
+    ) {
+      setError("빈칸을 모두 채워주세요.");
+      setDisable(true);
+    } else if (!regex.test(form.email)) {
+      setError("이메일 형식을 확인해주세요");
+    } else if (form.password.length < 6 || form.password.length > 14) {
+      setError("비밀번호는 6-14자여야 합니다.");
+      setDisable(true);
+    } else if (form.password != form.passwordConfirm) {
+      setError("비밀번호가 일치하지 않습니다.");
+      setDisable(true);
+    } else if (form.phoneNumber.length != 11) {
+      setError("전화번호를 확인해주세요");
+    } else {
+      setError("");
+      setDisable(false);
+    }
+  };
+
   return (
     <section className={styles.signUp01} onClick={close}>
       <div className={styles.stateBackground} id="stateBackground">
@@ -58,6 +96,7 @@ const Step01 = ({
             placeholder={"휴대폰 번호('-' 제외)"}
             onChange={handleChange("phoneNumber")}
           />
+          <span className={styles.errText}>{error ? error : ""}</span>
         </div>
         <div className={styles.selectSection}>
           <span className={styles.row}>
@@ -95,7 +134,7 @@ const Step01 = ({
         <span className={styles.text}>동네 강의 추천을 위해 입력해주세요</span>
       </div>
       <div className={styles.footer}>
-        <BlueBtn text={"완료"} onClick={handleSubmit} />
+        <BlueBtn text={"완료"} onClick={handleSubmit} disable={disable} />
       </div>
     </section>
   );
