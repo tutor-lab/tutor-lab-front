@@ -14,7 +14,12 @@ const ChatLists = ({ newAlarm }) => {
   const [response, setResponse] = useState("");
   const getChatLists = async () => {
     try {
-      setResponse(await axios.get("/tutors/my-chatrooms"));
+      await axios.get("/tutors/my-chatrooms")
+      .then((res)=>{
+        console.log('res==',res)
+        setResponse(res)
+      })
+      // setResponse(await axios.get("/tutors/my-chatrooms"));
       setRes(true);
     } catch (e) {
       setRes(false);
@@ -31,7 +36,7 @@ const ChatLists = ({ newAlarm }) => {
     }
   }, []);
 
-  console.log(response);
+  
   return res ? (
     <>
       <div className={styles.chatLists}>

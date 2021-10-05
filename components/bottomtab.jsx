@@ -27,6 +27,24 @@ const BottomTab = ({}) => {
 
         <button
           type="button"
+          onClick={() => router.push("/chatLists")}
+          className={styles.elements}
+        >
+          <li>
+            <div className={styles.img}>
+              <Image
+                src="/images/chatList.png"
+                width="23px"
+                height="23px"
+                alt="채팅리스트"
+                className={styles.img}
+              />
+            </div>
+            <span>채팅리스트</span>
+          </li>
+        </button>
+        {/* <button
+          type="button"
           onClick={() => router.push("/board")}
           className={styles.elements}
         >
@@ -42,7 +60,7 @@ const BottomTab = ({}) => {
             </div>
             <span>게시판</span>
           </li>
-        </button>
+        </button> */}
 
         <button
           type="button"
