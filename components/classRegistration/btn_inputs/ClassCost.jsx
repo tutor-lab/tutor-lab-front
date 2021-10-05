@@ -33,7 +33,7 @@ const ClassCost = ({ form, handleChange, distinct }) => {
         <ShortSquare
           definition={"시간 당 가격"}
           unit={"원"}
-          placeholder={"10,000"}
+          placeholder={"0"}
           onChange={
             distinct == "personal"
               ? handleChange("PpricePerHour")

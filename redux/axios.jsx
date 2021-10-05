@@ -1,12 +1,12 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://3.35.255.192:8081";
-axios.interceptors.request.use(function (config) {
-  const token = localStorage.getItem("accessToken");
-  if (token) {
-    config.headers.Authorization = "Bearer " + token;
-  }
-  return config;
-});
+// axios.defaults.baseURL = "http://3.35.255.192:8081";
+// axios.interceptors.request.use(function (config) {
+//   const token = localStorage.getItem("accessToken");
+//   if (token) {
+//     config.headers.Authorization = "Bearer " + token;
+//   }
+//   return config;
+// });
 export const ClassReg = async (form) => {
   let level = "입문";
   switch (form.level) {

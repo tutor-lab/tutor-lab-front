@@ -63,7 +63,7 @@ const ClassMain = () => {
         <button
           className={select ? style.selected : style.unselected}
           // onClick={() => setSelect(true)}
-          onClick={() => console.log(data)}
+          onClick={() => setSelect(true)}
         >
           강의소개
         </button>
