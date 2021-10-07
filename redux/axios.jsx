@@ -26,13 +26,26 @@ export const ClassReg = async (form) => {
       level = "BASIC";
   }
 
+ 
   let languageArray = [];
-  form.language.map((e, i) => {
+  // form.language.map((e, i) => {
+  //   var languageObject = new Object();
+  //   languageObject.krSubject = form.language[i];
+  //   // languageObject.parent = form.classtype[i];
+  //   languageArray.push(languageObject);
+  // });
+  // form.classtype.map((e, i) => {
+  //   var languageObject = new Object();
+  //   languageObject.classtype = form.classtype[i];
+  //   // languageObject.parent = form.classtype[i];
+  //   languageArray.push(languageObject);
+  // });
+  for(let i=0;i<form.classtype.length;i++){
     var languageObject = new Object();
     languageObject.krSubject = form.language[i];
-    languageObject.parent = 1;
+    languageObject.parent = form.classtype[i];
     languageArray.push(languageObject);
-  });
+  }
 
   let systemArray = [];
   if (form.online == "on") {
@@ -76,6 +89,7 @@ export const ClassReg = async (form) => {
     thumbnailUrl: form.image,
     title: form.maintitle,
   };
+  console.log(data)
   await axios({
     method: "POST",
     url: "/lectures",

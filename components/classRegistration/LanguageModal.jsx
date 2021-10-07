@@ -31,7 +31,7 @@ export const lectureListData = [
     "krSubject":"C/C++"
   },
 ]
-// export const lectureListData1 = [
+// export const lectureListData = [
 //   {
 //     "parent":"2",
 //     "learningKind":"언어",
@@ -72,15 +72,11 @@ export const LectureKindModal = ({ ChangingClass,setLectureModal,currentI }) => 
 export const LanguageModal = ({ ChangingClass }) => {
   return (
     <div className={styles.modal} id="menu">
-      <Language language={"Java"} select={1} ChangingClass={ChangingClass} />
-      <Language
-        language={"JavaScript"}
-        select={2}
-        ChangingClass={ChangingClass}
-      />
-      <Language language={"Python"} select={2} ChangingClass={ChangingClass} />
-      <Language language={"SQL"} select={2} ChangingClass={ChangingClass} />
-      <Language language={"R"} select={2} ChangingClass={ChangingClass} />
+      {lectureListData.map((item,index)=>
+        <div key={index}>
+          <Language language={item.krSubject} select={1} ChangingClass={ChangingClass} />
+        </div>
+      )}
       <input
         type="text"
         placeholder="직접 입력 후 엔터키"
