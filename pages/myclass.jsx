@@ -4,18 +4,12 @@ import ClassCard from "../components/classcard";
 import BottomTab from "../components/bottomtab";
 import axios from "axios";
 import { useEffect, useState } from "react";
-axios.interceptors.request.use(function (config) {
-  const token = localStorage.getItem("accessToken");
-  if (token) {
-    config.headers.Authorization = "Bearer " + token;
-  }
-  return config;
-});
 
 const MyClass = ({}) => {
   const [response, setResponse] = useState("");
   const [res, setRes] = useState(false);
   const ClassLists = async () => {
+    
     try {
       setResponse(await axios.get("/tutors/my-lectures"));
       setRes(true);

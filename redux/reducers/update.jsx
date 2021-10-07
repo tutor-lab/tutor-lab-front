@@ -9,6 +9,8 @@ const INITIALIZE = "newclass/INITIALIZE";
 const CHANGE_FIELD = "newclass/CHANGE_FIELD";
 const ADD_CLASS = "newclass/ADD_CLASS";
 const DELETE_CLASS = "newclass/DELETE_CLASS";
+const DELETE_LECTURE = "newclass/DELETE_LECTURE";
+const ADD_LECTURE = "newclass/ADD_LECTURE";
 const INPUT_CLASS = "newclass/INPUT_CLASS";
 const NEXT_STEP = "newclass/NEXT_STEP";
 const PREV_STEP = "newclass/PREV_STEP";
@@ -25,7 +27,18 @@ export const AddClass = createAction(ADD_CLASS, ({ form, key }) => ({
   form,
   key,
 }));
-
+export const AddLectrue = createAction(ADD_LECTURE, ({ form, key }) => ({
+  form,
+  key,
+}));
+export const DeleteLectrue = createAction(
+  DELETE_LECTURE,
+  ({ form, key, index }) => ({
+    form,
+    key,
+    index,
+  })
+);
 export const DeleteClass = createAction(
   DELETE_CLASS,
   ({ form, key, index }) => ({
@@ -55,7 +68,7 @@ const initialState = {
     maintitle: "",
     subheading: "",
     introduction: "",
-    classtype: "개발",
+    classtype: ["IT"],
     language: ["Java"],
     level: "입문",
     PpricePerHour: 0,
@@ -91,6 +104,14 @@ const Update = handleActions(
       produce(state, (draft) => {
         draft[form][key].splice(index, 1);
       }),
+    [ADD_LECTURE]: (state, { payload: { form, key } }) =>
+      produce(state, (draft) => {
+        draft[form][key].push("IT");
+      }),
+    [DELETE_LECTURE]: (state, { payload: { form, key, index } }) =>
+      produce(state, (draft) => {
+        draft[form][key].splice(index, 1);
+      }), 
     [INPUT_CLASS]: (state, { payload: { form, key, index, value } }) =>
       produce(state, (draft) => {
         draft[form][key][index] = value;

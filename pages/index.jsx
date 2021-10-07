@@ -3,9 +3,19 @@ import { WhiteBtn, BlueBtn } from "../components/login/btn/mainBtn";
 import TextBtn from "../components/login/btn/textBtn";
 import { ImageLogo, TextLogo } from "../components/login/logos";
 import router from "next/router";
+
 const Main = () => {
+
+  const token = typeof window !== "undefined" ? window.localStorage.getItem("accessToken"):null
+
+  if(token){
+    router.push("/myclass");
+  }
+
   return (
-    <section className={styles.main}>
+    <div>
+    
+      <section className={styles.main}>
       <span className={styles.imageLogo}>
         <ImageLogo />
       </span>
@@ -19,6 +29,8 @@ const Main = () => {
       </div>
       <span className={styles.tutorlabText}>@tutorlab</span>
     </section>
+    </div>
+    
   );
 };
 
