@@ -5,10 +5,11 @@ import BottomSection from "../BottomSection";
 import SquareButton from "../btn_inputs/SquareButton";
 import Quill from "../../quillEditor/QuillDynamic";
 import LanguageModal from "../LanguageModal";
-import {LectureKindModal} from "../LanguageModal";
+import { LectureKindModal } from "../LanguageModal";
 import { LevelModal } from "../LanguageModal";
 import { AddBtn, DeleteBtn } from "../btn_inputs/AddDeleteBtn";
 import { useEffect, useState } from "react";
+import axios from "axios";
 const Step02 = ({
   form,
   nextStep,
@@ -22,33 +23,58 @@ const Step02 = ({
   DeletingClass,
   lectureModal,
   setLectureModal,
-
   currentI,
-  lectureShowModal
+  lectureShowModal,
+  classtypeId,
 }) => {
   const [able, setAble] = useState(false);
+
   useEffect(() => {
     if (form.content != "") setAble(true);
   }, [form]); //quill editor 입력 내용 여부 확인 방법..??? <p><br/><p> 구분방법..
-
+  const [lectureKindList, setLectureKindList] = useState([]);
+  const [lectureKindSubList, setLectureKindSubList] = useState([]);
+  useEffect(() => {
+    axios
+      .get("/learningKinds")
+      .then((response) => {
+        setLectureKindList(response.data);
+      })
+      .catch((response) => {
+        console.log(response);
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`/subjects/${classtypeId}`)
+      .then((response) => {
+        setLectureKindSubList(response.data);
+      })
+      .catch((response) => {
+        console.log(response);
+      });
+  }, [classtypeId]);
   return (
     <div>
-      {lectureModal && 
+      {lectureModal && (
         <div className={styles.background} id="LanBackground">
           <div className={styles.modal} id="languageModal">
-            <LectureKindModal 
-              ChangingClass={handleChange} 
-              setLectureModal={setLectureModal} 
-             
+            <LectureKindModal
+              lectureKindList={lectureKindList}
+              ChangingClass={handleChange}
+              setLectureModal={setLectureModal}
               currentI={currentI}
             />
-          </div> 
+          </div>
         </div>
-      }
+      )}
       <div className={styles.step02} onClick={Close}>
         <div className={styles.background} id="LanBackground">
           <div className={styles.modal} id="languageModal">
-            <LanguageModal ChangingClass={handleChange} />
+            <LanguageModal
+              lectureKindSubList={lectureKindSubList}
+              ChangingClass={handleChange}
+            />
           </div>
         </div>
         <div className={styles.background} id="LevBackground">
@@ -70,9 +96,9 @@ const Step02 = ({
                 return (
                   <>
                     <div className={styles.classType}>
-                      <SquareButton 
-                        category={"강의 종류"} 
-                        element={form.classtype[i]} 
+                      <SquareButton
+                        category={"강의 종류"}
+                        element={form.classtype[i]}
                         showModal={() => lectureShowModal(i)}
                       />
                       <SquareButton

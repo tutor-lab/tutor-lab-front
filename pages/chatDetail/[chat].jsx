@@ -96,13 +96,13 @@ const Chat = () => {
   }, [socketConnected]);
 
   const sendMsgEnter = (data) => {
-    alert(JSON.stringify(user.data.name));
+    console.log("chatID=", chatID);
     ws.current.send(
       JSON.stringify({
         username: user.data.name,
         message: data,
         sessionId: "30ae0b1d-45bc-ed13-2f3a-ee5c402725c7",
-        chatroomId: 1,
+        chatroomId: parseInt(chatID),
         type: "message",
       })
     );

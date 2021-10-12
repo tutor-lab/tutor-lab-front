@@ -69,6 +69,7 @@ const initialState = {
     subheading: "",
     introduction: "",
     classtype: ["IT"],
+    classtypeId: [1],
     language: ["Java"],
     level: "입문",
     PpricePerHour: 0,
@@ -111,7 +112,7 @@ const Update = handleActions(
     [DELETE_LECTURE]: (state, { payload: { form, key, index } }) =>
       produce(state, (draft) => {
         draft[form][key].splice(index, 1);
-      }), 
+      }),
     [INPUT_CLASS]: (state, { payload: { form, key, index, value } }) =>
       produce(state, (draft) => {
         draft[form][key][index] = value;

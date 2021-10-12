@@ -10,7 +10,7 @@ import {
   AddClass,
   DeleteClass,
   InputClass,
-  AddLectrue
+  AddLectrue,
 } from "../redux/reducers/update";
 import MyClass from "./myclass";
 import Step01 from "../components/classRegistration/step/step01";
@@ -19,8 +19,8 @@ import Step03 from "../components/classRegistration/step/step03";
 
 const ClassRegistration = () => {
   const [currentI, setCurrentI] = useState(0);
-  const [lectureModal,setLectureModal] = useState(false);
-  const [lecture,setLecture] = useState("IT");
+  const [lectureModal, setLectureModal] = useState(false);
+  const [lecture, setLecture] = useState("IT");
 
   const dispatch = useDispatch();
   const { form } = useSelector(({ update }) => ({
@@ -31,7 +31,6 @@ const ClassRegistration = () => {
   const onChange = (name) => async (e) => {
     let value = e.target.value;
     switch (name) {
-      
       case "maintitle":
         TextLimit(e, 40);
         value = e.target.value;
@@ -165,10 +164,10 @@ const ClassRegistration = () => {
     modal ? (modal.style.display = "block") : "";
     setCurrentI(i);
   };
-  const lectureShowModal = (i) =>{
+  const lectureShowModal = (i) => {
     setLectureModal(true);
     setCurrentI(i);
-  }
+  };
 
   const hideModal = () => {
     //modal 숨기기
@@ -274,6 +273,7 @@ const ClassRegistration = () => {
           setLectureModal={setLectureModal}
           currentI={currentI}
           lectureShowModal={lectureShowModal}
+          classtypeId={form.classtypeId}
         />
       );
     case 3:

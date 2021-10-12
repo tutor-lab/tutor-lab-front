@@ -1,36 +1,35 @@
 import styles from "./languageModal.module.scss";
 import { useDispatch } from "react-redux";
-import {
-  InputClass,
-} from "../../redux/reducers/update";
+import { InputClass, ChangeField } from "../../redux/reducers/update";
+import { useEffect, useState } from "react";
+import axios from "axios";
 export const lectureKindListData = [
   {
-    "parent":"1",
-    "learningKind":"IT"
+    parent: "1",
+    learningKind: "IT",
   },
   {
-    "parent":"2",
-    "learningKind":"언어",
-
+    parent: "2",
+    learningKind: "언어",
   },
-]
+];
 export const lectureListData = [
   {
-    "parent":"1",
-    "learningKind":"IT",
-    "krSubject":"자바"
+    parent: "1",
+    learningKind: "IT",
+    krSubject: "자바",
   },
   {
-    "parent":"1",
-    "learningKind":"IT",
-    "krSubject":"파이썬"
+    parent: "1",
+    learningKind: "IT",
+    krSubject: "파이썬",
   },
   {
-    "parent":"1",
-    "learningKind":"IT",
-    "krSubject":"C/C++"
+    parent: "1",
+    learningKind: "IT",
+    krSubject: "C/C++",
   },
-]
+];
 // export const lectureListData = [
 //   {
 //     "parent":"2",
@@ -43,20 +42,28 @@ export const lectureListData = [
 //     "krSubject":"중국어"
 //   }
 // ]
-export const LectureKindModal = ({ ChangingClass,setLectureModal,currentI }) => {
+export const LectureKindModal = ({
+  lectureKindList,
+  ChangingClass,
+  setLectureModal,
+  currentI,
+  setLectureKindSubList,
+}) => {
   return (
     <div className={styles.modal2} id="menu">
-      {lectureKindListData.map((item,index)=>
+      {lectureKindList.map((item, index) => (
         <div key={index}>
-          <LectureKind 
-            lecture={item.learningKind} 
-            select={1} 
-            ChangingClass={ChangingClass} 
-            setLectureModal={setLectureModal} 
+          <LectureKind
+            lecture={item.learningKind}
+            learningKindId={item.learningKindId}
+            select={1}
+            ChangingClass={ChangingClass}
+            setLectureModal={setLectureModal}
             currentI={currentI}
+            setLectureKindSubList={setLectureKindSubList}
           />
         </div>
-      )}
+      ))}
       <input
         type="text"
         placeholder="직접 입력 후 엔터키"
@@ -69,14 +76,18 @@ export const LectureKindModal = ({ ChangingClass,setLectureModal,currentI }) => 
   );
 };
 
-export const LanguageModal = ({ ChangingClass }) => {
+export const LanguageModal = ({ lectureKindSubList, ChangingClass }) => {
   return (
     <div className={styles.modal} id="menu">
-      {lectureListData.map((item,index)=>
+      {lectureKindSubList.map((item, index) => (
         <div key={index}>
-          <Language language={item.krSubject} select={1} ChangingClass={ChangingClass} />
+          <Language
+            language={item.krSubject}
+            select={1}
+            ChangingClass={ChangingClass}
+          />
         </div>
-      )}
+      ))}
       <input
         type="text"
         placeholder="직접 입력 후 엔터키"
@@ -88,32 +99,52 @@ export const LanguageModal = ({ ChangingClass }) => {
     </div>
   );
 };
-const LectureKind = ({ lecture, select, ChangingClass,setLectureModal,currentI }) => {
+const LectureKind = ({
+  lecture,
+  learningKindId,
+  select,
+  ChangingClass,
+  setLectureModal,
+  currentI,
+}) => {
   const dispatch = useDispatch();
 
-  const onClickModal = (item) =>{
-
-    console.log("currentI=",currentI)
+  const onClickModal = (learningKindId, item) => {
     dispatch(
-      InputClass({ 
+      InputClass({
         form: "update",
         key: "classtype",
         index: currentI,
         value: item,
       })
     );
-    setLectureModal(false)
-  }
-
+    dispatch(
+      InputClass({
+        form: "update",
+        key: "classtypeId",
+        index: currentI,
+        value: learningKindId,
+      })
+    );
+    dispatch(
+      InputClass({
+        form: "update",
+        key: "language",
+        index: currentI,
+        value: [""],
+      })
+    );
+    setLectureModal(false);
+  };
 
   return (
     <label htmlFor={lecture}>
       <div
         className={select == 1 ? styles.first : styles.modalElement}
-        onClick={(e)=>onClickModal(lecture)}
+        onClick={(e) => onClickModal(learningKindId, lecture)}
         name="lecture"
       >
-        <input type="radio" name="modalElement" id={lecture}  />
+        <input type="radio" name="modalElement" id={lecture} />
         {lecture}
       </div>
     </label>
@@ -132,7 +163,6 @@ const Language = ({ language, select, ChangingClass }) => {
     </label>
   );
 };
-
 
 const Level = ({ level, select, handleChange }) => {
   return (
