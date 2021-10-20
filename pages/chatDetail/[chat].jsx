@@ -5,7 +5,6 @@ import styles from "../chat.module.scss";
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-axios.defaults.baseURL = "http://3.35.255.192:8081";
 axios.interceptors.request.use(function (config) {
   const token = localStorage.getItem("accessToken");
   if (token) {

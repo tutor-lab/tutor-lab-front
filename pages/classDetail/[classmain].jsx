@@ -10,7 +10,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import renderHTML from "react-render-html";
 
-axios.defaults.baseURL = "http://3.35.255.192:8081";
 export async function getServerSideProps(context) {
   return {
     props: {},

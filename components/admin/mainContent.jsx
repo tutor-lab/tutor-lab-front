@@ -2,7 +2,6 @@ import styles from "./mainContent.module.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import router from "next/router";
-axios.defaults.baseURL = "http://3.35.255.192:8081";
 
 const Empty = ({ id, title, tutor }) => {
   return (

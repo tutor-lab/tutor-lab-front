@@ -26,7 +26,6 @@ export const ClassReg = async (form) => {
       level = "BASIC";
   }
 
- 
   let languageArray = [];
   // form.language.map((e, i) => {
   //   var languageObject = new Object();
@@ -40,10 +39,10 @@ export const ClassReg = async (form) => {
   //   // languageObject.parent = form.classtype[i];
   //   languageArray.push(languageObject);
   // });
-  for(let i=0;i<form.classtype.length;i++){
+  for (let i = 0; i < form.classtype.length; i++) {
     var languageObject = new Object();
     languageObject.krSubject = form.language[i];
-    languageObject.parent = form.classtype[i];
+    languageObject.learningKind = form.classtype[i];
     languageArray.push(languageObject);
   }
 
@@ -89,7 +88,7 @@ export const ClassReg = async (form) => {
     thumbnailUrl: form.image,
     title: form.maintitle,
   };
-  console.log(data)
+  console.log(data);
   await axios({
     method: "POST",
     url: "/lectures",
