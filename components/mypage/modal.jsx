@@ -49,5 +49,5 @@ const ReasonModal = () => {
     </div>
   );
 };
-// export { ReviewModal };
-export default ReasonModal;
+
+export default { ReviewModal, RefundModal, ReasonModal };

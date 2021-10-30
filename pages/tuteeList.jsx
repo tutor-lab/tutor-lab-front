@@ -1,6 +1,6 @@
 import OtherTopBar from "../components/mypage/topBar/otherPage";
 import styles from "./tuteeList.module.scss";
-import { TuteeBox, TuteeBox2 } from "../components/mypage/tuteeBox";
+import { TuteeBox } from "../components/mypage/tuteeBox";
 import BottomTab from "../components/bottomtab";
 import SearchSection from "../components/mypage/searchSection";
 const TuteeList = () => {
