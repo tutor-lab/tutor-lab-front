@@ -4,7 +4,7 @@ const TuteeBox = ({ num }) => {
     <button className={styles.TuteeBox}>
       <span className={num == 1 ? styles.icon1 : styles.icon2} />
       <h1 className={styles.title}>
-        {num == 1 ? "강의 신청 튜티" : "환불 신청 튜티"}
+        {num == 1 ? "튜티 목록" : "환불 목록"}
       </h1>
     </button>
   );

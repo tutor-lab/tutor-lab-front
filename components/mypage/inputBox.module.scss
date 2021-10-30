@@ -1,0 +1,35 @@
+.myPageInput1,
+.myPageInput2,
+.myPageInput3 {
+  display: flex;
+  width: 332px;
+  height: 41px;
+  background-color: #f3f5f8;
+  border: 1px solid #ebeaef;
+
+  .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    font-size: 13px;
+    color: #434a58;
+  }
+
+  .inputBox {
+    width: 236px;
+    background-color: #f3f5f8;
+    border: 0;
+    outline: none;
+  }
+}
+
+.myPageInput1 {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.myPageInput3 {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
