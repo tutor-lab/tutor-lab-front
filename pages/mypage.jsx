@@ -21,8 +21,6 @@ const MyPage = () => {
         <div className={styles.selectCategory}>
           <h1 className={styles.title}>계정정보</h1>
           <CategoryBtn text={"내 계정"} />
-          <CategoryBtn text={"게시판 활동내역"} />
-          <CategoryBtn text={"강의 요청"} />
           <CategoryBtn text={"설정"} />
         </div>
 

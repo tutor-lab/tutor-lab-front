@@ -3,6 +3,7 @@ import BottomTab from "../components/bottomtab";
 import OtherTopBar from "../components/mypage/topBar/otherPage";
 import TutorInfoBox from "../components/mypage/tutorInfoBox";
 import TutorProfileImg from "../components/mypage/tutorProfileImg";
+import router from "next/router";
 const TutorIntroduction = () => {
   return (
     <section className={styles.tutorIntroductionSection}>
@@ -42,6 +43,11 @@ const TutorIntroduction = () => {
       </section>
       <div className={styles.fixed}>
         <BottomTab />
+        <button
+          type="button"
+          className={styles.edit}
+          onClick={() => router.push("tutorInfoEdit")}
+        />
       </div>
     </section>
   );
