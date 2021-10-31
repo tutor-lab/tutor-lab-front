@@ -11,7 +11,7 @@ const ProfileEdit = () => {
       </section>
       <span className={styles.line} />
       <section className={styles.editBtnSection}>
-        <ProfileEditBtn text={"튜터 소개"} />
+        <ProfileEditBtn text={"튜터 소개"} url={"/tutorInfoEdit"} />
         <ProfileEditBtn text={"회원정보 수정"} />
         <ProfileEditBtn text={"비밀번호 변경"} />
         <ProfileEditBtn text={"맞춤강의 설정"} />

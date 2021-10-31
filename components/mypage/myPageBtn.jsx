@@ -1,8 +1,12 @@
 import styles from "./myPageBtn.module.scss";
-
-const ProfileEditBtn = ({ text }) => {
+import router from "next/router";
+const ProfileEditBtn = ({ text, url }) => {
   return (
-    <button type="button" className={styles.ProfileEditBtn}>
+    <button
+      type="button"
+      className={styles.ProfileEditBtn}
+      onClick={() => router.push(url)}
+    >
       <h1 className={styles.text}>{text}</h1>
       <div className={styles.goto} />
     </button>
