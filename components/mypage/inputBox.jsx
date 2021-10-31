@@ -16,4 +16,24 @@ const InputBox = ({ text, order }) => {
   );
 };
 
+const ThickInputBox = ({ type, placeholder }) => {
+  return (
+    <input
+      type={type}
+      placeholder={placeholder}
+      className={styles.thickInputBox}
+    />
+  );
+};
+
+const ThickInputBoxWithTitle = ({ title, type, placeholder }) => {
+  return (
+    <div className={styles.withTitle}>
+      <h1 className={styles.title}>{title}</h1>
+      <ThickInputBox type={type} placeholder={placeholder} />
+    </div>
+  );
+};
+
+export { ThickInputBox, ThickInputBoxWithTitle };
 export default InputBox;
