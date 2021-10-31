@@ -50,9 +50,13 @@
         width: 24px;
         height: 24px;
         cursor: pointer;
+        background-color: #f3f5f8;
         background-image: url("/images/mypage/file.svg");
         background-position: center;
         background-repeat: no-repeat;
+        background-size: auto;
+        border-radius: 50%;
+        box-shadow: 0 0 2px #c5d1ee;
       }
 
       input {
