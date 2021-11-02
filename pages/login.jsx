@@ -26,8 +26,19 @@ const Login = ({}) => {
         console.log(response);
         const accessToken = response.data.split(" ")[1];
         localStorage.setItem("accessToken", accessToken);
-        alert("로그인에 성공하였습니다");
-        router.push("/myclass");
+        axios
+          .get("/users/my-info")
+          .then((res) => {
+            alert("로그인에 성공하였습니다");
+            if (res.data.role === "TUTEE") {
+              router.push("/tutorInfoEdit");
+            } else {
+              router.push("/myclass");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch(function (error) {
         alert("로그인에 실패했습니다.");

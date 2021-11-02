@@ -5,7 +5,14 @@ const ProfileEditBtn = ({ text, url }) => {
     <button
       type="button"
       className={styles.ProfileEditBtn}
-      onClick={() => router.push(url)}
+      onClick={() => {
+        if (text === "로그아웃") {
+          localStorage.removeItem("accessToken");
+          router.push(url);
+        } else {
+          router.push(url);
+        }
+      }}
     >
       <h1 className={styles.text}>{text}</h1>
       <div className={styles.goto} />

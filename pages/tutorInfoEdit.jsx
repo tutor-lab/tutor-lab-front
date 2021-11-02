@@ -19,7 +19,7 @@ const TutorInfoEdit = () => {
       <section className={styles.academic}>
         <div className={styles.firstLine}>
           <h1 className={styles.title}>학력정보</h1>
-          <label for="academicFile">
+          <label htmlFor="academicFile">
             <div className={styles.fileImg} />
           </label>
           <input type="file" id="academicFile" required />
@@ -33,7 +33,7 @@ const TutorInfoEdit = () => {
       <section className={styles.career}>
         <div className={styles.firstLine}>
           <h1 className={styles.title}>경력정보</h1>
-          <label for="careerFile">
+          <label htmlFor="careerFile">
             <div className={styles.fileImg} />
           </label>
           <input type="file" id="careerFile" required />
