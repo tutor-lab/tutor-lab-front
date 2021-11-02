@@ -28,9 +28,9 @@ const CategoryBtn = ({ text }) => {
   );
 };
 
-const SaveBtn = () => {
+const SaveBtn = ({ onClick }) => {
   return (
-    <button type="button" className={styles.saveBtn}>
+    <button type="button" className={styles.saveBtn} onClick={onClick}>
       저장
     </button>
   );
