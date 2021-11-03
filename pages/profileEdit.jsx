@@ -15,7 +15,7 @@ const ProfileEdit = () => {
         <ProfileEditBtn text={"회원정보 수정"} url={"/memberInfoEdit"} />
         <ProfileEditBtn text={"비밀번호 변경"} url={"/changePW"} />
         <ProfileEditBtn text={"로그아웃"} url={"/"} />
-        <ProfileEditBtn text={"회원탈퇴"} />
+        <ProfileEditBtn text={"회원탈퇴"} url={"/deleteAccount"} />
       </section>
       <div className={styles.fixedTab}>
         <BottomTab />
