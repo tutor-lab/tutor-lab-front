@@ -2,14 +2,14 @@ import { call, put } from "redux-saga/effects";
 import { startLoading, finishLoading } from "./loading";
 
 
-function createRequestActionTypesSignUp(type) {
+export function createRequestActionTypesSignUp(type) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
   return [type, SUCCESS, FAILURE];
 };
-export default createRequestActionTypesSignUp
 
-function createRequestSagaSignUp(type, request) {
+
+export function createRequestSagaSignUp(type, request) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
   return function* (action) {
@@ -27,4 +27,3 @@ function createRequestSagaSignUp(type, request) {
     yield put(finishLoading(type));
   };
 }
-export default createRequestSagaSignUp
