@@ -1,15 +1,7 @@
 import { call, put } from "redux-saga/effects";
 import { startLoading, finishLoading } from "./loading";
 
-
-export default function createRequestActionTypesSignUp(type) {
-  const SUCCESS = `${type}_SUCCESS`;
-  const FAILURE = `${type}_FAILURE`;
-  return [type, SUCCESS, FAILURE];
-};
-
-
-export function createRequestSagaSignUp(type, request) {
+export default function createRequestSagaSignUp(type, request) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
   return function* (action) {
