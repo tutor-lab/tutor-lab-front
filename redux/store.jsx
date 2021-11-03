@@ -1,6 +1,6 @@
-import { createStore, applyMiddleware, Store, compose } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./reducers";
-import { MakeStore, createWrapper } from "next-redux-wrapper";
+import { createWrapper } from "next-redux-wrapper";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -17,5 +17,8 @@ const configureStore = () => {
   return store;
 };
 
-export const wrapper =
-  createWrapper < Store > (configureStore, { debug: true });
+const wrapper = createWrapper(configureStore, {
+  debug: process.env.NODE_ENV === "development,",
+});
+
+export default wrapper;
