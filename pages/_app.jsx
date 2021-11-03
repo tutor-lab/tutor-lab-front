@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { wrapper } from "../redux/store";
+import wrapper from "../redux/store";
 import "../styles/globals.css";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
