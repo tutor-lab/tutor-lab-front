@@ -28,10 +28,10 @@ const CategoryBtn = ({ text }) => {
   );
 };
 
-const SaveBtn = ({ onClick }) => {
+const BlueBtn = ({ onClick, text }) => {
   return (
-    <button type="button" className={styles.saveBtn} onClick={onClick}>
-      저장
+    <button type="button" className={styles.blueBtn} onClick={onClick}>
+      {text}
     </button>
   );
 };
@@ -57,4 +57,4 @@ const TuteeBoxBtn = ({ text }) => {
   );
 };
 
-export { ProfileEditBtn, CategoryBtn, SaveBtn, TuteeBoxBtn };
+export { ProfileEditBtn, CategoryBtn, BlueBtn, TuteeBoxBtn };
