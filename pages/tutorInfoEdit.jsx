@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import styles from "./tutorInfoEdit.module.scss";
 import OtherTopBar from "../components/mypage/topBar/otherPage";
 import InputBox from "../components/mypage/inputBox";
@@ -15,6 +15,25 @@ const TutorInfoEdit = () => {
   const [edothers, setEdOthers] = useState("");
   const [schoolName, setSchoolName] = useState("");
 
+  const [userInfoCheck,setUserInfoCheck] = useState(false)
+
+  const getUserInfo = () =>{
+    axios.get("/tutors/my-info")
+    .then((res)=>{
+      const item = res.data
+      setSchoolName(item.educations[0].schoolName)
+      setEdOthers(item.educations[0].others)
+      setMajor(item.educations[0].major)
+      setEducationLevel(item.educations[0].educationLevel)
+      setJob(item.careers[0].job)
+      setcompanyName(item.careers[0].companyName)
+      setLicense(item.careers[0].license)
+      setCaOthers(item.careers[0].others)
+      // setEducations(res.data.educations[0])
+      // setCareers(res.data.careers[0])
+      setUserInfoCheck(true)
+    })
+  }
   const handleSave = () => {
     const sendData = {
       careers: [
@@ -34,11 +53,9 @@ const TutorInfoEdit = () => {
         },
       ],
     };
-    console.log(sendData);
     axios
-      .post("tutors", sendData)
+      .post("/tutors", sendData)
       .then((res) => {
-        console.log(res);
         if (res.status === 201) {
           alert("등록되었습니다.");
           router.push("/myclass");
@@ -50,6 +67,43 @@ const TutorInfoEdit = () => {
         }
       });
   };
+  const handleUpdate = () =>{
+    const sendData = {
+      careers: [
+        {
+          companyName: companyName,
+          job: job,
+          license: license,
+          others: caothers,
+        },
+      ],
+      educations: [
+        {
+          educationLevel: educationLevel,
+          major: major,
+          others: edothers,
+          schoolName: schoolName,
+        },
+      ],
+    };
+    axios
+      .put("/tutors", sendData)
+      .then((res) => {
+        console.log('res1',res)
+        if (res.status === 200) {
+          alert("수정되었습니다.");
+          router.push("/myclass");
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log(err.response);
+        }
+      });
+  }
+  useEffect(() => {
+    getUserInfo()
+  }, [])
 
   return (
     <section className={styles.tutorInfoEdit}>
@@ -127,7 +181,7 @@ const TutorInfoEdit = () => {
         />
       </section>
       <div className={styles.fixed}>
-        <BlueBtn onClick={handleSave} text={"저장"} />
+        {userInfoCheck?<BlueBtn onClick={handleUpdate} text={"수정"} />:<BlueBtn onClick={handleSave} text={"저장"} />}
       </div>
     </section>
   );
