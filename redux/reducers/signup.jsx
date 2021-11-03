@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
-import createRequestSagaSignUp from "./createRequestSagaSignUp";
-import { createRequestActionTypesSignUp } from "./createRequestSagaSignUp";
+import createRequestSagaSignUp from "./createRequestSagaSignup";
+import { createRequestActionTypesSignUp } from "./createRequestSagaSignup";
 import * as API from "../api/signup";
 import { takeLatest } from "@redux-saga/core/effects";
 
