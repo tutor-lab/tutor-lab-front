@@ -1,11 +1,16 @@
 import styles from "./aboutTutee.module.scss";
+import router from "next/router";
 const TuteeBox = ({ num }) => {
   return (
-    <button className={styles.TuteeBox}>
+    <button
+      type="button"
+      className={styles.TuteeBox}
+      onClick={() =>
+        num == 1 ? router.push("/tuteeList") : router.push("/refundList")
+      }
+    >
       <span className={num == 1 ? styles.icon1 : styles.icon2} />
-      <h1 className={styles.title}>
-        {num == 1 ? "튜티 목록" : "환불 목록"}
-      </h1>
+      <h1 className={styles.title}>{num == 1 ? "튜티 목록" : "환불 목록"}</h1>
     </button>
   );
 };

@@ -49,5 +49,22 @@
   .fixed {
     position: fixed;
     bottom: -15px;
+
+    .edit {
+      position: absolute;
+      right: 24px;
+      bottom: 109px;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+      background-color: #689afd;
+      background-image: url("/images/mypage/edit.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 0;
+      border-radius: 50%;
+      outline: none;
+      box-shadow: 2px 2px 6px rgba(101, 149, 244, 0.6);
+    }
   }
 }

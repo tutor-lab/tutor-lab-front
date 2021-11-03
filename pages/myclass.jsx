@@ -8,8 +8,19 @@ import { useEffect, useState } from "react";
 const MyClass = ({}) => {
   const [response, setResponse] = useState("");
   const [res, setRes] = useState(false);
+  const [userRole, setUserRole] = useState("");
+
+  const getMyInfo = () => {
+    axios
+      .get("/users/my-info")
+      .then((res) => {
+        setUserRole(res.data.role);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const ClassLists = async () => {
-    
     try {
       setResponse(await axios.get("/tutors/my-lectures"));
       setRes(true);
@@ -28,6 +39,12 @@ const MyClass = ({}) => {
       ClassLists();
     }
   }, []);
+  // useEffect(() => {
+  //   getMyInfo();
+  //   if (userRole === "TUTEE") {
+  //     router.push("/tutorInfoEdit");
+  //   }
+  // }, [userRole]);
 
   console.log(response);
   return res ? (
