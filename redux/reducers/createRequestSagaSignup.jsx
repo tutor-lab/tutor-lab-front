@@ -9,7 +9,7 @@ export default function createRequestActionTypesSignUp(type) {
 };
 
 
-export function createRequestSagaSignUp(type, request) {
+export default function createRequestSagaSignUp(type, request) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
   return function* (action) {
