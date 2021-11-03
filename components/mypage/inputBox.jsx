@@ -25,6 +25,7 @@ const InputBox = ({ text, order, value, setValue }) => {
             style={{ marginLeft: 30 }}
             name="type"
             onChange={(e) => handleChange(e, "type")}
+            value={value}
           >
             <option value="">선택</option>
 
