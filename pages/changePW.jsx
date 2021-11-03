@@ -1,7 +1,7 @@
 import styles from "./changePW.module.scss";
 import { ThickInputBox } from "../components/mypage/inputBox";
 import OtherTopBar from "../components/mypage/topBar/otherPage";
-import { SaveBtn } from "../components/mypage/myPageBtn";
+import { BlueBtn } from "../components/mypage/myPageBtn";
 const ChangePW = () => {
   return (
     <section className={styles.changePW}>
@@ -21,7 +21,7 @@ const ChangePW = () => {
         <ThickInputBox type={"password"} placeholder={"새로운 비밀번호 확인"} />
       </section>
       <div className={styles.fixed}>
-        <SaveBtn />
+        <BlueBtn text={"저장"} />
       </div>
     </section>
   );

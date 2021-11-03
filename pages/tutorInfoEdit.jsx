@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./tutorInfoEdit.module.scss";
 import OtherTopBar from "../components/mypage/topBar/otherPage";
 import InputBox from "../components/mypage/inputBox";
-import { SaveBtn } from "../components/mypage/myPageBtn";
+import { BlueBtn } from "../components/mypage/myPageBtn";
 import axios from "axios";
 import router from "next/router";
 const TutorInfoEdit = () => {
@@ -127,7 +127,7 @@ const TutorInfoEdit = () => {
         />
       </section>
       <div className={styles.fixed}>
-        <SaveBtn onClick={handleSave} />
+        <BlueBtn onClick={handleSave} text={"저장"} />
       </div>
     </section>
   );
