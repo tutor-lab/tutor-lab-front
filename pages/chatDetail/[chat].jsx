@@ -124,7 +124,7 @@ const Chat = () => {
           {items != undefined &&
             items.length > 0 &&
             items.map((data, i) => {
-              return user?.data?.name == data.username ? (
+              return user?.data?.name == data.senderNickname ? (
                 <MyChats key={i} text={data.message} />
               ) : (
                 <OthersChats key={i} text={data.message} name={data.username} />
