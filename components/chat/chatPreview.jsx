@@ -3,10 +3,16 @@ import router from "next/router";
 import Image from "next/image";
 
 const ChatPreview = ({ data, newChat }) => {
+  console.log("data===", data.tuteeId);
   return (
     <button
       className={styles.previewSection}
-      onClick={() => router.push(`/chatDetail/${data.chatroomId}`)}
+      onClick={() =>
+        router.push({
+          pathname: `/chatDetail/${data.chatroomId}`,
+          query: { tuteeId: data.tuteeId },
+        })
+      }
     >
       <div className={styles.profile}>
         {data.tuteeImage !== null && (
