@@ -33,7 +33,7 @@ const MyPage = () => {
       </section>
 
       <div className={styles.fixedTab}>
-        <BottomTab />
+        <BottomTab num={3} />
       </div>
     </section>
   );
