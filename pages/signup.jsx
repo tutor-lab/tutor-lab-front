@@ -15,6 +15,7 @@ const SignUpPage = () => {
   const dispatch = useDispatch();
   const { form } = useSelector(({ SignUpR }) => ({
     form: SignUpR.signup,
+    signUpError: SignUpR.signUpError,
   }));
   const step = form.step;
 
@@ -97,6 +98,8 @@ const SignUpPage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(SignUp(form));
+
+    console.log("signUpError", form.signUpError);
   };
 
   const showState = () => {

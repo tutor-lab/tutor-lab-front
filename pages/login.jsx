@@ -41,8 +41,9 @@ const Login = ({}) => {
           });
       })
       .catch(function (error) {
-        alert("로그인에 실패했습니다.");
-        console.log(error);
+        if (error.response.data.message === "Unauthenticated") {
+          alert("이메일 인증을 받아주세요.");
+        }
       });
   };
   const onChangeUsername = (e) => {
