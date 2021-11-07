@@ -87,7 +87,7 @@ const TutorInfoEdit = () => {
       ],
     };
     axios
-      .put("/tutors", sendData)
+      .put("/tutors/my-info", sendData)
       .then((res) => {
         console.log("res1", res);
         if (res.status === 200) {
@@ -116,7 +116,7 @@ const TutorInfoEdit = () => {
 
   return (
     <section className={styles.tutorInfoEdit}>
-      <OtherTopBar title={"튜터 정보 수정"} />
+      <OtherTopBar title={"튜터 정보 수정"} url={"/tutorIntroduction"} />
       <section className={styles.text}>
         <p className={styles.intro}>
           입력하신 학력 및 경력 정보를 인증할 수 있는 첨부파일을 추가로 업로드

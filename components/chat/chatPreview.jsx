@@ -27,16 +27,19 @@ const ChatPreview = ({ data, newChat }) => {
       <div className={styles.chat}>
         <span className={styles.tuteeInfo}>
           <span className={styles.tutee}>튜티</span>
-          <span>{data.tuteeNickname}</span>
-          <span className={styles.name}>{data.lectureTitle}</span>
+          <span className={styles.name}>{data.tuteeNickname}</span>
         </span>
         {/* <span className={styles.last}>{data.lastMessage?.message}</span> */}
       </div>
       <div className={styles.timeInfo}>
         <span className={styles.date}>{data.date}</span>
         <span className={styles.newChat}>{data.uncheckedMessageCount}</span>
-        {/* {newChat ? <span className={styles.newChat}>{data.uncheckedMessageCount}</span> : <></>} */}
-        {/* <span className={styles.newChat}>{newChat}</span> */}
+        {/* {newChat ? (
+          <span className={styles.newChat}>{data.uncheckedMessageCount}</span>
+        ) : (
+          <></>
+        )}
+        <span className={styles.newChat}>{newChat}</span> */}
       </div>
     </button>
   );
