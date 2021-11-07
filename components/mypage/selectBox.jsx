@@ -34,10 +34,10 @@ const Selection = ({ title, opt }) => {
   );
 };
 
-const SelectionWithoutTitle = ({ opt }) => {
+const SelectionWithoutTitle = ({ opt, name, onChange }) => {
   return (
     <section className={styles.selectBox2}>
-      <select className={styles.sel}>
+      <select className={styles.sel} name={name} id={name} onChange={onChange}>
         {opt == 1 ? (
           <>
             <option value="M" className={styles.option}>
