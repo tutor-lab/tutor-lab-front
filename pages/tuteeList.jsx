@@ -6,7 +6,8 @@ import SearchSection from "../components/mypage/searchSection";
 import axios from "axios";
 import { useEffect, useState } from "react";
 const TuteeList = () => {
-  const [info, setInfo] = useState("");
+  const [info2, setInfo2] = useState("");
+  const [info3, setInfo3] = useState("");
   const [tuteeName, setName] = useState("");
   const [tuteeId, setID] = useState("");
   const [type, setType] = useState("");
@@ -21,6 +22,7 @@ const TuteeList = () => {
   const getTuteeList = () => {
     axios({ method: "GET", url: "/tutors/my-tutees", data: data }).then(
       (response) => {
+        setInfo2(response.data);
         setID(response.data.content[0].tuteeId);
         setName(response.data.content[0].name);
       }
@@ -33,7 +35,7 @@ const TuteeList = () => {
       url: `/tutors/my-tutees/${tuteeId}`,
       data: data,
     }).then((response) => {
-      setInfo(response.data.content[0].lecture);
+      setInfo3(response.data);
       setType(response.data.content[0].lecture.systemTypes[0].name);
     });
   };
@@ -41,6 +43,7 @@ const TuteeList = () => {
   useEffect(() => {
     getTuteeList();
   }, []);
+
   return (
     <section className={styles.tuteeList}>
       <OtherTopBar title={"튜티 목록"} url={"/mypage"} />
@@ -48,19 +51,32 @@ const TuteeList = () => {
       <div className={styles.line} />
       <section className={styles.ing}>
         <h1 className={styles.title}>강의 진행 중인 튜티</h1>
-
-        {info == "" ? (
-          <TuteeBox name={tuteeName} count={"1"} onClick={getTuteeClass} />
-        ) : (
-          <TuteeBox2
-            name={tuteeName}
-            title={info.title}
-            type={type}
-            price={info.lecturePrice.totalCost.toLocaleString("ko-KR")}
-            img={info.thumbnail}
-            onClick={() => setInfo("")}
-          />
-        )}
+        {info2 && info3 == ""
+          ? info2.content?.map((data, i) => {
+              return (
+                <TuteeBox
+                  name={data.name}
+                  key={i}
+                  count={"1"}
+                  onClick={getTuteeClass}
+                />
+              );
+            })
+          : info3.content?.map((data, i) => {
+              return (
+                <TuteeBox2
+                  name={tuteeName}
+                  title={data.lecture.title}
+                  type={type}
+                  price={data.lecture.lecturePrice.totalCost.toLocaleString(
+                    "ko-KR"
+                  )}
+                  img={data.lecture.thumbnail}
+                  onClick={() => setInfo3("")}
+                  key={i}
+                />
+              );
+            })}
       </section>
       <div className={styles.line} />
       <section className={styles.finished}>
