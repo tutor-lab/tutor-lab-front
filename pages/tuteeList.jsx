@@ -7,7 +7,7 @@ const TuteeList = () => {
   const price = 197000;
   return (
     <section className={styles.tuteeList}>
-      <OtherTopBar title={"튜티 목록"} />
+      <OtherTopBar title={"튜티 목록"} url={"/mypage"} />
       <SearchSection text1={"전체 튜티"} text2={"신규 튜티"} />
       <div className={styles.line} />
       <section className={styles.ing}>
@@ -20,7 +20,7 @@ const TuteeList = () => {
         <TuteeBox name={"김민영"} count={"1"} />
       </section>
       <div className={styles.fixed}>
-        <BottomTab />
+        <BottomTab num={3} />
       </div>
     </section>
   );

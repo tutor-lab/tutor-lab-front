@@ -1,48 +1,48 @@
-import {useEffect,useState} from 'react'
+import { useEffect, useState } from "react";
 import styles from "./tutorIntroduction.module.scss";
 import BottomTab from "../components/bottomtab";
 import OtherTopBar from "../components/mypage/topBar/otherPage";
 import TutorInfoBox from "../components/mypage/tutorInfoBox";
 import TutorProfileImg from "../components/mypage/tutorProfileImg";
 import router from "next/router";
-import axios from 'axios'
+import axios from "axios";
 const TutorIntroduction = () => {
-
-  const [careers,setCareers] = useState([]) 
-  const [educations,setEducations] = useState([])
-  const [name,setName] = useState("")
-  const [nickname,setNickname] = useState("")
-  const [phoneNumber,setPhoneNumber] = useState("")
-  const [email,setEmail] = useState("")
-  const [bio,setBio] = useState("")
-
-  const getUserInfo = () =>{
-    axios.get("/tutors/my-info")
-    .then((res)=>{
-      setEducations(res.data.educations[0])
-      setCareers(res.data.careers[0])
-    })
-    axios.get('/users/my-info')
-    .then((res)=>{
-      const item = res.data
-      setName(item.name)
-      setNickname(item.nickname)
-      setPhoneNumber(item.phoneNumber)
-      setEmail(item.email)
-      setBio(item.bio)
-    })
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("accessToken");
   }
+  const [careers, setCareers] = useState([]);
+  const [educations, setEducations] = useState([]);
+  const [name, setName] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [bio, setBio] = useState("");
+
+  const getUserInfo = () => {
+    axios.get("/tutors/my-info").then((res) => {
+      setEducations(res.data.educations[0]);
+      setCareers(res.data.careers[0]);
+    });
+    axios.get("/users/my-info").then((res) => {
+      const item = res.data;
+      setName(item.name);
+      setNickname(item.nickname);
+      setPhoneNumber(item.phoneNumber);
+      setEmail(item.email);
+      setBio(item.bio);
+    });
+  };
   useEffect(() => {
-    getUserInfo()
-  },[])
+    getUserInfo();
+  }, []);
   return (
     <section className={styles.tutorIntroductionSection}>
-      <OtherTopBar title={"튜터 소개"} />
+      <OtherTopBar title={"튜터 소개"} url={"/profileEdit"} />
       <section className={styles.basicInfo}>
         <h1 className={styles.title}>기본정보</h1>
         <div className={styles.profile}>
           <TutorProfileImg />
-          <div>
+          <div className={styles.info}>
             <TutorInfoBox category={"이름"} content={name} />
             <TutorInfoBox category={"닉네임"} content={nickname} />
             <TutorInfoBox category={"휴대폰번호"} content={phoneNumber} />
@@ -54,7 +54,10 @@ const TutorIntroduction = () => {
 
       <section className={styles.academicInfo}>
         <h1 className={styles.title}>학력정보</h1>
-        <TutorInfoBox category={"최종학력"} content={educations.educationLevel} />
+        <TutorInfoBox
+          category={"최종학력"}
+          content={educations.educationLevel}
+        />
         <TutorInfoBox category={"학교 명"} content={educations.schoolName} />
         <TutorInfoBox category={"전공 명"} content={educations.major} />
         <TutorInfoBox category={"그 외 학력"} content={educations.others} />
@@ -72,7 +75,7 @@ const TutorIntroduction = () => {
         <span className={styles.text}>{bio}</span>
       </section>
       <div className={styles.fixed}>
-        <BottomTab />
+        <BottomTab num={3} />
         <button
           type="button"
           className={styles.edit}

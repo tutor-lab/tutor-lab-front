@@ -7,7 +7,7 @@ const RefundList = () => {
   const price = 197000;
   return (
     <section className={styles.refundList}>
-      <OtherTopBar title={"환불 목록"} />
+      <OtherTopBar title={"환불 목록"} url={"/mypage"} />
       <SearchSection text1={"전체 환불"} text2={"최근 1년"} />
       <div className={styles.line} />
       <section className={styles.refundContent}>
@@ -41,7 +41,7 @@ const RefundList = () => {
         />
       </section>
       <div className={styles.fixed}>
-        <BottomTab />
+        <BottomTab num={3} />
       </div>
     </section>
   );

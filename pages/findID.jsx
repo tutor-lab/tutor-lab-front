@@ -14,7 +14,7 @@ const FindID = () => {
           이메일로 {/*문자 메세지 또는 카카오톡으로 */}
           <br /> 아이디 정보를 보내드립니다.
         </p>
-        <InputBox type={"email"} placeholder={"이메일 주소"} />
+        <InputBox type={"tel"} placeholder={"휴대폰 번호 '-' 제외"} />
         <BlueBtn text={"확인"} />
       </div>
       <NameLogo />
