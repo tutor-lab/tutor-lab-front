@@ -56,7 +56,7 @@ const ChatLists = ({ newAlarm }) => {
           )}
         </section>
         <span className={styles.fixedTab}>
-          <BottomTab />
+          <BottomTab num={2} />
         </span>
       </div>
     </>
