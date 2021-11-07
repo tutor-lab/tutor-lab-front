@@ -6,13 +6,13 @@ import SelectBox from "../selectBox";
 import Modal from "../modal";
 import Gender from "../gender";
 import { useState, useEffect } from "react";
+import { SelectionWithoutTitle } from "../../mypage/selectBox";
 const Step01 = ({
   form,
   prevStep,
   handleChange,
   handleSubmit,
   showState,
-  showGender,
   close,
 }) => {
   const [error, setError] = useState("");
@@ -100,13 +100,15 @@ const Step01 = ({
         </div>
         <div className={styles.selectSection}>
           <span className={styles.row}>
-            <SelectBox placeholder={"출생년도"} num={1} />
-            <SelectBox
+            {/* <SelectBox placeholder={"출생년도"} num={1} /> */}
+            <SelectionWithoutTitle opt={2} />
+            <SelectionWithoutTitle opt={1} />
+            {/* <SelectBox
               num={3}
               id="gender"
               btnText={form.gender}
               onClick={showGender}
-            />
+            /> */}
           </span>
           <span className={styles.row}>
             <SelectBox

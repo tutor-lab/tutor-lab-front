@@ -10,6 +10,7 @@ import { ImageLogo, NameLogo } from "../components/login/logos";
 const Login = ({}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const checkAccount = () => {
     if (username === "" || password === "") {
@@ -29,7 +30,8 @@ const Login = ({}) => {
         axios
           .get("/users/my-info")
           .then((res) => {
-            alert("로그인에 성공하였습니다");
+            setError(false);
+            //            alert("로그인에 성공하였습니다");
             if (res.data.role === "TUTEE") {
               router.push("/tutorInfoEdit");
             } else {
@@ -41,7 +43,8 @@ const Login = ({}) => {
           });
       })
       .catch(function (error) {
-        alert("로그인에 실패했습니다.");
+        setError(true);
+        //        alert("로그인에 실패했습니다.");
         console.log(error);
       });
   };
@@ -71,6 +74,13 @@ const Login = ({}) => {
           onChange={onChangePassword}
           value={password}
         />
+        {error ? (
+          <span className={styles.failed}>
+            아이디 또는 비밀번호가 일치하지 않습니다.{" "}
+          </span>
+        ) : (
+          <></>
+        )}
         <BlueBtn text={"로그인 하기"} type="submit" onClick={checkAccount} />
         <span className={styles.textBtn}>
           <TextBtn text={"아이디 찾기"} />

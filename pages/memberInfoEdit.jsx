@@ -2,42 +2,7 @@ import styles from "./memberInfoEdit.module.scss";
 import OtherTopBar from "../components/mypage/topBar/otherPage";
 import { ThickInputBoxWithTitle } from "../components/mypage/inputBox";
 import { BlueBtn } from "../components/mypage/myPageBtn";
-
-const year = [];
-for (let i = 2002; i >= 1921; i--) {
-  year.push(i);
-}
-
-const SelectBox = ({ title, opt }) => {
-  return (
-    <section className={styles.selectBox}>
-      <span className={styles.title}>{title}</span>
-      <select className={styles.sel}>
-        {opt == 1 ? (
-          <>
-            <option value="M" className={styles.option}>
-              남자
-            </option>
-            <option value="F" className={styles.option}>
-              여자
-            </option>
-          </>
-        ) : (
-          <>
-            {year.map((data, i) => {
-              return (
-                <option value={data} className={styles.option} key={i}>
-                  {data}
-                </option>
-              );
-            })}
-          </>
-        )}
-      </select>
-    </section>
-  );
-};
-
+import { Selection } from "../components/mypage/selectBox";
 const MemberInfoEdit = () => {
   return (
     <section className={styles.memberInfoEdit}>
@@ -54,8 +19,8 @@ const MemberInfoEdit = () => {
           placeholder={"성명을 입력하세요"}
         />
         <section className={styles.sexBirth}>
-          <SelectBox title={"성별"} opt={1} />
-          <SelectBox title={"출생년도"} opt={2} />
+          <Selection title={"성별"} opt={1} />
+          <Selection title={"출생년도"} opt={2} />
         </section>
 
         <ThickInputBoxWithTitle
