@@ -33,12 +33,16 @@ const Chat = () => {
   let ws = useRef(null);
 
   const getMy = async () => {
+    console.log("adsda");
     try {
-      await axios.get(`/users/my-info`).then((response) => {
+      await axios.get("/users/my-info").then((response) => {
+        console.log("aaa");
+        console.log("res===", response);
         setUser(response);
         return response;
       });
     } catch (error) {
+      console.log("error");
       return error;
     }
   };
@@ -54,9 +58,11 @@ const Chat = () => {
     }
   };
 
-  // 소켓 객체 생성
   useEffect(() => {
     getMy();
+  }, []);
+  // 소켓 객체 생성
+  useEffect(() => {
     getPrevChat();
     // if (!ws.current) {
     ws.current = new WebSocket(webSocketUrl);
@@ -98,7 +104,6 @@ const Chat = () => {
   }, [socketConnected]);
 
   const sendMsgEnter = (data) => {
-    console.log("chatID=", chatID);
     ws.current.send(
       JSON.stringify({
         // sender: user.data.name,
@@ -110,6 +115,7 @@ const Chat = () => {
         sender: user.data.name,
         receiver: parseInt(tuteeId),
         message: data,
+        senderId: user?.data.userId,
       })
     );
     setSendMsg(sendMsg + 1);
@@ -124,7 +130,8 @@ const Chat = () => {
           {items != undefined &&
             items.length > 0 &&
             items.map((data, i) => {
-              return user?.data?.name == data.senderNickname ? (
+              return user?.data.nickname == data.senderNickname ||
+                user?.data.nickname == data.sender ? (
                 <MyChats key={i} text={data.message} />
               ) : (
                 <OthersChats key={i} text={data.message} name={data.username} />
