@@ -1,7 +1,6 @@
 import styles from "./tuteeBox.module.scss";
 import Image from "next/image";
 import { TuteeBoxBtn } from "./myPageBtn";
-import { useState } from "react";
 const TuteeBox = ({ name, count, onClick }) => {
   return (
     <section className={styles.tuteeBox}>
@@ -34,7 +33,17 @@ const ClassBox = ({ title, type, price, img }) => {
   );
 };
 
-const TuteeBox2 = ({ name, title, type, price, img, onClick }) => {
+const TuteeBox2 = ({
+  name,
+  title,
+  type,
+  price,
+  img,
+  onClick,
+  chatID,
+  lecID,
+  tuteeID,
+}) => {
   return (
     <section className={styles.tuteeBoxOpen}>
       <section className={styles.firstLine}>
@@ -46,8 +55,8 @@ const TuteeBox2 = ({ name, title, type, price, img, onClick }) => {
       </section>
       <ClassBox title={title} type={type} price={price} img={img} />
       <div className={styles.btn}>
-        <TuteeBoxBtn text={"대화 요청"} />
-        <TuteeBoxBtn text={"리뷰 확인"} />
+        <TuteeBoxBtn text={"대화 요청"} chatroomID={chatID} tuteeID={tuteeID} />
+        <TuteeBoxBtn text={"리뷰 확인"} lectureID={lecID} />
       </div>
     </section>
   );
