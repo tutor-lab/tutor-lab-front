@@ -2,35 +2,22 @@ import styles from "./tuteeBox.module.scss";
 import Image from "next/image";
 import { TuteeBoxBtn } from "./myPageBtn";
 import { useState } from "react";
-const TuteeBox = ({ name, count }) => {
-  const [detail, setDetail] = useState(false);
-  const price = 197000;
-  return detail == false ? (
+const TuteeBox = ({ name, count, onClick }) => {
+  return (
     <section className={styles.tuteeBox}>
       <div className={styles.img} />
       <strong className={styles.name}>{name} 튜티</strong>
       <span className={styles.count}>{count}개의 강의</span>
-      <button
-        type="button"
-        className={styles.dropBtn}
-        onClick={() => setDetail(true)}
-      />
+      <button type="button" className={styles.dropBtn} onClick={onClick} />
     </section>
-  ) : (
-    <TuteeBox2
-      name={"김민영"}
-      title={"금융권 취업을 위한 데이터 분석 및 모델링 SQL, R, Python"}
-      type={"온라인/그룹"}
-      price={price.toLocaleString("ko-KR")}
-    />
   );
 };
 
-const ClassBox = ({ title, type, price }) => {
+const ClassBox = ({ title, type, price, img }) => {
   return (
     <section className={styles.boxContent}>
       <div className={styles.classImg}>
-        <Image src="/images/mypage/classImg.png" width="84px" height="84px" />
+        <Image src={img} width="84px" height="84px" />
       </div>
       <div className={styles.classContent}>
         <strong className={styles.title}>{title}</strong>
@@ -47,29 +34,22 @@ const ClassBox = ({ title, type, price }) => {
   );
 };
 
-const TuteeBox2 = ({ name, title, type, price }) => {
-  const [detail, setDetail] = useState(true);
-  return detail ? (
+const TuteeBox2 = ({ name, title, type, price, img, onClick }) => {
+  return (
     <section className={styles.tuteeBoxOpen}>
       <section className={styles.firstLine}>
         <div className={styles.nameSection}>
           <div className={styles.img} />
           <strong className={styles.name}>{name} 튜티</strong>
         </div>
-        <button
-          type="button"
-          className={styles.upbar}
-          onClick={() => setDetail(false)}
-        />
+        <button type="button" className={styles.upbar} onClick={onClick} />
       </section>
-      <ClassBox title={title} type={type} price={price} />
+      <ClassBox title={title} type={type} price={price} img={img} />
       <div className={styles.btn}>
         <TuteeBoxBtn text={"대화 요청"} />
         <TuteeBoxBtn text={"리뷰 확인"} />
       </div>
     </section>
-  ) : (
-    <TuteeBox name={"김민영"} count={1} />
   );
 };
 
