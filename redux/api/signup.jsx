@@ -44,8 +44,8 @@ export const SignUp = async (form) => {
       return response;
     })
     .catch((error) => {
-      console.log("에러" + error);
-      errormsg = error.response;
-      return Promise.reject(errormsg);
+      console.log("에러" + error.response.data.message);
+
+      return Promise.reject(error.response.data.message);
     });
 };

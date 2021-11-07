@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./tutorInfoEdit.module.scss";
 import OtherTopBar from "../components/mypage/topBar/otherPage";
 import InputBox from "../components/mypage/inputBox";
@@ -14,26 +14,26 @@ const TutorInfoEdit = () => {
   const [major, setMajor] = useState("");
   const [edothers, setEdOthers] = useState("");
   const [schoolName, setSchoolName] = useState("");
+  const [role, setRole] = useState("");
 
-  const [userInfoCheck,setUserInfoCheck] = useState(false)
+  const [userInfoCheck, setUserInfoCheck] = useState(false);
 
-  const getUserInfo = () =>{
-    axios.get("/tutors/my-info")
-    .then((res)=>{
-      const item = res.data
-      setSchoolName(item.educations[0].schoolName)
-      setEdOthers(item.educations[0].others)
-      setMajor(item.educations[0].major)
-      setEducationLevel(item.educations[0].educationLevel)
-      setJob(item.careers[0].job)
-      setcompanyName(item.careers[0].companyName)
-      setLicense(item.careers[0].license)
-      setCaOthers(item.careers[0].others)
+  const getUserInfo = () => {
+    axios.get("/tutors/my-info").then((res) => {
+      const item = res.data;
+      setSchoolName(item.educations[0].schoolName);
+      setEdOthers(item.educations[0].others);
+      setMajor(item.educations[0].major);
+      setEducationLevel(item.educations[0].educationLevel);
+      setJob(item.careers[0].job);
+      setcompanyName(item.careers[0].companyName);
+      setLicense(item.careers[0].license);
+      setCaOthers(item.careers[0].others);
       // setEducations(res.data.educations[0])
       // setCareers(res.data.careers[0])
-      setUserInfoCheck(true)
-    })
-  }
+      setUserInfoCheck(true);
+    });
+  };
   const handleSave = () => {
     const sendData = {
       careers: [
@@ -67,7 +67,7 @@ const TutorInfoEdit = () => {
         }
       });
   };
-  const handleUpdate = () =>{
+  const handleUpdate = () => {
     const sendData = {
       careers: [
         {
@@ -89,7 +89,7 @@ const TutorInfoEdit = () => {
     axios
       .put("/tutors", sendData)
       .then((res) => {
-        console.log('res1',res)
+        console.log("res1", res);
         if (res.status === 200) {
           alert("수정되었습니다.");
           router.push("/myclass");
@@ -100,10 +100,19 @@ const TutorInfoEdit = () => {
           console.log(err.response);
         }
       });
-  }
+  };
+  const getMyInfo = () => {
+    axios.get("/users/my-info").then((res) => {
+      console.log("inrole,", res.data.role);
+      setRole(res.data.role);
+    });
+  };
   useEffect(() => {
-    getUserInfo()
-  }, [])
+    getMyInfo();
+    if (role === "TUTOR") {
+      getUserInfo();
+    }
+  }, [role]);
 
   return (
     <section className={styles.tutorInfoEdit}>
@@ -181,7 +190,11 @@ const TutorInfoEdit = () => {
         />
       </section>
       <div className={styles.fixed}>
-        {userInfoCheck?<BlueBtn onClick={handleUpdate} text={"수정"} />:<BlueBtn onClick={handleSave} text={"저장"} />}
+        {userInfoCheck ? (
+          <BlueBtn onClick={handleUpdate} text={"수정"} />
+        ) : (
+          <BlueBtn onClick={handleSave} text={"저장"} />
+        )}
       </div>
     </section>
   );

@@ -20,11 +20,13 @@ export async function getServerSideProps(context) {
 } //getServerSideProps 없으면 새로 고침 시 에러!
 
 const Chat = () => {
+  const router = useRouter();
+  const { tuteeId } = router.query;
   const [socketConnected, setSocketConnected] = useState(false);
   const [sendMsg, setSendMsg] = useState(0);
   const [items, setItems] = useState([]);
   const [user, setUser] = useState("");
-  const router = useRouter();
+
   const chatID = router.query.chat;
 
   const webSocketUrl = `ws://3.35.255.192:8081/ws/chat/${chatID}`;
@@ -72,6 +74,7 @@ const Chat = () => {
   useEffect(() => {
     ws.current.onmessage = (evt) => {
       const data = JSON.parse(evt.data);
+      console.log("data=", data);
       if (items) {
         setItems((prevItems) => [...prevItems, data]);
       }
@@ -98,11 +101,15 @@ const Chat = () => {
     console.log("chatID=", chatID);
     ws.current.send(
       JSON.stringify({
-        username: user.data.name,
-        message: data,
-        sessionId: "30ae0b1d-45bc-ed13-2f3a-ee5c402725c7",
+        // sender: user.data.name,
+        // message: data,
+        // sessionId: "30ae0b1d-45bc-ed13-2f3a-ee5c402725c7",
+        // chatroomId: parseInt(chatID),
+        // type: "message",
         chatroomId: parseInt(chatID),
-        type: "message",
+        sender: user.data.name,
+        receiver: parseInt(tuteeId),
+        message: data,
       })
     );
     setSendMsg(sendMsg + 1);
@@ -117,7 +124,7 @@ const Chat = () => {
           {items != undefined &&
             items.length > 0 &&
             items.map((data, i) => {
-              return user?.data?.name == data.username ? (
+              return user?.data?.name == data.senderNickname ? (
                 <MyChats key={i} text={data.message} />
               ) : (
                 <OthersChats key={i} text={data.message} name={data.username} />

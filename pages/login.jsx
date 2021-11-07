@@ -43,9 +43,11 @@ const Login = ({}) => {
           });
       })
       .catch(function (error) {
+
         setError(true);
         //        alert("로그인에 실패했습니다.");
         console.log(error);
+
       });
   };
   const onChangeUsername = (e) => {
