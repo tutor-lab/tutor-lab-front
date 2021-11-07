@@ -80,7 +80,7 @@ const MyClass = ({}) => {
           <></>
         )}
         <div className={styles.fixedTab}>
-          <BottomTab />
+          <BottomTab num={1} />
         </div>
       </div>
     </>

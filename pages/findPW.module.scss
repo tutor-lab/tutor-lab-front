@@ -1,3 +1,23 @@
+.auth {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 90px;
+  height: 24px;
+  cursor: pointer;
+  background-color: #689afd;
+  border: 0;
+  border-radius: 6px;
+  outline: none;
+
+  .text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.83;
+    color: #fff;
+  }
+}
+
 .findPWSection {
   display: flex;
   flex-direction: column;
@@ -5,7 +25,7 @@
   height: 100vh;
   padding: 33px 63px 55px;
   margin: 0 auto;
-  background-color: #f3f3f3; //white로 바꾸기
+  background-color: #fff;
 
   .title {
     margin: 0;
@@ -33,6 +53,11 @@
       .blueText {
         color: #689afd;
       }
+    }
+
+    .tel {
+      position: relative;
+      width: 100%;
     }
 
     .smallText {

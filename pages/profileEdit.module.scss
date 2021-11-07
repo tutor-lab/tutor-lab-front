@@ -8,16 +8,40 @@
   background-color: #fff;
 
   .imageSection {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 200px;
-    padding: 41px 138px 60px;
-  }
 
-  .profileImage {
-    width: 100px;
-    height: 100px;
-    background-color: grey;
-    border-radius: 50%;
+    input {
+      display: none;
+    }
+
+    .profileImage {
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      background-color: grey;
+      border-radius: 50%;
+    }
+
+    .editBtn {
+      position: absolute;
+      top: 111px;
+      right: 143px;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+      background-color: #689afd;
+      background-image: url("/images/mypage/edit.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: auto;
+      border: 0;
+      border-radius: 50%;
+    }
   }
 
   .line {

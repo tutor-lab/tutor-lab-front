@@ -7,7 +7,11 @@ const ProfileEdit = () => {
     <section className={styles.profileEditSection}>
       <OtherTopBar title={"프로필 수정"} />
       <section className={styles.imageSection}>
-        <div className={styles.profileImage} />
+        <input type="file" id="profile" />
+        <label htmlFor="profile">
+          <div className={styles.profileImage} />
+          <div className={styles.editBtn} />
+        </label>
       </section>
       <span className={styles.line} />
       <section className={styles.editBtnSection}>

@@ -24,6 +24,14 @@
     width: 100%;
     margin: 0 auto 160px;
 
+    .failed {
+      text-align: center;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      color: #ee5a5a;
+    }
+
     .textBtn {
       display: flex;
       justify-content: center;
