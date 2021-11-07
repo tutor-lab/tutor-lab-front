@@ -24,11 +24,16 @@ const SignUpPage = () => {
   const [selectS, setSelectS] = useState(0);
 
   const onChange = (name) => async (e) => {
-    let value = "";
+    let value = "",
+      select = "";
     switch (name) {
       case "gender":
-        value = document.querySelector('input[name="gender"]:checked')?.id;
-        if (value) hideGender();
+        select = document.getElementById("gender");
+        value = select.options[select.selectedIndex].value;
+        break;
+      case "birthYear":
+        select = document.getElementById("birthYear");
+        value = select.options[select.selectedIndex].value;
         break;
       case "stateL":
         value = document.querySelector(
