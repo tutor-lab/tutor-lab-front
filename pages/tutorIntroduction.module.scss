@@ -30,6 +30,10 @@
     .profile {
       display: flex;
       justify-content: space-between;
+
+      .info {
+        width: 181px;
+      }
     }
   }
 

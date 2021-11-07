@@ -5,7 +5,7 @@ import { BlueBtn } from "../components/mypage/myPageBtn";
 const ChangePW = () => {
   return (
     <section className={styles.changePW}>
-      <OtherTopBar title={"비밀번호 변경"} />
+      <OtherTopBar title={"비밀번호 변경"} url={"/profileEdit"} />
       <p className={styles.text}>
         주기적인 비밀번호 변경을 통해
         <br />

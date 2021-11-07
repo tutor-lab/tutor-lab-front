@@ -5,7 +5,7 @@ import { ProfileEditBtn } from "../components/mypage/myPageBtn";
 const ProfileEdit = () => {
   return (
     <section className={styles.profileEditSection}>
-      <OtherTopBar title={"프로필 수정"} />
+      <OtherTopBar title={"프로필 수정"} url={"/mypage"} />
       <section className={styles.imageSection}>
         <input type="file" id="profile" />
         <label htmlFor="profile">
@@ -22,7 +22,7 @@ const ProfileEdit = () => {
         <ProfileEditBtn text={"회원탈퇴"} url={"/deleteAccount"} />
       </section>
       <div className={styles.fixedTab}>
-        <BottomTab />
+        <BottomTab num={3} />
       </div>
     </section>
   );

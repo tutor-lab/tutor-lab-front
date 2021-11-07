@@ -36,9 +36,19 @@ const BlueBtn = ({ onClick, text }) => {
   );
 };
 
-const TuteeBoxBtn = ({ text }) => {
+const TuteeBoxBtn = ({ text, lectureID, chatroomID, tuteeID }) => {
   return (
-    <button type="button" className={styles.tuteeBoxBtn}>
+    <button
+      type="button"
+      className={styles.tuteeBoxBtn}
+      onClick={() =>
+        text == "대화 요청"
+          ? router.push(`/chatDetail/${chatroomID}?tuteeId=${tuteeID}`)
+          : (text = "환불 사유"
+              ? router.push(`/classDetail/${lectureID}`)
+              : router.push("/mypage"))
+      }
+    >
       <div
         className={
           text == "대화 요청"

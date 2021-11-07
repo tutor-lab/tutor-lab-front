@@ -6,7 +6,7 @@ import { Selection } from "../components/mypage/selectBox";
 const MemberInfoEdit = () => {
   return (
     <section className={styles.memberInfoEdit}>
-      <OtherTopBar title={"회원정보 수정"} />
+      <OtherTopBar title={"회원정보 수정"} url={"/profileEdit"} />
       <section className={styles.content}>
         <ThickInputBoxWithTitle
           title={"이메일"}
