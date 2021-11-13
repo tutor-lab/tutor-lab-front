@@ -62,10 +62,9 @@ const ClassPosting = ({}) => {
               <></>
             );
           })}
-          {/* -> unique한 key값 필요 ==> 강의마다 id 부여 -> key={data.id}로 해결 */}
         </div>
         <div className={styles.fixedTab}>
-          <BottomTab />
+          <BottomTab num={1} />
         </div>
       </div>
     </>
