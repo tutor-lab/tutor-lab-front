@@ -45,21 +45,7 @@ const TuteeBoxBtn = ({
   tuteeID,
   value,
   setValue,
-  cancelID,
 }) => {
-  console.log(cancelID);
-  const Accept = () => {
-    axios
-      .put(`/tutors/my-cancellations/${cancelID}`, {
-        cancellation_id: cancelID,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
   return (
     <button
       type="button"
@@ -69,9 +55,7 @@ const TuteeBoxBtn = ({
           ? router.push(`/chatDetail/${chatroomID}?tuteeId=${tuteeID}`)
           : text == "리뷰 확인"
           ? router.push(`/classDetail/${lectureID}`)
-          : text == "환불 사유"
-          ? setValue(!value)
-          : Accept()
+          : setValue(!value)
       }
     >
       <div

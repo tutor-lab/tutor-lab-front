@@ -5,10 +5,12 @@ import { RefundBox } from "../components/mypage/tuteeBox";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./refundList.module.scss";
-import { ReasonModal } from "../components/mypage/modal";
+import { ReasonModal, RefundModal } from "../components/mypage/modal";
 const RefundList = () => {
   const [res, setRes] = useState("");
   const [reasonM, setReasonM] = useState(false);
+  const [acceptM, setAcceptM] = useState(false);
+  const [accept, setAccept] = useState(false);
   const getRefund = () => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("accessToken");
@@ -51,7 +53,8 @@ const RefundList = () => {
                 img={data.lecture.thumbnail}
                 value={reasonM}
                 setValue={setReasonM}
-                cancelID={data.cancellationId}
+                value2={acceptM}
+                setValue2={setAcceptM}
               />
               <div className={styles.modal}>
                 {reasonM ? (
@@ -59,6 +62,12 @@ const RefundList = () => {
                     reason={data.reason}
                     value={reasonM}
                     setValue={setReasonM}
+                  />
+                ) : acceptM ? (
+                  <RefundModal
+                    cancellationId={data.cancellationId}
+                    modal={acceptM}
+                    setModal={setAcceptM}
                   />
                 ) : (
                   <></>

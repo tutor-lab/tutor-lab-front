@@ -1,4 +1,5 @@
 import styles from "./modal.module.scss";
+import axios from "axios";
 const ReviewModal = () => {
   return (
     <div className={styles.reviewModal}>
@@ -11,7 +12,21 @@ const ReviewModal = () => {
   );
 };
 
-const RefundModal = () => {
+const RefundModal = ({ cancellationId, modal, setModal }) => {
+  const Accept = () => {
+    setModal(!modal);
+    axios
+      .put(`/tutors/my-cancellations/${cancellationId}`, {
+        cancellation_id: cancellationId,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <div className={styles.refundModal}>
       <span className={styles.text}>
@@ -20,10 +35,14 @@ const RefundModal = () => {
         튜티에게 환불됩니다.
       </span>
       <div className={styles.btn}>
-        <button type="button" className={styles.cancelBtn}>
+        <button
+          type="button"
+          className={styles.cancelBtn}
+          onClick={() => setModal(!modal)}
+        >
           <span className={styles.btnText}>취소</span>
         </button>
-        <button type="button" className={styles.okBtn}>
+        <button type="button" className={styles.okBtn} onClick={Accept}>
           <span className={styles.btnText}>확인</span>
         </button>
       </div>

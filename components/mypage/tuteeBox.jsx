@@ -82,7 +82,8 @@ const RefundBox = ({
   img,
   value,
   setValue,
-  cancelID,
+  value2,
+  setValue2,
 }) => {
   return (
     <>
@@ -97,7 +98,7 @@ const RefundBox = ({
         </section>
         <ClassBox title={title} type={type} price={price} img={img} />
         <div className={styles.btn}>
-          <TuteeBoxBtn text={"환불 승인"} cancelID={cancelID} />
+          <TuteeBoxBtn text={"환불 승인"} value={value2} setValue={setValue2} />
           <TuteeBoxBtn text={"환불 사유"} value={value} setValue={setValue} />
         </div>
       </section>
