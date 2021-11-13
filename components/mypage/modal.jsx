@@ -31,23 +31,23 @@ const RefundModal = () => {
   );
 };
 
-const ReasonModal = () => {
+const ReasonModal = ({ reason, value, setValue }) => {
   return (
     <div className={styles.reasonModal}>
       <span className={styles.text}>
         튜터의 환불 요청 사유는 아래와 같습니다. <br />
         확인 후, 환불 승인을 진행해주세요.
       </span>
-      <strong className={styles.reason}>
-        {
-          "안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다.안녕하세요. 튜터님. 강의 신청 드렸던 김하나입니다."
-        }
-      </strong>
-      <button type="button" className={styles.btn}>
+      <strong className={styles.reason}>{reason}</strong>
+      <button
+        type="button"
+        className={styles.btn}
+        onClick={() => setValue(!value)}
+      >
         <span className={styles.ok}>확인</span>
       </button>
     </div>
   );
 };
 
-export default { ReviewModal, RefundModal, ReasonModal };
+export { ReviewModal, RefundModal, ReasonModal };

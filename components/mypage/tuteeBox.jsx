@@ -73,7 +73,17 @@ const RefundReq = () => {
   );
 };
 
-const RefundBox = ({ date, name, title, type, price }) => {
+const RefundBox = ({
+  date,
+  name,
+  title,
+  type,
+  price,
+  img,
+  value,
+  setValue,
+  cancelID,
+}) => {
   return (
     <>
       <section className={styles.refundBox}>
@@ -85,10 +95,10 @@ const RefundBox = ({ date, name, title, type, price }) => {
           </div>
           <RefundReq />
         </section>
-        <ClassBox title={title} type={type} price={price} />
+        <ClassBox title={title} type={type} price={price} img={img} />
         <div className={styles.btn}>
-          <TuteeBoxBtn text={"환불 승인"} />
-          <TuteeBoxBtn text={"환불 사유"} />
+          <TuteeBoxBtn text={"환불 승인"} cancelID={cancelID} />
+          <TuteeBoxBtn text={"환불 사유"} value={value} setValue={setValue} />
         </div>
       </section>
       <div className={styles.line} />

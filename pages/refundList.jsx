@@ -2,43 +2,71 @@ import BottomTab from "../components/bottomtab";
 import SearchSection from "../components/mypage/searchSection";
 import OtherTopBar from "../components/mypage/topBar/otherPage";
 import { RefundBox } from "../components/mypage/tuteeBox";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import styles from "./refundList.module.scss";
+import { ReasonModal } from "../components/mypage/modal";
 const RefundList = () => {
-  const price = 197000;
+  const [res, setRes] = useState("");
+  const [reasonM, setReasonM] = useState(false);
+  const getRefund = () => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("accessToken");
+    }
+
+    axios.get("/tutors/my-cancellations").then((response) => {
+      console.log(response.data);
+      setRes(response.data);
+    });
+  };
+
+  useEffect(() => {
+    getRefund();
+  }, []);
+
   return (
     <section className={styles.refundList}>
       <OtherTopBar title={"환불 목록"} url={"/mypage"} />
       <SearchSection text1={"전체 환불"} text2={"최근 1년"} />
       <div className={styles.line} />
       <section className={styles.refundContent}>
-        <RefundBox
-          date={"2021.07.01"}
-          name={"김민영"}
-          title={"금융권 취업을 위한 데이터 분석 및 모델링 SQL, R, Python"}
-          type={"온라인/그룹"}
-          price={price.toLocaleString("ko-KR")}
-        />
-        <RefundBox
-          date={"2021.07.01"}
-          name={"김민영"}
-          title={"금융권 취업을 위한 데이터 분석 및 모델링 SQL, R, Python"}
-          type={"온라인/그룹"}
-          price={price.toLocaleString("ko-KR")}
-        />
-        <RefundBox
-          date={"2021.07.01"}
-          name={"김민영"}
-          title={"금융권 취업을 위한 데이터 분석 및 모델링 SQL, R, Python"}
-          type={"온라인/그룹"}
-          price={price.toLocaleString("ko-KR")}
-        />
-        <RefundBox
-          date={"2021.07.01"}
-          name={"김민영"}
-          title={"금융권 취업을 위한 데이터 분석 및 모델링 SQL, R, Python"}
-          type={"온라인/그룹"}
-          price={price.toLocaleString("ko-KR")}
-        />
+        {res.content?.map((data, i) => {
+          let state = "";
+          data.lecture?.systemTypes.map((type, i) => {
+            state += type.name;
+            if (i != 0) {
+              state += "/";
+            }
+          });
+          return (
+            <div key={i}>
+              <RefundBox
+                date={"2021.07.01"}
+                name={data.tuteeName}
+                title={data.lecture.title}
+                type={state}
+                price={data.lecture.lecturePrice.totalCost.toLocaleString(
+                  "ko-KR"
+                )}
+                img={data.lecture.thumbnail}
+                value={reasonM}
+                setValue={setReasonM}
+                cancelID={data.cancellationId}
+              />
+              <div className={styles.modal}>
+                {reasonM ? (
+                  <ReasonModal
+                    reason={data.reason}
+                    value={reasonM}
+                    setValue={setReasonM}
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </section>
       <div className={styles.fixed}>
         <BottomTab num={3} />
