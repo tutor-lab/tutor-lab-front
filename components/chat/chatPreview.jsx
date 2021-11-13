@@ -1,9 +1,31 @@
 import styles from "./chatPreview.module.scss";
 import router from "next/router";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import moment from "moment";
 
 const ChatPreview = ({ data, newChat }) => {
+  const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
+  const [sameDay, setSameDay] = useState(false);
   console.log("data===", data.tuteeId);
+
+  const dates = data.lastMessage?.sentAt.toString();
+  const TimeMaker = () => {
+    if (dates) {
+      const newDates = new Date(dates);
+      setTime(newDates.toLocaleTimeString());
+      setDate(newDates.toLocaleDateString());
+      setSameDay(moment().isSame(newDates, "day"));
+      console.log(date);
+      console.log(time);
+    }
+  };
+
+  useEffect(() => {
+    TimeMaker();
+  }, []);
+
   return (
     <button
       className={styles.previewSection}
@@ -27,16 +49,14 @@ const ChatPreview = ({ data, newChat }) => {
       <div className={styles.chat}>
         <span className={styles.tuteeInfo}>
           <span className={styles.tutee}>튜티</span>
-          <span>{data.tuteeNickname}</span>
-          <span className={styles.name}>{data.lectureTitle}</span>
+          <span className={styles.name}>{data.tuteeNickname}</span>
         </span>
-        {/* <span className={styles.last}>{data.lastMessage?.message}</span> */}
+        <span className={styles.last}>{data.lastMessage?.message}</span>
       </div>
       <div className={styles.timeInfo}>
-        <span className={styles.date}>{data.date}</span>
+        <span className={styles.date}>{sameDay ? time : date}</span>
+        <span></span>
         <span className={styles.newChat}>{data.uncheckedMessageCount}</span>
-        {/* {newChat ? <span className={styles.newChat}>{data.uncheckedMessageCount}</span> : <></>} */}
-        {/* <span className={styles.newChat}>{newChat}</span> */}
       </div>
     </button>
   );

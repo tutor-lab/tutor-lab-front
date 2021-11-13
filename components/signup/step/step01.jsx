@@ -100,15 +100,16 @@ const Step01 = ({
         </div>
         <div className={styles.selectSection}>
           <span className={styles.row}>
-            {/* <SelectBox placeholder={"출생년도"} num={1} /> */}
-            <SelectionWithoutTitle opt={2} />
-            <SelectionWithoutTitle opt={1} />
-            {/* <SelectBox
-              num={3}
-              id="gender"
-              btnText={form.gender}
-              onClick={showGender}
-            /> */}
+            <SelectionWithoutTitle
+              opt={2}
+              name="birthYear"
+              onChange={handleChange("birthYear")}
+            />
+            <SelectionWithoutTitle
+              opt={1}
+              name="gender"
+              onChange={handleChange("gender")}
+            />
           </span>
           <span className={styles.row}>
             <SelectBox

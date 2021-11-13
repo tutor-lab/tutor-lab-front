@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import produce from "immer";
 import createRequestSagaSignUp from "./createRequestSagaSignup";
-import  createRequestActionTypesSignUp  from "./createRequestActionTypesSignUp";
+import createRequestActionTypesSignUp from "./createRequestActionTypesSignUp";
 import * as API from "../api/signup";
 import { takeLatest } from "@redux-saga/core/effects";
 
@@ -32,15 +32,13 @@ export function* signupSaga() {
 const initialState = {
   signup: {
     step: 1,
-    bio: "안녕하세요",
     email: "",
     gender: "",
     name: "",
-    nickname: "",
     password: "",
     passwordConfirm: "",
     phoneNumber: "",
-    username: "",
+    birthYear: "",
     stateL: "",
     stateM: "",
     stateS: "",

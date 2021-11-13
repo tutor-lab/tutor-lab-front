@@ -1,15 +1,18 @@
 import axios from "axios";
+import router from "next/router";
 export const SignUp = async (form) => {
-  let gender = "";
-  if (form.gender == "남") {
+  let gender = "MALE";
+  if (form.gender == "M") {
     gender = "MALE";
-  } else if (form.gender == "여") {
+  } else if (form.gender == "F") {
     gender = "FEMALE";
   }
   const data = {
-    bio: form.bio,
+    bio: "안녕하세요",
+    birthYear: form.birthYear,
     email: form.email,
     gender: gender,
+    image: "",
     name: form.name,
     nickname: form.name,
     password: form.password,
@@ -19,19 +22,6 @@ export const SignUp = async (form) => {
     zone: `${form.stateL} ${form.stateM} ${form.stateS}`,
   };
 
-  // const data = {
-  //   bio: "안녕하세요",
-  //   email: form.email,
-  //   gender: "여",
-  //   name: "김지수",
-  //   nickname: "김지수",
-  //   password: 123456,
-  //   passwordConfirm: 123456,
-  //   phoneNumber: "010-2222-2222",
-  //   username: form.email,
-  //   zone: "경기도 남양주시 다산동",
-  // };
-
   await axios({
     method: "POST",
     url: "/sign-up",
@@ -39,6 +29,7 @@ export const SignUp = async (form) => {
   })
     .then((response) => {
       if (response.data.code == 201) {
+        router.push("/myclass");
       }
       console.log("response: " + JSON.stringify(response));
       return response;

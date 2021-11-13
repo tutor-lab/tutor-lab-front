@@ -4,14 +4,30 @@ import MainTopBar from "../components/mypage/topBar/mainPage";
 import styles from "./mypage.module.scss";
 import MainProfile from "../components/mypage/mainProfile";
 import BottomTab from "../components/bottomtab";
-
+import axios from "axios";
+import { useEffect, useState } from "react";
 const MyPage = () => {
+  const [username, setUsername] = useState("");
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("accessToken");
+  }
+
+  const getMyInfo = () => {
+    axios.get("/tutors/my-info").then((response) => {
+      setUsername(response.data.user.name);
+    });
+  };
+
+  useEffect(() => {
+    getMyInfo();
+  }, []);
+
   return (
     <section className={styles.mypageSection}>
       <MainTopBar alarm={false} />
 
       <section className={styles.profileSection}>
-        <MainProfile name={"김하나"} />
+        <MainProfile name={username} />
         <AboutTutee />
       </section>
 

@@ -1,5 +1,7 @@
 import styles from "./myPageBtn.module.scss";
 import router from "next/router";
+import axios from "axios";
+
 const ProfileEditBtn = ({ text, url }) => {
   return (
     <button
@@ -36,7 +38,14 @@ const BlueBtn = ({ onClick, text }) => {
   );
 };
 
-const TuteeBoxBtn = ({ text, lectureID, chatroomID, tuteeID }) => {
+const TuteeBoxBtn = ({
+  text,
+  lectureID,
+  chatroomID,
+  tuteeID,
+  value,
+  setValue,
+}) => {
   return (
     <button
       type="button"
@@ -44,9 +53,9 @@ const TuteeBoxBtn = ({ text, lectureID, chatroomID, tuteeID }) => {
       onClick={() =>
         text == "대화 요청"
           ? router.push(`/chatDetail/${chatroomID}?tuteeId=${tuteeID}`)
-          : (text = "환불 사유"
-              ? router.push(`/classDetail/${lectureID}`)
-              : router.push("/mypage"))
+          : text == "리뷰 확인"
+          ? router.push(`/classDetail/${lectureID}`)
+          : setValue(!value)
       }
     >
       <div
