@@ -17,8 +17,6 @@ const ChatPreview = ({ data, newChat }) => {
       setTime(newDates.toLocaleTimeString());
       setDate(newDates.toLocaleDateString());
       setSameDay(moment().isSame(newDates, "day"));
-      console.log(date);
-      console.log(time);
     }
   };
 
@@ -54,7 +52,9 @@ const ChatPreview = ({ data, newChat }) => {
         <span className={styles.last}>{data.lastMessage?.message}</span>
       </div>
       <div className={styles.timeInfo}>
-        <span className={styles.date}>{sameDay ? time : date}</span>
+        <span className={styles.date}>
+          {sameDay ? time.slice(0, -3) : date.substring(2)}
+        </span>
         <span></span>
         <span className={styles.newChat}>{data.uncheckedMessageCount}</span>
       </div>
