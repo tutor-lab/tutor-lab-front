@@ -1,7 +1,5 @@
 import Image from "next/image";
 import styles from "./classcard.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import router from "next/router";
 const ClassCard = ({ data }) => {
   let online = false;
@@ -28,7 +26,7 @@ const ClassCard = ({ data }) => {
           src={data.thumbnail ? data.thumbnail : ""}
           width="330px"
           height="136px"
-          alt="취업이 빨라지는 개발 교육 첫단계"
+          alt=""
           className={styles.classCardImg}
         />
         <div className={styles.onoffMethod}>
@@ -52,7 +50,7 @@ const ClassCard = ({ data }) => {
         <h1>{data.title}</h1>
         <span className={styles.def}>{data.subTitle} </span>
         <div className={styles.likes}>
-          <FontAwesomeIcon icon={faHeart} className={styles.heart} />
+          <span className={styles.heart} />
           <span className={styles.likeCnt}>{data.likes}</span>
           {/*추가 필요 */}
         </div>
