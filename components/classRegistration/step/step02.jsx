@@ -7,7 +7,6 @@ import Quill from "../../quillEditor/QuillDynamic";
 import LanguageModal from "../LanguageModal";
 import { LectureKindModal } from "../LanguageModal";
 import { LevelModal } from "../LanguageModal";
-import { AddBtn, DeleteBtn } from "../btn_inputs/AddDeleteBtn";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const Step02 = ({
@@ -19,10 +18,7 @@ const Step02 = ({
   showLevel,
   MoveStep,
   Close,
-  AddingClass,
-  DeletingClass,
-  lectureModal,
-  setLectureModal,
+  hideLec,
   currentI,
   lectureShowModal,
   classtypeId,
@@ -54,21 +50,20 @@ const Step02 = ({
         console.log(response);
       });
   }, [classtypeId]);
+
   return (
     <div>
-      {lectureModal && (
-        <div className={styles.background} id="LanBackground">
-          <div className={styles.modal} id="languageModal">
+      <div className={styles.step02} onClick={Close}>
+        <div className={styles.background} id="LecBackground">
+          <div className={styles.modal} id="lectureModal">
             <LectureKindModal
               lectureKindList={lectureKindList}
               ChangingClass={handleChange}
-              setLectureModal={setLectureModal}
+              hideLec={hideLec}
               currentI={currentI}
             />
           </div>
         </div>
-      )}
-      <div className={styles.step02} onClick={Close}>
         <div className={styles.background} id="LanBackground">
           <div className={styles.modal} id="languageModal">
             <LanguageModal
@@ -94,30 +89,18 @@ const Step02 = ({
             {form.language.length > 0 &&
               form.language.map((e, i) => {
                 return (
-                  <>
-                    <div className={styles.classType}>
-                      <SquareButton
-                        category={"강의 종류"}
-                        element={form.classtype[i]}
-                        showModal={() => lectureShowModal(i)}
-                      />
-                      <SquareButton
-                        category={"언어"}
-                        element={form.language[i]}
-                        showModal={() => showModal(i)}
-                      />
-                      {form.language.length == 1 ? (
-                        <div className={style2.temp} />
-                      ) : (
-                        <DeleteBtn DeleteClasses={() => DeletingClass(i)} />
-                      )}
-                    </div>
-                    {i == form.language.length - 1 ? (
-                      <AddBtn AddClasses={AddingClass} />
-                    ) : (
-                      <></>
-                    )}
-                  </>
+                  <div className={styles.classType} key={i}>
+                    <SquareButton
+                      category={"강의 종류"}
+                      element={form.classtype[i]}
+                      showModal={() => lectureShowModal(i)}
+                    />
+                    <SquareButton
+                      category={"언어"}
+                      element={form.language[i]}
+                      showModal={() => showModal(i)}
+                    />
+                  </div>
                 );
               })}
           </div>

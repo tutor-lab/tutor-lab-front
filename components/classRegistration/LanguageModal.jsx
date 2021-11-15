@@ -1,77 +1,29 @@
 import styles from "./languageModal.module.scss";
 import { useDispatch } from "react-redux";
-import { InputClass, ChangeField } from "../../redux/reducers/update";
-import { useEffect, useState } from "react";
-import axios from "axios";
-export const lectureKindListData = [
-  {
-    parent: "1",
-    learningKind: "IT",
-  },
-  {
-    parent: "2",
-    learningKind: "언어",
-  },
-];
-export const lectureListData = [
-  {
-    parent: "1",
-    learningKind: "IT",
-    krSubject: "자바",
-  },
-  {
-    parent: "1",
-    learningKind: "IT",
-    krSubject: "파이썬",
-  },
-  {
-    parent: "1",
-    learningKind: "IT",
-    krSubject: "C/C++",
-  },
-];
-// export const lectureListData = [
-//   {
-//     "parent":"2",
-//     "learningKind":"언어",
-//     "krSubject":"영어"
-//   },
-//   {
-//     "parent":"2",
-//     "learningKind":"언어",
-//     "krSubject":"중국어"
-//   }
-// ]
+import { InputClass } from "../../redux/reducers/update";
 export const LectureKindModal = ({
   lectureKindList,
   ChangingClass,
-  setLectureModal,
   currentI,
   setLectureKindSubList,
+  hideLec,
 }) => {
   return (
-    <div className={styles.modal2} id="menu">
+    <div className={styles.modal2} id="lec">
       {lectureKindList.map((item, index) => (
         <div key={index}>
           <LectureKind
             lecture={item.learningKind}
             learningKindId={item.learningKindId}
-            select={1}
+            select={index + 1}
             ChangingClass={ChangingClass}
-            setLectureModal={setLectureModal}
             currentI={currentI}
             setLectureKindSubList={setLectureKindSubList}
+            hideLec={hideLec}
+            last={index + 1 == lectureKindList.length}
           />
         </div>
       ))}
-      <input
-        type="text"
-        placeholder="직접 입력 후 엔터키"
-        className={styles.last}
-        onKeyPress={ChangingClass("languageInput")}
-        id="modalInput"
-        name="languageInput"
-      />
     </div>
   );
 };
@@ -83,7 +35,7 @@ export const LanguageModal = ({ lectureKindSubList, ChangingClass }) => {
         <div key={index}>
           <Language
             language={item.krSubject}
-            select={1}
+            select={index + 1}
             ChangingClass={ChangingClass}
           />
         </div>
@@ -103,9 +55,9 @@ const LectureKind = ({
   lecture,
   learningKindId,
   select,
-  ChangingClass,
-  setLectureModal,
   currentI,
+  hideLec,
+  last,
 }) => {
   const dispatch = useDispatch();
 
@@ -134,15 +86,17 @@ const LectureKind = ({
         value: [""],
       })
     );
-    setLectureModal(false);
+    hideLec();
   };
 
   return (
     <label htmlFor={lecture}>
       <div
-        className={select == 1 ? styles.first : styles.modalElement}
+        className={
+          select == 1 ? styles.first : last ? styles.last : styles.modalElement
+        }
         onClick={(e) => onClickModal(learningKindId, lecture)}
-        name="lecture"
+        name="lec"
       >
         <input type="radio" name="modalElement" id={lecture} />
         {lecture}
