@@ -26,6 +26,7 @@ const ClassMain = () => {
   const ClassMainContent = async () => {
     try {
       await axios.get(`/lectures/${classID}`).then((res) => {
+        console.log(res);
         setIntroduce(res.data.content);
         setData(res.data);
       });
@@ -47,21 +48,21 @@ const ClassMain = () => {
     <section className={style.main}>
       <ImgSection thumbnail={data?.thumbnail} online={1} offline={1} />
       <IntroSection
-        // tutorname={testid}
+        tutorname={data?.lectureTutor.nickname}
         title={data?.title}
         // rating={Data.totalRating.toFixed(1)}
-        // reviewCnt={Data.reviewCnt}
+        reviewCnt={data?.reviewCount}
         subheading={data?.explanation}
-        // originPrice={Data.originPrice}
-        // discount={Data.dc}
-        // finalPrice={Data.originPrice * (100 - Data.dc) * 0.01}
+        originPrice={data?.lecturePrices[0].totalCost}
+        discount={0}
+        finalPrice={data?.lecturePrices[0].totalCost * (100 - 0) * 0.01}
+        setReview={setSelect}
         // notes={Data.notes}
       ></IntroSection>
 
       <div className={style.category}>
         <button
           className={select ? style.selected : style.unselected}
-          // onClick={() => setSelect(true)}
           onClick={() => setSelect(true)}
         >
           강의소개
@@ -70,7 +71,7 @@ const ClassMain = () => {
           className={select ? style.unselected : style.selected}
           onClick={() => setSelect(false)}
         >
-          리뷰({Data.reviewCnt})
+          리뷰({data.reviewCount})
         </button>
       </div>
 
