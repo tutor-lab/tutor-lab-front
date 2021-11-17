@@ -28,7 +28,8 @@ export const SignUp = async (form) => {
     data: data,
   })
     .then((response) => {
-      if (response.data.code == 201) {
+      console.log("response", response);
+      if (response.status == 201) {
         router.push("/myclass");
       }
       console.log("response: " + JSON.stringify(response));
@@ -36,7 +37,7 @@ export const SignUp = async (form) => {
     })
     .catch((error) => {
       console.log("에러" + error.response.data.message);
-
+      alert(error.response.data.message);
       return Promise.reject(error.response.data.message);
     });
 };
