@@ -58,12 +58,16 @@ const Step03 = ({ form, prevStep, handleChange, handleSubmit, MoveStep }) => {
               id={"offline"}
               onClick={handleChange("offline")}
             />
-            <EllipseButton
-              element={"장소 협의 가능"}
-              selected={form.discuss}
-              id={"discuss"}
-              onClick={handleChange("discuss")}
-            />
+            {form.offline == "on" ? (
+              <EllipseButton
+                element={"장소 협의 가능"}
+                selected={form.discuss}
+                id={"discuss"}
+                onClick={handleChange("discuss")}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <div>

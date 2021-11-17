@@ -38,12 +38,6 @@ const ClassRegistration = () => {
         const selected = radiobox(1);
         value = selected;
         break;
-      case "languageInput":
-        if (e.code == "Enter") {
-          name = "language";
-          hideModal();
-        }
-        break;
       case "level":
         const level = radiobox(2);
         value = level;
@@ -73,6 +67,25 @@ const ClassRegistration = () => {
           key: name,
           index: currentI,
           value: value,
+        })
+      );
+    } else if (name == "offline") {
+      let discuss = form.discuss;
+      if (value == "off") {
+        discuss = "off";
+      }
+      dispatch(
+        ChangeField({
+          form: "update",
+          key: name,
+          value,
+        })
+      );
+      dispatch(
+        ChangeField({
+          form: "update",
+          key: "discuss",
+          discuss,
         })
       );
     } else {
@@ -122,7 +135,6 @@ const ClassRegistration = () => {
     const background3 = document.getElementById("LecBackground");
 
     window.addEventListener("click", (e) => {
-      console.log(e.target);
       e.target === background ? hideModal() : false;
       e.target === background2 ? hideLevel() : false;
       e.target === background3 ? hideLec() : false;

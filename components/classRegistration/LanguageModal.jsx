@@ -37,17 +37,10 @@ export const LanguageModal = ({ lectureKindSubList, ChangingClass }) => {
             language={item.krSubject}
             select={index + 1}
             ChangingClass={ChangingClass}
+            last={index + 1 == lectureKindSubList.length}
           />
         </div>
       ))}
-      <input
-        type="text"
-        placeholder="직접 입력 후 엔터키"
-        className={styles.last}
-        onKeyPress={ChangingClass("languageInput")}
-        id="modalInput"
-        name="languageInput"
-      />
     </div>
   );
 };
@@ -104,11 +97,13 @@ const LectureKind = ({
     </label>
   );
 };
-const Language = ({ language, select, ChangingClass }) => {
+const Language = ({ language, select, ChangingClass, last }) => {
   return (
     <label htmlFor={language}>
       <div
-        className={select == 1 ? styles.first : styles.modalElement}
+        className={
+          select == 1 ? styles.first : last ? styles.last : styles.modalElement
+        }
         onClick={ChangingClass("language")}
       >
         <input type="radio" name="modalElement" id={language} />

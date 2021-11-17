@@ -1,12 +1,4 @@
 import axios from "axios";
-// axios.defaults.baseURL = "http://3.35.255.192:8081";
-// axios.interceptors.request.use(function (config) {
-//   const token = localStorage.getItem("accessToken");
-//   if (token) {
-//     config.headers.Authorization = "Bearer " + token;
-//   }
-//   return config;
-// });
 export const ClassReg = async (form) => {
   let level = "입문";
   switch (form.level) {
@@ -27,18 +19,6 @@ export const ClassReg = async (form) => {
   }
 
   let languageArray = [];
-  // form.language.map((e, i) => {
-  //   var languageObject = new Object();
-  //   languageObject.krSubject = form.language[i];
-  //   // languageObject.parent = form.classtype[i];
-  //   languageArray.push(languageObject);
-  // });
-  // form.classtype.map((e, i) => {
-  //   var languageObject = new Object();
-  //   languageObject.classtype = form.classtype[i];
-  //   // languageObject.parent = form.classtype[i];
-  //   languageArray.push(languageObject);
-  // });
   for (let i = 0; i < form.classtype.length; i++) {
     var languageObject = new Object();
     languageObject.krSubject = form.language[i];
@@ -52,6 +32,9 @@ export const ClassReg = async (form) => {
   }
   if (form.offline == "on") {
     systemArray.push("OFFLINE");
+  }
+  if (form.discuss == "on") {
+    systemArray.push("DISCUSS");
   }
 
   let priceArray = [];
