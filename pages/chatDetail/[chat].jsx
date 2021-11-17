@@ -132,9 +132,14 @@ const Chat = () => {
             items.map((data, i) => {
               return user?.data.nickname == data.senderNickname ||
                 user?.data.nickname == data.sender ? (
-                <MyChats key={i} text={data.message} />
+                <MyChats key={i} text={data.message} time={data.sentAt} />
               ) : (
-                <OthersChats key={i} text={data.message} name={data.username} />
+                <OthersChats
+                  key={i}
+                  text={data.message}
+                  name={data.username}
+                  time={data.sentAt}
+                />
               );
             })}
         </div>{" "}

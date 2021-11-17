@@ -5,7 +5,7 @@
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    width: 135px;
+    width: 160px;
     height: 56px;
     padding-left: 16px;
     cursor: pointer;
@@ -27,18 +27,16 @@
       color: #3568ee;
     }
 
-    .arrowBtn {
+    .arrow {
       position: absolute;
-      top: 25px;
-      right: 10px;
+      top: 37px;
+      right: 18px;
+      width: 7px;
+      height: 5px;
       cursor: pointer;
       background-color: transparent;
-      border: 0;
-
-      .arrow {
-        font-weight: 900;
-        color: #3568ee;
-      }
+      background-image: url("../../../public/newImage/registration_arrow.svg");
+      background-repeat: no-repeat;
     }
   }
 }

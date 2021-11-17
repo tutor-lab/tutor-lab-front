@@ -4,11 +4,16 @@ for (let i = 2002; i >= 1921; i--) {
   year.push(i);
 }
 
-const Selection = ({ title, opt }) => {
+const Selection = ({ title, opt, setValue }) => {
   return (
     <section className={styles.selectBox}>
       <span className={styles.title}>{title}</span>
-      <select className={styles.sel}>
+      <select
+        className={styles.sel}
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
+      >
         {opt == 1 ? (
           <>
             <option value="M" className={styles.option}>

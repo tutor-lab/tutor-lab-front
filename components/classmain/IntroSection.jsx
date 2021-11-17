@@ -11,6 +11,7 @@ const IntroSection = ({
   originPrice,
   discount,
   finalPrice,
+  setReview,
   notes, //특이사항 (ex) 쿠폰 적용시 5개월 할부
 }) => {
   return (
@@ -25,7 +26,11 @@ const IntroSection = ({
           <Rating rating={rating}></Rating>
         </span>
         <span className={style.rates}>{rating}</span>
-        <button type="button" className={style.reviewBtn}>
+        <button
+          type="button"
+          className={style.reviewBtn}
+          onClick={() => setReview(false)}
+        >
           <span className={style.gotoReview}> 리뷰보기&nbsp;</span>
           <span className={style.reviewcount}>({reviewCnt})</span>
         </button>

@@ -43,6 +43,7 @@ class EditorComponent extends Component {
 
       // Insert uploaded image
       // this.quill.insertEmbed(range.index, 'image', res.body.image);
+      console.log("resImage", resImage);
       this.quill.insertEmbed(range.index, "image", resImage);
     };
   }

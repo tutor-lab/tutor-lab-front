@@ -7,10 +7,7 @@ import {
   PrevStep,
   MoveStep,
   ClassUpdate,
-  AddClass,
-  DeleteClass,
   InputClass,
-  AddLectrue,
 } from "../redux/reducers/update";
 import MyClass from "./myclass";
 import Step01 from "../components/classRegistration/step/step01";
@@ -19,9 +16,6 @@ import Step03 from "../components/classRegistration/step/step03";
 
 const ClassRegistration = () => {
   const [currentI, setCurrentI] = useState(0);
-  const [lectureModal, setLectureModal] = useState(false);
-  const [lecture, setLecture] = useState("IT");
-
   const dispatch = useDispatch();
   const { form } = useSelector(({ update }) => ({
     form: update.update,
@@ -43,12 +37,6 @@ const ClassRegistration = () => {
       case "language":
         const selected = radiobox(1);
         value = selected;
-        break;
-      case "languageInput":
-        if (e.code == "Enter") {
-          name = "language";
-          hideModal();
-        }
         break;
       case "level":
         const level = radiobox(2);
@@ -81,6 +69,25 @@ const ClassRegistration = () => {
           value: value,
         })
       );
+    } else if (name == "offline") {
+      let discuss = form.discuss;
+      if (value == "off") {
+        discuss = "off";
+      }
+      dispatch(
+        ChangeField({
+          form: "update",
+          key: name,
+          value,
+        })
+      );
+      dispatch(
+        ChangeField({
+          form: "update",
+          key: "discuss",
+          discuss,
+        })
+      );
     } else {
       dispatch(
         ChangeField({
@@ -90,31 +97,6 @@ const ClassRegistration = () => {
         })
       );
     }
-  };
-
-  const AddingClass = () => {
-    dispatch(
-      AddClass({
-        form: "update",
-        key: "language",
-      })
-    );
-    dispatch(
-      AddLectrue({
-        form: "update",
-        key: "classtype",
-      })
-    );
-  };
-
-  const DeletingClass = (i) => {
-    dispatch(
-      DeleteClass({
-        form: "update",
-        key: "language",
-        index: i,
-      })
-    );
   };
 
   const onSubmit = (e) => {
@@ -149,8 +131,13 @@ const ClassRegistration = () => {
   const Close = () => {
     //focus 빗나갔을 때 modal 닫히도록
     const background = document.getElementById("LanBackground");
+    const background2 = document.getElementById("LevBackground");
+    const background3 = document.getElementById("LecBackground");
+
     window.addEventListener("click", (e) => {
       e.target === background ? hideModal() : false;
+      e.target === background2 ? hideLevel() : false;
+      e.target === background3 ? hideLec() : false;
     });
   };
 
@@ -164,9 +151,24 @@ const ClassRegistration = () => {
     modal ? (modal.style.display = "block") : "";
     setCurrentI(i);
   };
+
   const lectureShowModal = (i) => {
-    setLectureModal(true);
+    const menu = document.getElementById("lec");
+    menu ? (menu.style.display = "block") : "";
+    const back = document.getElementById("LecBackground");
+    back ? (back.style.display = "block") : "";
+    const modal = document.getElementById("lectureModal");
+    modal ? (modal.style.display = "block") : "";
     setCurrentI(i);
+  };
+
+  const hideLec = () => {
+    const lec = document.getElementById("lec");
+    lec ? (lec.style.display = "none") : "";
+    const back = document.getElementById("LecBackground");
+    back ? (back.style.display = "none") : "";
+    const modal = document.getElementById("lectureModal");
+    modal ? (modal.style.display = "none") : "";
   };
 
   const hideModal = () => {
@@ -267,10 +269,7 @@ const ClassRegistration = () => {
           showLevel={showLevel}
           MoveStep={RandomMove}
           Close={Close}
-          AddingClass={AddingClass}
-          DeletingClass={DeletingClass}
-          lectureModal={lectureModal}
-          setLectureModal={setLectureModal}
+          hideLec={hideLec}
           currentI={currentI}
           lectureShowModal={lectureShowModal}
           classtypeId={form.classtypeId}

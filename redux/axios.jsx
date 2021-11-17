@@ -1,12 +1,4 @@
 import axios from "axios";
-// axios.defaults.baseURL = "http://3.35.255.192:8081";
-// axios.interceptors.request.use(function (config) {
-//   const token = localStorage.getItem("accessToken");
-//   if (token) {
-//     config.headers.Authorization = "Bearer " + token;
-//   }
-//   return config;
-// });
 export const ClassReg = async (form) => {
   let level = "입문";
   switch (form.level) {
@@ -27,18 +19,6 @@ export const ClassReg = async (form) => {
   }
 
   let languageArray = [];
-  // form.language.map((e, i) => {
-  //   var languageObject = new Object();
-  //   languageObject.krSubject = form.language[i];
-  //   // languageObject.parent = form.classtype[i];
-  //   languageArray.push(languageObject);
-  // });
-  // form.classtype.map((e, i) => {
-  //   var languageObject = new Object();
-  //   languageObject.classtype = form.classtype[i];
-  //   // languageObject.parent = form.classtype[i];
-  //   languageArray.push(languageObject);
-  // });
   for (let i = 0; i < form.classtype.length; i++) {
     var languageObject = new Object();
     languageObject.krSubject = form.language[i];
@@ -53,9 +33,13 @@ export const ClassReg = async (form) => {
   if (form.offline == "on") {
     systemArray.push("OFFLINE");
   }
+  if (form.discuss == "on") {
+    systemArray.push("DISCUSS");
+  }
 
   let priceArray = [];
-  let priceObject = new Object();
+  let priceObject = new Object(),
+    priceObject2 = new Object();
   if (form.personal == "on") {
     priceObject.groupNumber = 0;
     priceObject.isGroup = false;
@@ -67,14 +51,14 @@ export const ClassReg = async (form) => {
     priceArray.push(priceObject);
   }
   if (form.group == "on") {
-    priceObject.groupNumber = form.groupMax;
-    priceObject.isGroup = true;
-    priceObject.pertimeCost = form.GpricePerHour; //시간당 비용
-    priceObject.pertimeLecture = form.GtimePerClass; //1회당 강의 시간
-    priceObject.totalCost =
+    priceObject2.groupNumber = form.groupMax;
+    priceObject2.isGroup = true;
+    priceObject2.pertimeCost = form.GpricePerHour; //시간당 비용
+    priceObject2.pertimeLecture = form.GtimePerClass; //1회당 강의 시간
+    priceObject2.totalCost =
       form.GpricePerHour * form.GnumOfTimes * form.GtimePerClass; //총 비용
-    priceObject.totalTime = form.GnumOfTimes * form.GtimePerClass; //총 강의 시간
-    priceArray.push(priceObject);
+    priceObject2.totalTime = form.GnumOfTimes * form.GtimePerClass; //총 강의 시간
+    priceArray.push(priceObject2);
   }
 
   const data = {

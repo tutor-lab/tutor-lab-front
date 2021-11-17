@@ -39,12 +39,6 @@ const MyClass = ({}) => {
       ClassLists();
     }
   }, []);
-  // useEffect(() => {
-  //   getMyInfo();
-  //   if (userRole === "TUTEE") {
-  //     router.push("/tutorInfoEdit");
-  //   }
-  // }, [userRole]);
 
   console.log(response);
   return res ? (
@@ -70,7 +64,7 @@ const MyClass = ({}) => {
       </div>
       <div className={styles.graysection}>
         <h3 className={styles.smallheadingB}>
-          등록한 강의 총 {response.data?.length}개
+          등록한 강의 총 {response.data?.numberOfElements}개
         </h3>
         {response.data ? (
           response.data.content.map((data) => {
