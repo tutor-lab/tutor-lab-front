@@ -1,7 +1,7 @@
 import styles from "./mainBtn.module.scss";
-const WhiteBtn = ({ text }) => {
+const WhiteBtn = ({ text, onClick }) => {
   return (
-    <button type="button" className={styles.whiteBtn}>
+    <button type="button" className={styles.whiteBtn} onClick={onClick}>
       <span className={styles.blueText}>{text}</span>
     </button>
   );
