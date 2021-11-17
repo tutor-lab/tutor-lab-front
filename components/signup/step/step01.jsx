@@ -92,7 +92,7 @@ const Step01 = ({
             onChange={handleChange("passwordConfirm")}
           />
           <InputBox
-            type="number"
+            type="text"
             placeholder={"휴대폰 번호('-' 제외)"}
             onChange={handleChange("phoneNumber")}
           />
