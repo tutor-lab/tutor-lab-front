@@ -101,8 +101,6 @@ const SignUpPage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(SignUp(form));
-
-    console.log("signUpError", form.signUpError);
   };
 
   const showState = () => {

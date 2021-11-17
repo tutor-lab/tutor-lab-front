@@ -7,8 +7,8 @@ import jwt_decode from "jwt-decode";
 function MyApp({ Component, pageProps }) {
   const [authorized, setAuthorized] = useState(false);
 
-  axios.defaults.baseURL = "http://3.35.255.192:8081";
-  //axios.defaults.baseURL = "http://192.168.0.10:8081";
+  //axios.defaults.baseURL = "http://3.35.255.192:8081";
+  axios.defaults.baseURL = "http://localhost:8080";
   axios.interceptors.request.use(function (config) {
     const token = localStorage.getItem("accessToken");
     if (token) {
