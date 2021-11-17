@@ -38,7 +38,8 @@ export const ClassReg = async (form) => {
   }
 
   let priceArray = [];
-  let priceObject = new Object();
+  let priceObject = new Object(),
+    priceObject2 = new Object();
   if (form.personal == "on") {
     priceObject.groupNumber = 0;
     priceObject.isGroup = false;
@@ -50,14 +51,14 @@ export const ClassReg = async (form) => {
     priceArray.push(priceObject);
   }
   if (form.group == "on") {
-    priceObject.groupNumber = form.groupMax;
-    priceObject.isGroup = true;
-    priceObject.pertimeCost = form.GpricePerHour; //시간당 비용
-    priceObject.pertimeLecture = form.GtimePerClass; //1회당 강의 시간
-    priceObject.totalCost =
+    priceObject2.groupNumber = form.groupMax;
+    priceObject2.isGroup = true;
+    priceObject2.pertimeCost = form.GpricePerHour; //시간당 비용
+    priceObject2.pertimeLecture = form.GtimePerClass; //1회당 강의 시간
+    priceObject2.totalCost =
       form.GpricePerHour * form.GnumOfTimes * form.GtimePerClass; //총 비용
-    priceObject.totalTime = form.GnumOfTimes * form.GtimePerClass; //총 강의 시간
-    priceArray.push(priceObject);
+    priceObject2.totalTime = form.GnumOfTimes * form.GtimePerClass; //총 강의 시간
+    priceArray.push(priceObject2);
   }
 
   const data = {
