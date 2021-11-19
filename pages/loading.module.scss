@@ -6,12 +6,12 @@
   width: 376px;
   height: 100vh;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0.35);
 
   .loadingText {
     font-size: 20px;
     font-weight: 700;
-    color: #667089;
+    color: #3568ee;
     animation-duration: 1400ms;
     animation-iteration-count: infinite;
     animation-name: flicker;
@@ -36,7 +36,6 @@
       animation-duration: 1600ms;
       animation-iteration-count: infinite;
       animation-name: gaguebar;
-      //   animation-direction: alternate;
     }
   }
 }

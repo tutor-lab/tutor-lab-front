@@ -17,11 +17,13 @@ const loading = handleActions(
   {
     [START_LOADING]: (state, action) => ({
       ...state,
-      [action.payload]: true,
+      // [action.payload]: true,
+      loading: true,
     }),
     [FINISH_LOADING]: (state, action) => ({
       ...state,
-      [action.payload]: false,
+      // [action.payload]: false,
+      loading: false,
     }),
   },
   initialState
