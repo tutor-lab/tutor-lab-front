@@ -7,6 +7,7 @@ import Modal from "../modal";
 import Gender from "../gender";
 import { useState, useEffect } from "react";
 import { SelectionWithoutTitle } from "../../mypage/selectBox";
+import Loading from "../../../pages/loading";
 const Step01 = ({
   form,
   prevStep,
@@ -14,6 +15,7 @@ const Step01 = ({
   handleSubmit,
   showState,
   close,
+  loading,
 }) => {
   const [error, setError] = useState("");
   const [disable, setDisable] = useState(true);
@@ -56,7 +58,9 @@ const Step01 = ({
     }
   };
 
-  return (
+  return loading ? (
+    <Loading></Loading>
+  ) : (
     <section className={styles.signUp01} onClick={close}>
       <div className={styles.stateBackground} id="stateBackground">
         <div className={styles.stateModalPart} id="stateModal">
@@ -68,7 +72,7 @@ const Step01 = ({
           <Gender onChange={handleChange} />
         </div>
       </div>
-      <TopBar prevStep={prevStep} />
+      <TopBar url={"/terms"} title={"회원가입"} />
       <div className={styles.contentSection}>
         <div className={styles.inputSection}>
           <InputBox

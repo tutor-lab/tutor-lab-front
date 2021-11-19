@@ -15,8 +15,10 @@ const SignUpPage = () => {
     form: SignUpR.signup,
     signUpError: SignUpR.signUpError,
   }));
+  const { initialState } = useSelector(({ loading }) => ({
+    initialState: loading.loading,
+  }));
   const step = form.step;
-
   const [selectL, setSelectL] = useState(0);
   const [selectM, setSelectM] = useState(0);
   const [selectS, setSelectS] = useState(0);
@@ -141,6 +143,7 @@ const SignUpPage = () => {
           handleSubmit={onSubmit}
           showState={showState}
           close={Close}
+          loading={initialState}
         />
       );
     default:
