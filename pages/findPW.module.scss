@@ -58,15 +58,20 @@
     .tel {
       position: relative;
       width: 100%;
-    }
 
-    .smallText {
-      margin-bottom: 49px;
-      font-size: 12px;
-      font-weight: 400;
-      line-height: 1.66;
-      color: #283237;
-      text-align: center;
+      .authBtn {
+        position: absolute;
+        top: 8px;
+        right: 3px;
+        width: 96px;
+        height: 24px;
+        color: #fff;
+        cursor: pointer;
+        background-color: #689afd;
+        border: 0;
+        border-radius: 6px;
+        outline: none;
+      }
     }
   }
 }
