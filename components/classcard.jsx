@@ -47,7 +47,11 @@ const ClassCard = ({ data }) => {
         </div>
       </div>{" "}
       <div className={styles.classCardExplanation}>
-        <h1>{data.title}</h1>
+        <h1>
+          {data.title.length >= 25
+            ? data.title.substring(0, 25) + "..."
+            : data.title}
+        </h1>
         <span className={styles.def}>{data.subTitle} </span>
         <div className={styles.likes}>
           <span className={styles.heart} />
