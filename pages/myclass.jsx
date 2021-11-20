@@ -3,32 +3,28 @@ import styles from "../styles/myclass.module.scss";
 import ClassCard from "../components/classcard";
 import BottomTab from "../components/bottomtab";
 import axios from "axios";
-import { useEffect, useState } from "react";
-
+import { useEffect, useState, useCallback, useRef } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 const MyClass = ({}) => {
   const [response, setResponse] = useState("");
   const [res, setRes] = useState(false);
-  const [userRole, setUserRole] = useState("");
+  const [pageNum, setPageNum] = useState(1);
+  const [totalElem, setTotalElem] = useState(0);
 
-  const getMyInfo = () => {
-    axios
-      .get("/users/my-info")
-      .then((res) => {
-        setUserRole(res.data.role);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   const ClassLists = async () => {
-    try {
-      setResponse(await axios.get("/tutors/my-lectures"));
-      setRes(true);
-      return response;
-    } catch (e) {
-      setRes(false);
-      return Promise.reject(e);
-    }
+    console.log(pageNum);
+    await axios
+      .get(`tutors/my-lectures?page=${pageNum}`)
+      .then((res) => {
+        setResponse([...response, res]);
+        setTotalElem(response[0]?.data.totalElements);
+        setRes(true);
+        return response;
+      })
+      .catch((e) => {
+        setRes(false);
+        return Promise.reject(e);
+      });
   };
 
   useEffect(() => {
@@ -38,9 +34,8 @@ const MyClass = ({}) => {
     } else {
       ClassLists();
     }
-  }, []);
+  }, [pageNum]);
 
-  console.log(response);
   return res ? (
     <>
       <div className={styles.whitesection}>
@@ -64,14 +59,31 @@ const MyClass = ({}) => {
       </div>
       <div className={styles.graysection}>
         <h3 className={styles.smallheadingB}>
-          등록한 강의 총 {response.data?.numberOfElements}개
+          등록한 강의 총 {response[0].data?.totalElements}개
         </h3>
-        {response.data ? (
-          response.data.content.map((data) => {
-            return <ClassCard data={data} key={data.id} />;
+        {response ? (
+          response.map((obj) => {
+            const hasMore = !obj.data?.last;
+            return (
+              <>
+                <InfiniteScroll
+                  dataLength={obj.data.totalElements}
+                  next={() => setPageNum(pageNum + 1)}
+                  hasMore={hasMore}
+                >
+                  {obj.data ? (
+                    obj.data.content.map((itemData) => {
+                      return <ClassCard data={itemData} key={itemData.id} />;
+                    })
+                  ) : (
+                    <h1>error1</h1>
+                  )}
+                </InfiniteScroll>
+              </>
+            );
           })
         ) : (
-          <></>
+          <h1>error2</h1>
         )}
         <div className={styles.fixedTab}>
           <BottomTab num={1} />
