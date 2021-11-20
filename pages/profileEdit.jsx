@@ -2,16 +2,105 @@ import styles from "./profileEdit.module.scss";
 import BottomTab from "../components/bottomtab";
 import OtherTopBar from "../components/mypage/topBar/otherPage";
 import { ProfileEditBtn } from "../components/mypage/myPageBtn";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 const ProfileEdit = () => {
+  const [img, setImg] = useState("");
+  const [origin, setOrigin] = useState("");
+  const onChangeFile = (event) => {
+    console.log(event.target.files[0]);
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    axios
+      .post("/uploads/images", formData)
+      .then((response) => {
+        const url = response.data.url;
+        const userImages = {};
+        userImages.image = url;
+        setImg(url);
+
+        console.log(url);
+        axios
+          .put("/users/my-info/image", userImages)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const myImage = () => {
+    axios
+      .get("/users/my-info")
+      .then((response) => {
+        setOrigin(response.data.image);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    myImage();
+  }, []);
+
   return (
     <section className={styles.profileEditSection}>
       <OtherTopBar title={"프로필 수정"} url={"/mypage"} />
       <section className={styles.imageSection}>
-        <input type="file" id="profile" />
-        <label htmlFor="profile">
-          <div className={styles.profileImage} />
-          <div className={styles.editBtn} />
-        </label>
+        {img == "" ? (
+          origin == "" ? (
+            <>
+              <input
+                type="file"
+                id="profile"
+                onChange={(e) => onChangeFile(e)}
+              />
+              <label htmlFor="profile">
+                <div className={styles.profileImage} />
+                <div className={styles.editBtn} />
+              </label>
+            </>
+          ) : (
+            <>
+              {" "}
+              <input
+                type="file"
+                id="profile"
+                onChange={(e) => onChangeFile(e)}
+              />
+              <Image
+                src={origin}
+                width="100px"
+                height="100px"
+                className={styles.inputImage}
+              ></Image>
+              <label htmlFor="profile">
+                <div className={styles.editBtn} />
+              </label>
+            </>
+          )
+        ) : (
+          <>
+            <input type="file" id="profile" onChange={(e) => onChangeFile(e)} />
+            <Image
+              src={img}
+              width="100px"
+              height="100px"
+              className={styles.inputImage}
+            ></Image>
+            <label htmlFor="profile">
+              <div className={styles.editBtn} />
+            </label>
+          </>
+        )}
       </section>
       <span className={styles.line} />
       <section className={styles.editBtnSection}>

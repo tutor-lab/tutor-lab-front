@@ -10,6 +10,7 @@ const TutorIntroduction = () => {
   if (typeof window !== "undefined") {
     const token = localStorage.getItem("accessToken");
   }
+  const [img, setImg] = useState("");
   const [careers, setCareers] = useState([]);
   const [educations, setEducations] = useState([]);
   const [name, setName] = useState("");
@@ -25,6 +26,7 @@ const TutorIntroduction = () => {
     });
     axios.get("/users/my-info").then((res) => {
       const item = res.data;
+      setImg(item.image);
       setName(item.name);
       setNickname(item.nickname);
       setPhoneNumber(item.phoneNumber);
@@ -41,7 +43,7 @@ const TutorIntroduction = () => {
       <section className={styles.basicInfo}>
         <h1 className={styles.title}>기본정보</h1>
         <div className={styles.profile}>
-          <TutorProfileImg />
+          <TutorProfileImg img={img} />
           <div className={styles.info}>
             <TutorInfoBox category={"이름"} content={name} />
             <TutorInfoBox category={"닉네임"} content={nickname} />
