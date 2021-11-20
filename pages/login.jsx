@@ -17,6 +17,12 @@ const Login = ({}) => {
       return alert("id와 password를 입력해주세요");
     }
 
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ username: username })
+      );
+    }
+
     const LoginRequest = new Object();
     LoginRequest.username = username;
     LoginRequest.password = password;
@@ -43,11 +49,9 @@ const Login = ({}) => {
           });
       })
       .catch(function (error) {
-
         setError(true);
         //        alert("로그인에 실패했습니다.");
         console.log(error);
-
       });
   };
   const onChangeUsername = (e) => {
@@ -60,6 +64,7 @@ const Login = ({}) => {
   return (
     <section className={styles.loginSection}>
       <h1 className={styles.title}>{"튜터로 로그인"}</h1>
+      <div className="test" />
       <span className={styles.imageLogo}>
         <ImageLogo />
       </span>
