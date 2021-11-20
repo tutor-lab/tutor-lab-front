@@ -20,7 +20,11 @@ const InputBox = ({ text, order, value, setValue }) => {
     >
       {text === "최종 학력" ? (
         <div style={{ display: "flex" }}>
-          <div className={styles.text}>{text}</div>
+          <div className={styles.text}>
+            {" "}
+            <span className={styles.important}>*</span>
+            {text}
+          </div>
           <select
             className={styles.educationLevel}
             name="type"

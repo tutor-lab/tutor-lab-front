@@ -30,7 +30,7 @@ export const SignUp = async (form) => {
     .then((response) => {
       console.log("response", response);
       if (response.status == 201) {
-        router.push("/myclass");
+        router.push("/login");
       }
       console.log("response: " + JSON.stringify(response));
       return response;

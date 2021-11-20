@@ -2,7 +2,7 @@ import Image from "next/image";
 import style from "./reviewSection.module.scss";
 import Rating from "./Rating";
 
-const Review = ({ profile, name, date, rating, review }) => {
+const Review = ({ name, date, rating, review }) => {
   return (
     <section className={style.UserReview}>
       <button type="button" className={style.dotbtn}>
@@ -11,7 +11,7 @@ const Review = ({ profile, name, date, rating, review }) => {
       {/* 버튼 이미지 필요 */}
       <div className={style.profile}>
         {/* 프로필 사진 없을 때 사용할 기본 이미지 필요 */}
-        {profile != "" ? (
+        {/* {profile != "" ? (
           <Image
             src={profile}
             alt=""
@@ -27,7 +27,7 @@ const Review = ({ profile, name, date, rating, review }) => {
             height="30px"
             className={style.profile}
           ></Image>
-        )}
+        )} */}
       </div>
       <div className={style.textSection}>
         <h2 className={style.name}>
@@ -42,17 +42,17 @@ const Review = ({ profile, name, date, rating, review }) => {
   );
 };
 
-const Comment = ({ profile, date, comment }) => {
+const Comment = ({ date, comment }) => {
   return (
     <section className={style.TutorComment}>
       <div className={style.profile}>
-        <Image
+        {/* <Image
           src={profile}
           alt=""
           width="30px"
           height="30px"
           className={style.profile}
-        ></Image>
+        ></Image> */}
       </div>
       <section className={style.textSection}>
         <h2 className={style.name}>
@@ -81,7 +81,7 @@ const CommentWriting = () => {
 };
 
 const ReviewSection = ({
-  Uprofile,
+  // Uprofile,
   Uname,
   Udate,
   URating,
@@ -94,7 +94,7 @@ const ReviewSection = ({
     <>
       {" "}
       <Review
-        profile={Uprofile}
+        // profile={Uprofile}
         name={Uname}
         date={Udate}
         rating={URating}

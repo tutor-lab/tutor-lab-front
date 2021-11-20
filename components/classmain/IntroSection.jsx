@@ -9,8 +9,12 @@ const IntroSection = ({
   reviewCnt,
   subheading,
   originPrice,
+  originPrice2,
+  group,
+  group2,
   discount,
   finalPrice,
+  finalPrice2,
   setReview,
   notes, //특이사항 (ex) 쿠폰 적용시 5개월 할부
 }) => {
@@ -42,7 +46,19 @@ const IntroSection = ({
         discount={discount}
         finalPrice={finalPrice}
         notes={notes}
+        group={group}
       ></Discount>
+      {originPrice2 ? (
+        <Discount
+          originPrice={originPrice2}
+          discount={discount}
+          finalPrice={finalPrice2}
+          notes={notes}
+          group={group2}
+        ></Discount>
+      ) : (
+        <></>
+      )}
       <button type="submit" className={style.register}>
         강의 신청
       </button>

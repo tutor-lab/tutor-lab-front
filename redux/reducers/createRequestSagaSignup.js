@@ -10,7 +10,7 @@ export default function createRequestSagaSignUp(type, request) {
       const response = yield call(request, action.payload);
       yield put({
         type: SUCCESS,
-        payload: response.data,
+        payload: response.status,
       });
     } catch (e) {
       console.log("error: " + e);

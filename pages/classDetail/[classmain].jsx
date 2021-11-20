@@ -20,6 +20,8 @@ const ClassMain = () => {
   const [select, setSelect] = useState(true);
   const [introduce, setIntroduce] = useState("");
   const [data, setData] = useState("");
+  const [review, setReview] = useState("");
+  const [myName, setMyName] = useState("");
   const router = useRouter();
   const classID = router.query.classmain;
 
@@ -35,12 +37,36 @@ const ClassMain = () => {
     }
   };
 
+  const getMyInfo = () => {
+    axios
+      .get("/users/my-info")
+      .then((res) => {
+        setMyName(res.data.username);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const GetReview = async () => {
+    try {
+      await axios.get(`/tutors/my-lectures/${classID}/reviews`).then((res) => {
+        console.log(res);
+        setReview(res.data.content);
+      });
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
       router.push("/");
     } else {
+      getMyInfo();
       ClassMainContent();
+      GetReview();
     }
   }, []);
 
@@ -50,12 +76,16 @@ const ClassMain = () => {
       <IntroSection
         tutorname={data?.lectureTutor.nickname}
         title={data?.title}
-        // rating={Data.totalRating.toFixed(1)}
+        rating={data?.scoreAverage.toFixed(1)}
         reviewCnt={data?.reviewCount}
-        subheading={data?.explanation}
-        originPrice={data?.lecturePrices[0].totalCost}
+        subheading={data?.subTitle}
+        originPrice={data?.lecturePrices[0]?.totalCost}
+        originPrice2={data?.lecturePrices[1]?.totalCost}
+        group={data?.lecturePrices[0]?.isGroup}
+        group2={data?.lecturePrices[1]?.isGroup}
         discount={0}
-        finalPrice={data?.lecturePrices[0].totalCost * (100 - 0) * 0.01}
+        finalPrice={data?.lecturePrices[0]?.totalCost}
+        finalPrice2={data?.lecturePrices[1]?.totalCost}
         setReview={setSelect}
         // notes={Data.notes}
       ></IntroSection>
@@ -79,26 +109,26 @@ const ClassMain = () => {
         <div className={style.classIntroduce}>{renderHTML(introduce)}</div>
       ) : (
         <>
-          {/* <TotalReview
-            totalRating={Data.totalRating}
-            reviewCnt={Data.reviewCnt}
-          /> */}
-          {/* {Data.reviews.map((data, i) => {
+          <TotalReview
+            totalRating={data?.scoreAverage.toFixed(1)}
+            reviewCnt={data.reviewCount}
+          />
+          {review.map((data, i) => {
             return (
               <ReviewSection
-                Uprofile={"/images/classImage.jpg"}
+                // Uprofile={"/images/classImage.jpg"}
                 // Uprofile={""}
-                Uname={data[0].name}
-                Udate={data[0].Udate}
-                URating={data[0].rate}
-                Ureview={data[0].Utext}
-                Tprofile={"/images/classImage.jpg"}
-                Tdate={data[1].Tdate}
-                Tcomment={data[1].Ttext}
+                Uname={data.username}
+                Udate={data.createdAt.substring(0, 10)}
+                URating={data.score}
+                Ureview={data.content}
+                // Tprofile={"/images/classImage.jpg"}
+                // Tdate={data[1].Tdate}
+                // Tcomment={data[1].Ttext}
                 key={i}
               ></ReviewSection>
             );
-          })} */}
+          })}
         </>
       )}
 

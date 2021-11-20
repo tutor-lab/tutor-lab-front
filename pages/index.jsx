@@ -27,7 +27,7 @@ const Main = () => {
             text={"튜터로 로그인"}
             onClick={() => router.push("/login")}
           />
-          <BlueBtn text={"회원가입"} onClick={() => router.push("/signup")} />
+          <BlueBtn text={"회원가입"} onClick={() => router.push("/terms")} />
         </div>
         <span className={styles.tutorlabText}>@tutorlab</span>
       </section>
