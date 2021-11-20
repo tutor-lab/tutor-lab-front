@@ -40,14 +40,7 @@ const ClassPosting = ({}) => {
               강의를 등록하고
               <br /> 더 많은 튜티들을 만나보세요!
             </p>
-            <div className={styles.pluspic}>
-              <Image
-                src="/../public/images/plus.png"
-                width="16px"
-                height="16px"
-                alt=""
-              />
-            </div>
+            <div className={styles.pluspic}>+</div>
           </button>
         </div>
 
