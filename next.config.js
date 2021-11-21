@@ -11,4 +11,7 @@ module.exports = withImages({
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  resolve: {
+    extensions: ["js", "jsx"],
+  },
 });
