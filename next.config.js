@@ -11,13 +11,4 @@ module.exports = withImages({
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-  webpack(config, { webpack }) {
-    return {
-      ...config,
-      plugins: [
-        ...config.plugins,
-        new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /^\.\/ko$/),
-      ],
-    };
-  },
 });
