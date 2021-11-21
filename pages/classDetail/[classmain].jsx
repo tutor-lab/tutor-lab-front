@@ -3,7 +3,6 @@ import IntroSection from "../../components/classmain/IntroSection";
 import style from "../classMain.module.scss";
 import BottomTab from "../../components/bottomtab";
 import ReviewSection from "../../components/classmain/ReviewSection";
-import Data from "../../classdata.json";
 import TotalReview from "../../components/classmain/TotalReview";
 import axios from "axios";
 import { useState, useEffect } from "react";
