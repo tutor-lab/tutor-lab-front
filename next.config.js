@@ -12,6 +12,9 @@ module.exports = withImages({
     ignoreDuringBuilds: true,
   },
   resolve: {
-    extensions: ["js", "jsx"],
+    modules: [resolve(process.cwd(), "src"), "node_modules"],
+    extensions: ["*", ".js", ".jsx", ".json"],
+    symlinks: false,
+    cacheWithContext: false,
   },
 });
