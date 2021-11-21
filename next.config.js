@@ -1,7 +1,5 @@
-const withImages = require("next-images");
-module.exports = withImages();
 module.exports = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   // images: {
   //   loader: "imgix",
   //   domains: ["tutorlab.s3.ap-northeast-2.amazonaws.com"],
