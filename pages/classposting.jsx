@@ -3,7 +3,7 @@ import router from "next/router";
 import styles from "../styles/classposting.module.scss";
 import ClassCardForPosting from "../components/classCardForPosting";
 import BottomTab from "../components/bottomtab";
-import Data from "../data.json";
+import fakeData from "../data.json";
 
 const ClassPosting = ({}) => {
   return (
@@ -46,9 +46,9 @@ const ClassPosting = ({}) => {
 
         <div>
           <h3 className={styles.smallheadingM}>
-            심사 중인 강의 {Data.testingcnt}개(최대 24시간 소요)
+            심사 중인 강의 {fakeData.testingcnt}개(최대 24시간 소요)
           </h3>
-          {Data.classes.map((data, i) => {
+          {fakeData.classes.map((data, i) => {
             return data.testing ? (
               <ClassCardForPosting data={data} key={i} />
             ) : (

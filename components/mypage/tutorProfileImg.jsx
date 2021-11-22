@@ -1,5 +1,6 @@
 import styles from "./tutorProfileImg.module.scss";
-import Image from "next/Image";
+import Image from "next/image";
+
 const TutorProfileImg = ({ img }) => {
   return img == "" ? (
     <section className={styles.tutorProfileImg}>
