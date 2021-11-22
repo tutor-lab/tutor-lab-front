@@ -1,9 +1,19 @@
 import styles from "./mainProfile.module.scss";
 import router from "next/router";
-const MainProfile = ({ name }) => {
+import Image from "next/image";
+const MainProfile = ({ name, img }) => {
   return (
     <section className={styles.mainPageProfile}>
-      <div className={styles.profileImage} />
+      {img ? (
+        <Image
+          src={img}
+          width="56px"
+          height="56px"
+          className={styles.profileImage}
+        />
+      ) : (
+        <div className={styles.profileImage} />
+      )}
       <div className={styles.profileInfo}>
         <span className={styles.profile}>튜터</span>
         <h1 className={styles.name}>{name}</h1>

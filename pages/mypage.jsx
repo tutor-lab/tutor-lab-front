@@ -9,13 +9,16 @@ import router from "next/router";
 import { useEffect, useState } from "react";
 const MyPage = () => {
   const [username, setUsername] = useState("");
+  const [image, setImage] = useState("");
   if (typeof window !== "undefined") {
     const token = localStorage.getItem("accessToken");
   }
 
   const getMyInfo = () => {
     axios.get("/tutors/my-info").then((response) => {
+      console.log(response);
       setUsername(response.data.user.name);
+      setImage(response.data.user.image);
     });
   };
 
@@ -33,7 +36,7 @@ const MyPage = () => {
     <section className={styles.mypageSection}>
       <MainTopBar />
       <section className={styles.profileSection}>
-        <MainProfile name={username} />
+        <MainProfile name={username} img={image} />
         <AboutTutee />
       </section>
 
@@ -43,7 +46,7 @@ const MyPage = () => {
         <div className={styles.selectCategory}>
           <h1 className={styles.title}>계정정보</h1>
           <CategoryBtn text={"내 계정"} />
-          <CategoryBtn text={"설정"} />
+          <CategoryBtn text={"설정"} onClick={() => router.push("/setting")} />
         </div>
 
         <div className={styles.selectCategory}>
