@@ -21,7 +21,7 @@ export async function getServerSideProps(context) {
 
 const Chat = () => {
   const router = useRouter();
-  const { tuteeId } = router.query;
+  const { tuteeId, profile, tuteeNickname } = router.query;
   const [socketConnected, setSocketConnected] = useState(false);
   const [sendMsg, setSendMsg] = useState(0);
   const [items, setItems] = useState([]);
@@ -124,12 +124,13 @@ const Chat = () => {
   console.log(items);
   return user ? (
     <div className={styles.chat}>
-      <NameTab name={"김하나"} />
+      <NameTab name={tuteeNickname} />
       <section className={styles.contentSection}>
         <div className={styles.content}>
           {items != undefined &&
             items.length > 0 &&
             items.map((data, i) => {
+              console.log("data===", data);
               return user?.data.nickname == data.senderNickname ||
                 user?.data.nickname == data.sender ? (
                 <MyChats key={i} text={data.message} time={data.sentAt} />
@@ -139,6 +140,7 @@ const Chat = () => {
                   text={data.message}
                   name={data.username}
                   time={data.sentAt}
+                  profile={profile}
                 />
               );
             })}

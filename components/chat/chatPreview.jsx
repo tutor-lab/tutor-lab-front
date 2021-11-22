@@ -30,7 +30,11 @@ const ChatPreview = ({ data, newChat }) => {
       onClick={() =>
         router.push({
           pathname: `/chatDetail/${data.chatroomId}`,
-          query: { tuteeId: data.tuteeId },
+          query: {
+            tuteeId: data.tuteeId,
+            profile: data.tuteeImage,
+            tuteeNickname: data.tuteeNickname,
+          },
         })
       }
     >
@@ -41,6 +45,7 @@ const ChatPreview = ({ data, newChat }) => {
             width="56px"
             height="56px"
             alt="프로필"
+            className={styles.profileImg}
           />
         )}
       </div>
