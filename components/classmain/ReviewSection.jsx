@@ -30,8 +30,9 @@ const Review = ({ name, date, rating, review }) => {
         )} */}
       </div>
       <div className={style.textSection}>
-        <h2 className={style.name}>
-          {name} <span className={style.date}>{date}</span>
+        <h2 className={style.reviewInfo}>
+          <span className={style.name}>{name}</span>
+          <span className={style.date}>{date}</span>
         </h2>
         <span className={style.rating}>
           <Rating rating={rating}></Rating>
@@ -55,8 +56,9 @@ const Comment = ({ date, comment }) => {
         ></Image> */}
       </div>
       <section className={style.textSection}>
-        <h2 className={style.name}>
-          튜터 댓글 <span className={style.date}>{date}</span>
+        <h2 className={style.reviewInfo}>
+          <span className={style.name}>튜터 댓글</span>
+          <span className={style.date}>{date}</span>
         </h2>
         <span className={style.comment}>{comment}</span>
       </section>
@@ -86,22 +88,26 @@ const ReviewSection = ({
   Udate,
   URating,
   Ureview,
-  Tprofile,
-  Tdate,
-  Tcomment,
+  TutorReview,
 }) => {
   return (
     <>
-      {" "}
       <Review
         // profile={Uprofile}
         name={Uname}
         date={Udate}
         rating={URating}
         review={Ureview}
-      ></Review>
-      <Comment profile={Tprofile} date={Tdate} comment={Tcomment}></Comment>
-      <CommentWriting></CommentWriting>
+      />
+      {TutorReview.content != null ? (
+        <Comment
+          date={TutorReview.createdAt.substring(0, 10)}
+          comment={TutorReview.content}
+        />
+      ) : (
+        <></>
+      )}
+      <CommentWriting />
     </>
   );
 };

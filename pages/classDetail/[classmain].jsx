@@ -1,14 +1,13 @@
 import ImgSection from "../../components/classmain/ImgSection";
 import IntroSection from "../../components/classmain/IntroSection";
 import style from "../classMain.module.scss";
-import BottomTab from "../../components/bottomtab";
 import ReviewSection from "../../components/classmain/ReviewSection";
-import Data from "../../classdata.json";
 import TotalReview from "../../components/classmain/TotalReview";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import renderHTML from "react-render-html";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export async function getServerSideProps(context) {
   return {
@@ -22,13 +21,13 @@ const ClassMain = () => {
   const [data, setData] = useState("");
   const [review, setReview] = useState("");
   const [myName, setMyName] = useState("");
+  const [pageNum, setPageNum] = useState(1);
   const router = useRouter();
   const classID = router.query.classmain;
 
   const ClassMainContent = async () => {
     try {
       await axios.get(`/lectures/${classID}`).then((res) => {
-        console.log(res);
         setIntroduce(res.data.content);
         setData(res.data);
       });
@@ -50,10 +49,12 @@ const ClassMain = () => {
 
   const GetReview = async () => {
     try {
-      await axios.get(`/tutors/my-lectures/${classID}/reviews`).then((res) => {
-        console.log(res);
-        setReview(res.data.content);
-      });
+      await axios
+        .get(`/tutors/my-lectures/${classID}/reviews?page=${pageNum}`)
+        .then((res) => {
+          console.log(res);
+          setReview([...review, res]);
+        });
     } catch (e) {
       return Promise.reject(e);
     }
@@ -66,9 +67,12 @@ const ClassMain = () => {
     } else {
       getMyInfo();
       ClassMainContent();
-      GetReview();
     }
   }, []);
+
+  useEffect(() => {
+    GetReview();
+  }, [pageNum]);
 
   return data != "" ? (
     <section className={style.main}>
@@ -113,28 +117,44 @@ const ClassMain = () => {
             totalRating={data?.scoreAverage.toFixed(1)}
             reviewCnt={data.reviewCount}
           />
-          {review.map((data, i) => {
-            return (
-              <ReviewSection
-                // Uprofile={"/images/classImage.jpg"}
-                // Uprofile={""}
-                Uname={data.username}
-                Udate={data.createdAt.substring(0, 10)}
-                URating={data.score}
-                Ureview={data.content}
-                // Tprofile={"/images/classImage.jpg"}
-                // Tdate={data[1].Tdate}
-                // Tcomment={data[1].Ttext}
-                key={i}
-              ></ReviewSection>
-            );
-          })}
+          {review ? (
+            review.map((obj, i) => {
+              const hasMore = !obj.data?.last;
+              return (
+                <>
+                  <InfiniteScroll
+                    dataLength={obj.data.totalElements}
+                    next={() => setPageNum(pageNum + 1)}
+                    hasMore={hasMore}
+                    key={i}
+                  >
+                    {obj.data ? (
+                      obj.data.content.map((itemData, index) => {
+                        console.log(itemData);
+                        return (
+                          <ReviewSection
+                            // Uprofile={"/images/classImage.jpg"}
+                            Uname={itemData.username}
+                            Udate={itemData.createdAt.substring(0, 10)}
+                            URating={itemData.score}
+                            Ureview={itemData.content}
+                            TutorReview={itemData.child}
+                            key={index}
+                          />
+                        );
+                      })
+                    ) : (
+                      <h1>error1</h1>
+                    )}
+                  </InfiniteScroll>
+                </>
+              );
+            })
+          ) : (
+            <h1>error2</h1>
+          )}
         </>
       )}
-
-      <div className={style.fixedTab}>
-        <BottomTab />
-      </div>
     </section>
   ) : (
     <></>

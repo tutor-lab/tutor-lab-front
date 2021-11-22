@@ -25,18 +25,22 @@
     flex-direction: column;
     width: 230px;
 
-    .name {
+    .reviewInfo {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       margin: 0 0 7px 0;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.44;
-      color: #858585;
+
+      .name {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.44;
+        color: #858585;
+      }
 
       .date {
         margin-left: 8px;
         font-size: 10px;
+        font-weight: 400;
         color: #939393;
       }
     }
@@ -71,18 +75,22 @@
     flex-direction: column;
     width: 230px;
 
-    .name {
+    .reviewInfo {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       margin: 0 0 5px 0;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.44;
-      color: #858585;
+
+      .name {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.44;
+        color: #858585;
+      }
 
       .date {
         margin-left: 8px;
         font-size: 10px;
+        font-weight: 400;
         color: #939393;
       }
     }
@@ -98,7 +106,8 @@
 
 .ReviewWriting {
   position: fixed;
-  bottom: 64px;
+  bottom: 0;
+  // bottom: 64px;
 
   .WritingBox {
     position: relative;
