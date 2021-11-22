@@ -27,6 +27,7 @@ const Login = ({}) => {
     LoginRequest.username = username;
     LoginRequest.password = password;
 
+    localStorage.removeItem("accessToken");
     axios
       .post("/login", LoginRequest)
       .then(function (response) {
