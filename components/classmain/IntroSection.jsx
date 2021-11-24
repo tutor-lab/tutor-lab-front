@@ -59,9 +59,6 @@ const IntroSection = ({
       ) : (
         <></>
       )}
-      <button type="submit" className={style.register}>
-        강의 신청
-      </button>
     </section>
   );
 };

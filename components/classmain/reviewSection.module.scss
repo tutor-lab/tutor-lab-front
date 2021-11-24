@@ -5,13 +5,32 @@
   background-color: white;
   border-top: 0.25px solid #b1b1b1;
 
+  .commentBtn {
+    position: absolute;
+    top: 26px;
+    right: 29px;
+    font-size: 10px;
+    font-weight: 400;
+    color: #939393;
+    text-decoration: underline;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+  }
+
   .dotbtn {
     position: absolute;
     top: 26px;
     right: 29px;
+    width: 3px;
+    height: 12px;
     cursor: pointer;
     background-color: transparent;
+    background-image: url("../../public/newImage/dots.svg");
+    background-repeat: no-repeat;
     border: 0;
+    outline: none;
   }
 
   .profile {
@@ -25,18 +44,22 @@
     flex-direction: column;
     width: 230px;
 
-    .name {
+    .reviewInfo {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       margin: 0 0 7px 0;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.44;
-      color: #858585;
+
+      .name {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.44;
+        color: #858585;
+      }
 
       .date {
         margin-left: 8px;
         font-size: 10px;
+        font-weight: 400;
         color: #939393;
       }
     }
@@ -55,9 +78,29 @@
 }
 
 .TutorComment {
+  position: relative;
   display: flex;
   padding: 20px 77px;
   border-top: 0.25px solid #b1b1b1;
+
+  .btnSet {
+    position: absolute;
+    top: 20px;
+    right: 29px;
+    display: flex;
+
+    .commentBtn {
+      padding: 0 3px;
+      font-size: 10px;
+      font-weight: 400;
+      color: #939393;
+      text-decoration: underline;
+      cursor: pointer;
+      background-color: transparent;
+      border: 0;
+      outline: none;
+    }
+  }
 
   .profile {
     width: 30px;
@@ -71,18 +114,22 @@
     flex-direction: column;
     width: 230px;
 
-    .name {
+    .reviewInfo {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       margin: 0 0 5px 0;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.44;
-      color: #858585;
+
+      .name {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.44;
+        color: #858585;
+      }
 
       .date {
         margin-left: 8px;
         font-size: 10px;
+        font-weight: 400;
         color: #939393;
       }
     }
@@ -94,11 +141,32 @@
       color: #939393;
     }
   }
+
+  .commentBack {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    z-index: 9999;
+    display: block;
+    width: 375px;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    transform: translateX(-50%);
+
+    .modal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 }
 
 .ReviewWriting {
   position: fixed;
-  bottom: 64px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 
   .WritingBox {
     position: relative;
@@ -137,4 +205,41 @@
   bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.commentModal {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 329px;
+  height: 249px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px 0 #949bad;
+
+  .choose {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+  }
+
+  .ok,
+  .no {
+    width: 80px;
+    height: 50px;
+    color: #fff;
+    cursor: pointer;
+    background-color: #3568ee;
+    border: 0;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .no {
+    background-color: #858585;
+  }
 }
