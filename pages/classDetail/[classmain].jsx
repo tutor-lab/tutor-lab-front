@@ -22,6 +22,7 @@ const ClassMain = () => {
   const [review, setReview] = useState("");
   const [myName, setMyName] = useState("");
   const [pageNum, setPageNum] = useState(1);
+  const [remove, setRemove] = useState(false);
   const router = useRouter();
   const classID = router.query.classmain;
 
@@ -30,6 +31,7 @@ const ClassMain = () => {
       await axios.get(`/lectures/${classID}`).then((res) => {
         setIntroduce(res.data.content);
         setData(res.data);
+        console.log(res);
       });
     } catch (e) {
       return Promise.reject(e);
@@ -60,6 +62,61 @@ const ClassMain = () => {
     }
   };
 
+  const DeleteModal = () => {
+    useEffect(() => {
+      window.addEventListener("click", (e) => {
+        const classBack = document.getElementById("classBack");
+        e.target === classBack ? (classBack.style.display = "none") : false;
+      });
+    }, []);
+
+    const DeleteClass = () => {
+      axios
+        .delete(`/lectures/${classID}`)
+        .then((response) => {
+          console.log(response);
+          router.push("/myclass");
+        })
+        .catch((e) => {
+          console.log(e);
+          alert("수강자가 있으므로 강의를 종료하실 수 없습니다.");
+          const classBack = document.getElementById("classBack");
+          classBack ? (classBack.style.display = "none") : "";
+        });
+    };
+
+    return (
+      <div className={style.classModal} id="classModal">
+        <p className={style.text}>
+          <strong>
+            삭제하면 되돌릴 수 없습니다.
+            <br />
+            정말 삭제하시겠습니까?
+          </strong>
+        </p>
+        <div className={style.choose}>
+          <button
+            type="button"
+            className={style.no}
+            onClick={() => {
+              const classBack = document.getElementById("classBack");
+              classBack ? (classBack.style.display = "none") : "";
+            }}
+          >
+            아니오
+          </button>
+          <button
+            type="button"
+            className={style.ok}
+            onClick={() => DeleteClass()}
+          >
+            네
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
@@ -76,6 +133,33 @@ const ClassMain = () => {
 
   return data != "" ? (
     <section className={style.main}>
+      <div className={style.btnSet}>
+        <button
+          type="button"
+          className={style.edit}
+          onClick={() =>
+            router.push({
+              pathname: `/classEdit`,
+              query: {
+                id: data.id,
+              },
+            })
+          }
+        >
+          <span className={style.btnText}>수정</span>
+        </button>
+        <button
+          type="button"
+          className={style.close}
+          onClick={() => {
+            setRemove(true);
+            const classBack = document.getElementById("classBack");
+            classBack ? (classBack.style.display = "block") : "";
+          }}
+        >
+          <span className={style.btnText}>종료</span>
+        </button>
+      </div>
       <ImgSection thumbnail={data?.thumbnail} online={1} offline={1} />
       <IntroSection
         tutorname={data?.lectureTutor.nickname}
@@ -109,6 +193,16 @@ const ClassMain = () => {
         </button>
       </div>
 
+      {remove ? (
+        <div className={style.classBack} id="classBack">
+          <div className={style.modal} id="modal">
+            <DeleteModal />
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+
       {select ? (
         <div className={style.classIntroduce}>{renderHTML(introduce)}</div>
       ) : (
@@ -139,6 +233,8 @@ const ClassMain = () => {
                             URating={itemData.score}
                             Ureview={itemData.content}
                             TutorReview={itemData.child}
+                            ReviewId={itemData.reviewId}
+                            ClassId={classID}
                             key={index}
                           />
                         );
