@@ -44,7 +44,7 @@ const Step01 = ({
           <h3 className={styles.question}>
             1. 강의 소개 메인 이미지를 등록해주세요.
           </h3>
-          <ImageCrop className={styles.test} form={form} />
+          <ImageCrop className={styles.test} />
         </div>
         <InputBox
           title={"2. 강의 타이틀을 입력해주세요."}

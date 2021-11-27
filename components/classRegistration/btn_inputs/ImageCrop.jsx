@@ -8,14 +8,14 @@ import Slider from "@material-ui/core/Slider";
 import { generateDownload } from "./utils/cropImage";
 import styles from "./imgCrop.module.scss";
 
-export default function ImageCrop({ className, form }) {
+function ImageCrop({ className }) {
   const inputRef = React.useRef();
 
   const triggerFileSelectPopup = () => inputRef.current.click();
 
-  // const { form } = useSelector(({ update }) => ({
-  //   form: update.update,
-  // }));
+  const { form } = useSelector(({ update }) => ({
+    form: update.update,
+  }));
 
   const [image, setImage] = useState("");
   const [croppedArea, setCroppedArea] = useState(null);
@@ -172,3 +172,4 @@ export default function ImageCrop({ className, form }) {
     </div>
   );
 }
+export default React.memo(ImageCrop);
