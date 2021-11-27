@@ -17,12 +17,6 @@ const Login = ({}) => {
       return alert("id와 password를 입력해주세요");
     }
 
-    if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(
-        JSON.stringify({ username: username })
-      );
-    }
-
     const LoginRequest = new Object();
     LoginRequest.username = username;
     LoginRequest.password = password;
@@ -31,7 +25,11 @@ const Login = ({}) => {
     axios
       .post("/login", LoginRequest)
       .then(function (response) {
-        console.log(response);
+        if (window.ReactNativeWebView) {
+          window.ReactNativeWebView.postMessage(
+            JSON.stringify({ username: username })
+          );
+        }
         const accessToken = response.data.split(" ")[1];
         localStorage.setItem("accessToken", accessToken);
         axios
