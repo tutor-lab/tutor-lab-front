@@ -37,7 +37,6 @@ const ClassEdit = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(data);
     const lecArr = [],
       langArr = [],
       lecKindId = [];
@@ -155,7 +154,8 @@ const ClassEdit = () => {
 
     for (let i = 0; i < name.length; i++) {
       let value = valueSet[i];
-      console.log(name[i], " ", value);
+
+      console.log("value=", value);
       dispatch(
         ChangeField({
           form: "update",
@@ -164,7 +164,7 @@ const ClassEdit = () => {
         })
       );
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   return <ClassRegistration distinct={2} lecID={id} />;
 };
