@@ -1,6 +1,4 @@
-const withImages = require("next-images");
-
-module.exports = withImages({
+module.exports = {
   reactStrictMode: false,
   images: {
     domains: ["tutorlab.s3.ap-northeast-2.amazonaws.com"],
@@ -10,4 +8,4 @@ module.exports = withImages({
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-});
+};
