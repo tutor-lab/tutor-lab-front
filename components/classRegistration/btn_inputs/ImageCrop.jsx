@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ChangeField } from "../../../redux/reducers/update";
 import Cropper from "react-easy-crop";
 import Slider from "@material-ui/core/Slider";
@@ -13,7 +13,11 @@ export default function ImageCrop() {
 
   const triggerFileSelectPopup = () => inputRef.current.click();
 
-  const [image, setImage] = React.useState(null);
+  const { form } = useSelector(({ update }) => ({
+    form: update.update,
+  }));
+
+  const [image, setImage] = React.useState(form.image);
   const [croppedArea, setCroppedArea] = React.useState(null);
   const [crop, setCrop] = React.useState({ x: 0, y: 0 });
   const [zoom, setZoom] = React.useState(1);

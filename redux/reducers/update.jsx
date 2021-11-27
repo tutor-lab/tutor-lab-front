@@ -13,6 +13,8 @@ const PREV_STEP = "newclass/PREV_STEP";
 const MOVE_STEP = "newclass/MOVE_STEP";
 const [CLASSUPDATE, CLASSUPDATE_SUCCESS, CLASSUPDATE_FAILURE] =
   createRequestActionTypes("newclass/UPDATE");
+const [CLASSEDIT, CLASSEDIT_SUCCESS, CLASSEDIT_FAILURE] =
+  createRequestActionTypes("newclass/EDIT");
 
 export const Initialize = createAction(INITIALIZE);
 export const ChangeField = createAction(
@@ -29,10 +31,17 @@ export const NextStep = createAction(NEXT_STEP, (form) => form);
 export const PrevStep = createAction(PREV_STEP, (form) => form);
 export const MoveStep = createAction(MOVE_STEP, (form) => form);
 export const ClassUpdate = createAction(CLASSUPDATE, (form) => form);
+export const ClassEdit = createAction(CLASSEDIT, ({ form, num,lecID }) => ({
+  form,
+  num,
+  lecID,
+}));
 
 const UpdateSaga = createRequestSaga(CLASSUPDATE, API.ClassReg);
+const EditSaga = createRequestSaga(CLASSEDIT, API.ClassReg);
 export function* Saga() {
   yield takeLatest(CLASSUPDATE, UpdateSaga);
+  yield takeLatest(CLASSEDIT, EditSaga);
 }
 const initialState = {
   update: {
@@ -92,6 +101,16 @@ const Update = handleActions(
       updateError: false,
     }),
     [CLASSUPDATE_FAILURE]: (state, { payload }) => ({
+      ...state,
+      updateSuccess: false,
+      updateError: true,
+    }),
+    [CLASSEDIT_SUCCESS]: (state) => ({
+      ...state,
+      updateSuccess: true,
+      updateError: false,
+    }),
+    [CLASSEDIT_FAILURE]: (state, { payload }) => ({
       ...state,
       updateSuccess: false,
       updateError: true,
