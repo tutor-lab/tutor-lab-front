@@ -3,6 +3,7 @@ import wrapper from "../redux/store";
 import "../styles/globals.css";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
   const [authorized, setAuthorized] = useState(false);
@@ -25,7 +26,19 @@ function MyApp({ Component, pageProps }) {
     return config;
   });
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      {" "}
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+        <meta
+          property="og:title"
+          content={title ? title : "튜터랩 과외구하기"}
+        />
+      </Head>
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 export default wrapper.withRedux(MyApp);
