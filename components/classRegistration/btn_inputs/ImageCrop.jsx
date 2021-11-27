@@ -1,26 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ChangeField } from "../../../redux/reducers/update";
 import Cropper from "react-easy-crop";
 import Slider from "@material-ui/core/Slider";
 import { generateDownload } from "./utils/cropImage";
 import styles from "./imgCrop.module.scss";
 
-export default function ImageCrop() {
+function ImageCrop({ className }) {
   const inputRef = React.useRef();
 
   const triggerFileSelectPopup = () => inputRef.current.click();
 
-  const [image, setImage] = React.useState(null);
-  const [croppedArea, setCroppedArea] = React.useState(null);
-  const [crop, setCrop] = React.useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = React.useState(1);
-  const [cropSize, setCropSize] = React.useState({ width: 330, height: 141 });
-  const [fileName, setFileName] = React.useState("");
-  const [imgType, setImgType] = React.useState("");
+  const { form } = useSelector(({ update }) => ({
+    form: update.update,
+  }));
 
+  const [image, setImage] = useState("");
+  const [croppedArea, setCroppedArea] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [cropSize, setCropSize] = useState({ width: 330, height: 141 });
+  const [fileName, setFileName] = useState("");
+  const [imgType, setImgType] = useState("");
+
+  useEffect(() => {
+    if (form.image !== "") {
+      setImage(form.image);
+    }
+  }, [form]);
   const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
   };
@@ -163,3 +172,4 @@ export default function ImageCrop() {
     </div>
   );
 }
+export default React.memo(ImageCrop);

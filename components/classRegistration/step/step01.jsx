@@ -12,6 +12,7 @@ const Step01 = ({
   showGray,
   hideGray,
   MoveStep,
+  num,
 }) => {
   const [able, setAble] = useState(false);
   useEffect(() => {
@@ -36,6 +37,7 @@ const Step01 = ({
         onClick={showGray}
         MoveStep={MoveStep}
         able={able}
+        num={num}
       />
       <section className={styles.graySection}>
         <div>

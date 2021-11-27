@@ -8,13 +8,14 @@ import {
   MoveStep,
   ClassUpdate,
   InputClass,
+  ClassEdit,
 } from "../redux/reducers/update";
 import MyClass from "./myclass";
 import Step01 from "../components/classRegistration/step/step01";
 import Step02 from "../components/classRegistration/step/step02";
 import Step03 from "../components/classRegistration/step/step03";
 
-const ClassRegistration = () => {
+const ClassRegistration = ({ distinct, lecID }) => {
   const [currentI, setCurrentI] = useState(0);
   const dispatch = useDispatch();
   const { form } = useSelector(({ update }) => ({
@@ -104,6 +105,12 @@ const ClassRegistration = () => {
     dispatch(ClassUpdate(form));
   };
 
+  const onSubmit2 = (e) => {
+    e.preventDefault();
+    console.log("2: ", e);
+    dispatch(ClassEdit({ form: form, num: 2, lecID: lecID }));
+  };
+
   const Next = (e) => {
     //이전 페이지
     e.preventDefault();
@@ -143,6 +150,7 @@ const ClassRegistration = () => {
 
   const showModal = (i) => {
     //modal 보이게
+    console.log(i);
     const menu = document.getElementById("menu");
     menu ? (menu.style.display = "block") : "";
     const back = document.getElementById("LanBackground");
@@ -153,6 +161,7 @@ const ClassRegistration = () => {
   };
 
   const lectureShowModal = (i) => {
+    console.log(i);
     const menu = document.getElementById("lec");
     menu ? (menu.style.display = "block") : "";
     const back = document.getElementById("LecBackground");
@@ -228,10 +237,12 @@ const ClassRegistration = () => {
     return selected;
   };
 
-  useEffect(() => {
-    //페이지 initialize
-    dispatch(Initialize("update"));
-  }, [dispatch]);
+  if (distinct != 2) {
+    useEffect(() => {
+      //페이지 initialize
+      dispatch(Initialize("update"));
+    }, [dispatch]);
+  }
 
   switch (step) {
     case 0:
@@ -243,6 +254,7 @@ const ClassRegistration = () => {
           handleChange={onChange}
           handleSubmit={onSubmit}
           MoveStep={RandomMove}
+          num={distinct}
         />
       );
     case 1:
@@ -255,6 +267,7 @@ const ClassRegistration = () => {
           showGray={showGray}
           hideGray={hideGray}
           MoveStep={RandomMove}
+          num={distinct}
         />
       );
     case 2:
@@ -273,6 +286,7 @@ const ClassRegistration = () => {
           currentI={currentI}
           lectureShowModal={lectureShowModal}
           classtypeId={form.classtypeId}
+          num={distinct}
         />
       );
     case 3:
@@ -282,14 +296,19 @@ const ClassRegistration = () => {
           form={form}
           prevStep={Prev}
           handleChange={onChange}
-          handleSubmit={onSubmit}
+          handleSubmit={distinct==2?onSubmit2:onSubmit}
           MoveStep={RandomMove}
+          num={distinct}
         />
       );
 
     default:
-      return <MyClass />;
+      if (distinct == 2) {
+        router.push(`/classmain/${lecID}`);
+        return;
+      } else {
+        return <MyClass />;
+      }
   }
 };
-
 export default ClassRegistration;

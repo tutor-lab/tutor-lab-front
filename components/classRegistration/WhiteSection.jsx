@@ -1,6 +1,6 @@
 import styles from "./whiteSection.module.scss";
 import Image from "next/image";
-const WhiteSection = ({ step, onClick, MoveStep, able }) => {
+const WhiteSection = ({ step, onClick, MoveStep, able, num }) => {
   return (
     <section className={styles.white}>
       <div className={styles.firstLine}>
@@ -12,7 +12,7 @@ const WhiteSection = ({ step, onClick, MoveStep, able }) => {
             height="14px"
           ></Image>
         </span>
-        <h1 className={styles.title}>강의 등록</h1>
+        <h1 className={styles.title}>{num == 2 ? "강의 수정" : "강의 등록"}</h1>
       </div>
       <div className={styles.secondLine}>
         <button

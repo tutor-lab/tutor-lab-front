@@ -6,7 +6,14 @@ import ClassCost from "../btn_inputs/ClassCost";
 import { BlueModal } from "../Modal";
 import { useState, useEffect } from "react";
 
-const Step03 = ({ form, prevStep, handleChange, handleSubmit, MoveStep }) => {
+const Step03 = ({
+  form,
+  prevStep,
+  handleChange,
+  handleSubmit,
+  MoveStep,
+  num,
+}) => {
   const [able, setAble] = useState(false);
   useEffect(() => {
     const test1 = form.online != "off" || form.offline != "off";
@@ -40,6 +47,7 @@ const Step03 = ({ form, prevStep, handleChange, handleSubmit, MoveStep }) => {
         onClick={prevStep}
         MoveStep={MoveStep}
         able={able}
+        num={num}
       />
       <section className={styles.graySection}>
         <div>

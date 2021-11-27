@@ -11,7 +11,7 @@ const InputBox = ({ title, placeholder, example, value, onChange, limit }) => {
           onChange={onChange}
         ></textarea>
         <span className={styles.count}>
-          {value.length}/{limit}
+          {value?.length}/{limit}
         </span>
       </span>
       <br />

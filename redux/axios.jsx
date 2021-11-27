@@ -1,5 +1,10 @@
 import axios from "axios";
-export const ClassReg = async (form) => {
+export const ClassReg = async ({ form, num, lecID }) => {
+  if (num == 2) {
+    console.log("it is 2!");
+  } else {
+    console.log("it is 1!");
+  }
   let level = "입문";
   switch (form.level) {
     case "입문":
@@ -23,6 +28,7 @@ export const ClassReg = async (form) => {
     var languageObject = new Object();
     languageObject.krSubject = form.language[i];
     languageObject.learningKind = form.classtype[i];
+    languageObject.learningKindId = form.classtypeId[i];
     languageArray.push(languageObject);
   }
 
@@ -72,22 +78,40 @@ export const ClassReg = async (form) => {
     thumbnailUrl: form.image,
     title: form.maintitle,
   };
+  console.log("num:", num);
+  console.log("lecID:", lecID);
   console.log(data);
-  await axios({
-    method: "POST",
-    url: "/lectures",
-    data: data,
-  })
-    .then((response) => {
-      const back = document.getElementById("uploadBack");
-      const modal = document.getElementById("uploadModal");
-      modal ? (modal.style.display = "block") : "";
-      back ? (back.style.display = "block") : "";
-      console.log(response);
-      return response;
+
+  if (num == 2) {
+    axios
+      .put(`/lectures/${lecID}`, data)
+      .then((response) => {
+        const back = document.getElementById("uploadBack");
+        const modal = document.getElementById("uploadModal");
+        modal ? (modal.style.display = "block") : "";
+        back ? (back.style.display = "block") : "";
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    await axios({
+      method: "POST",
+      url: "/lectures",
+      data: data,
     })
-    .catch((error) => {
-      errormsg = error.response;
-      return Promise.reject(errormsg);
-    });
+      .then((response) => {
+        const back = document.getElementById("uploadBack");
+        const modal = document.getElementById("uploadModal");
+        modal ? (modal.style.display = "block") : "";
+        back ? (back.style.display = "block") : "";
+        console.log(response);
+        return response;
+      })
+      .catch((error) => {
+        errormsg = error.response;
+        return Promise.reject(errormsg);
+      });
+  }
 };
