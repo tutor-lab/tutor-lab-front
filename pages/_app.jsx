@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import wrapper from "../redux/store";
 import "../styles/globals.css";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode"; 
 import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
@@ -25,6 +25,7 @@ function MyApp({ Component, pageProps }) {
     }
     return config;
   });
+  const title=""
 
   return (
     <>

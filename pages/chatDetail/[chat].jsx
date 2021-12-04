@@ -112,7 +112,7 @@ const Chat = () => {
         // chatroomId: parseInt(chatID),
         // type: "message",
         chatroomId: parseInt(chatID),
-        sender: user.data.name,
+        sender: user.data.senderNickname,
         receiver: parseInt(tuteeId),
         message: data,
         senderId: user?.data.userId,
@@ -130,8 +130,7 @@ const Chat = () => {
           {items != undefined &&
             items.length > 0 &&
             items.map((data, i) => {
-              console.log("data===", data);
-              return user?.data.nickname == data.senderNickname ||
+              return user?.data.senderNickname == data.senderNickname ||
                 user?.data.nickname == data.sender ? (
                 <MyChats key={i} text={data.message} time={data.sentAt} />
               ) : (
