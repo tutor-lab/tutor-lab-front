@@ -26,6 +26,6 @@
     "pages/myclass.jsx",
     "redux/reducers/index.jsx",
     "redux/sagas/index.jsx"
-  ],
+, "pages/terms2.jsx", "pages/termsContainer.jsx"  ],
   "exclude": ["node_modules"]
 }
