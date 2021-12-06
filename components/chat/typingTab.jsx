@@ -13,11 +13,11 @@ const TypingTab = ({ sendMsgEnter }) => {
 
   return (
     <section className={styles.typingTab}>
-      <button
+      {/* <button
         type="button"
         className={styles.addFile}
         onClick={() => console.log("plus")}
-      />
+      /> */}
       <input
         type="text"
         className={styles.chatContent}
@@ -29,7 +29,7 @@ const TypingTab = ({ sendMsgEnter }) => {
         id="messageInput"
       />
 
-      {/* <button
+      <button
         type="submit"
         className={styles.send}
         onClick={() => {
@@ -37,7 +37,9 @@ const TypingTab = ({ sendMsgEnter }) => {
             enter();
           }
         }}
-      /> */}
+      >
+        보내기
+      </button>
     </section>
   );
 };

@@ -38,10 +38,12 @@
   }
 
   .send {
-    width: 40px;
+    width: 50px;
     height: 40px;
     cursor: pointer;
-    background-image: url("/images/send.png");
+    color: #6595f4;
+    background-color: #fff;
+    //background-image: url("/images/send.png");
     background-position: center;
     background-repeat: no-repeat;
     border: 0;
