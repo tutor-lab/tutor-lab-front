@@ -2,17 +2,25 @@ import styles from "./main.module.scss";
 import { WhiteBtn, BlueBtn } from "../components/login/btn/mainBtn";
 import { ImageLogo, TextLogo } from "../components/login/logos";
 import router from "next/router";
+import jwt_decode from "jwt-decode";
 
 const Main = () => {
   let token = "";
   if (typeof window !== "undefined") {
     token = window.localStorage.getItem("accessToken");
+    if (token) {
+      const decodedJwt = jwt_decode(token);
+      // const d = new Date(0);
+      // d.setUTCSeconds(decodedJwt.exp);
+      // console.log('dTimes=',d); //날짜확인용
+      if (decodedJwt.exp * 1000 < Date.now()) {
+        window.localStorage.removeItem("accessToken");
+      }
+    }
   }
-
   if (token) {
     router.push("/myclass");
   }
-
   return (
     <div>
       <section className={styles.main}>

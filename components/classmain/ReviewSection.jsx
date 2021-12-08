@@ -2,6 +2,7 @@ import style from "./reviewSection.module.scss";
 import Rating from "./Rating";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { report } from "process";
 
 const CommentWriting = ({ lecId, pId, reviewId, num }) => {
   const [comment, setComment] = useState("");
@@ -53,6 +54,11 @@ const CommentWriting = ({ lecId, pId, reviewId, num }) => {
   );
 };
 
+const reportReview = () => {
+  if (confirm("신고 하시겠습니까?")) {
+    alert("신고접수가 완료되었습니다.");
+  }
+};
 const Review = ({ name, date, rating, review, reviewId, lecId, tReview }) => {
   const [comment, setComment] = useState(false);
   return (
@@ -92,6 +98,9 @@ const Review = ({ name, date, rating, review, reviewId, lecId, tReview }) => {
         <h2 className={style.reviewInfo}>
           <span className={style.name}>{name}</span>
           <span className={style.date}>{date}</span>
+          <span className={style.reportReview} onClick={reportReview}>
+            신고
+          </span>
         </h2>
         <span className={style.rating}>
           <Rating rating={rating}></Rating>
