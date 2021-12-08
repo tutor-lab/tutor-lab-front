@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styles from "./main.module.scss";
 import { WhiteBtn, BlueBtn } from "../components/login/btn/mainBtn";
 import { ImageLogo, TextLogo } from "../components/login/logos";
@@ -18,9 +19,13 @@ const Main = () => {
       }
     }
   }
-  if (token) {
-    router.push("/myclass");
-  }
+  useEffect(() => {
+    if (token) {
+      router.push("/myclass");
+    } else {
+      router.push("/");
+    }
+  }, [token]);
   return (
     <div>
       <section className={styles.main}>
