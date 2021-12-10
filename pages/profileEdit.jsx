@@ -61,6 +61,7 @@ const ProfileEdit = () => {
               <input
                 type="file"
                 id="profile"
+                accept="image/*"
                 onChange={(e) => onChangeFile(e)}
               />
               <label htmlFor="profile">
@@ -74,6 +75,7 @@ const ProfileEdit = () => {
               <input
                 type="file"
                 id="profile"
+                accept="image/*"
                 onChange={(e) => onChangeFile(e)}
               />
               <Image
@@ -92,6 +94,7 @@ const ProfileEdit = () => {
             <input type="file" id="profile" onChange={(e) => onChangeFile(e)} />
             <Image
               src={img}
+              accept="image/*"
               width="100px"
               height="100px"
               className={styles.inputImage}

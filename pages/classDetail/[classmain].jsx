@@ -224,7 +224,6 @@ const ClassMain = () => {
                   >
                     {obj.data ? (
                       obj.data.content.map((itemData, index) => {
-                        console.log(itemData);
                         return (
                           <ReviewSection
                             // Uprofile={"/images/classImage.jpg"}
