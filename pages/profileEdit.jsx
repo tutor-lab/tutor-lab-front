@@ -24,9 +24,7 @@ const ProfileEdit = () => {
         console.log(url);
         axios
           .put("/users/my-info/image", userImages)
-          .then((response) => {
-            console.log(response);
-          })
+          .then((response) => {})
           .catch((e) => {
             console.log(e);
           });
@@ -40,7 +38,9 @@ const ProfileEdit = () => {
     axios
       .get("/users/my-info")
       .then((response) => {
-        setOrigin(response.data.image);
+        if (response.data.image !== null) {
+          setOrigin(response.data.image);
+        }
       })
       .catch((e) => {
         console.log(e);
