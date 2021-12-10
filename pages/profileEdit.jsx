@@ -94,7 +94,6 @@ const ProfileEdit = () => {
             <input type="file" id="profile" onChange={(e) => onChangeFile(e)} />
             <Image
               src={img}
-              accept="image/*"
               width="100px"
               height="100px"
               className={styles.inputImage}
