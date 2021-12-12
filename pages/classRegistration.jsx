@@ -102,7 +102,8 @@ const ClassRegistration = ({ distinct, lecID }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(ClassUpdate(form));
+    console.log("form", form);
+    dispatch(ClassUpdate({ form: form, num: 1 }));
   };
 
   const onSubmit2 = (e) => {
@@ -296,7 +297,7 @@ const ClassRegistration = ({ distinct, lecID }) => {
           form={form}
           prevStep={Prev}
           handleChange={onChange}
-          handleSubmit={distinct==2?onSubmit2:onSubmit}
+          handleSubmit={distinct == 2 ? onSubmit2 : onSubmit}
           MoveStep={RandomMove}
           num={distinct}
         />
