@@ -8,6 +8,7 @@ import Gender from "../gender";
 import { useState, useEffect } from "react";
 import { SelectionWithoutTitle } from "../../mypage/selectBox";
 import Loading from "../../../pages/loading";
+
 const Step01 = ({
   form,
   prevStep,
@@ -33,7 +34,6 @@ const Step01 = ({
       /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     if (
       form.email == "" ||
-      form.gender == "" ||
       form.name == "" ||
       form.password == "" ||
       form.passwordConfirm == "" ||
@@ -60,6 +60,10 @@ const Step01 = ({
 
   return loading ? (
     <Loading></Loading>
+  ) : form.signUpSuccess ? (
+    () => {
+      alert("이메일이 발송되었습니다.\n가입하신 이메일을 확인해주세요.");
+    }
   ) : (
     <section className={styles.signUp01} onClick={close}>
       <div className={styles.stateBackground} id="stateBackground">
@@ -79,26 +83,31 @@ const Step01 = ({
             type="text"
             placeholder={"이름"}
             onChange={handleChange("name")}
+            value={form.name}
           />
           <InputBox
             type="email"
             placeholder={"ID(E-mail)"}
             onChange={handleChange("email")}
+            value={form.email}
           />
           <InputBox
             type="password"
             placeholder={"비밀번호 입력(6-14자)"}
             onChange={handleChange("password")}
+            value={form.password}
           />
           <InputBox
             type="password"
             placeholder={"비밀번호 재입력"}
             onChange={handleChange("passwordConfirm")}
+            value={form.passwordConfirm}
           />
           <InputBox
             type="text"
             placeholder={"휴대폰 번호('-' 제외)"}
             onChange={handleChange("phoneNumber")}
+            value={form.phoneNumber}
           />
           <span className={styles.errText}>{error ? error : ""}</span>
         </div>
@@ -138,6 +147,8 @@ const Step01 = ({
             />
           </span>
         </div>
+        <span className={styles.text}>출생연도와 성별은 선택사항입니다.</span>
+        <br />
         <span className={styles.text}>동네 강의 추천을 위해 입력해주세요</span>
       </div>
       <div className={styles.footer}>

@@ -7,7 +7,7 @@ const Terms = () => {
   const [disable, setDisable] = useState(true);
   return (
     <section className={styles.termSection}>
-      <TopBar url={"/"} title={"개인정보 처리방침"} />
+      <TopBar url={"/termsContainer"} title={"개인정보 처리방침"} />
       <section className={styles.termsContent}>
         <span>
           &lt;주니스&gt;('www.tutorlab.co.kr'이하 '튜터랩')은(는) 「개인정보
