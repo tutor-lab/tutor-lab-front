@@ -33,7 +33,7 @@ const initialState = {
   signup: {
     step: 1,
     email: "",
-    gender: "MALE",
+    gender: "M",
     name: "",
     password: "",
     passwordConfirm: "",
@@ -43,6 +43,8 @@ const initialState = {
     stateM: "",
     stateS: "",
     disable: true,
+    genderCheck: false,
+    birthCheck: false,
   },
   signUpSuccess: false,
   signUpError: false,

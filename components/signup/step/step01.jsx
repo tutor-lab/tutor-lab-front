@@ -117,11 +117,15 @@ const Step01 = ({
               opt={2}
               name="birthYear"
               onChange={handleChange("birthYear")}
+              onChange2={handleChange("birthCheck")}
+              form={form}
             />
             <SelectionWithoutTitle
               opt={1}
               name="gender"
               onChange={handleChange("gender")}
+              onChange2={handleChange("genderCheck")}
+              form={form}
             />
           </span>
           <span className={styles.row}>

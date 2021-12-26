@@ -2,14 +2,29 @@ import axios from "axios";
 import router from "next/router";
 export const SignUp = async (form) => {
   let gender = "MALE";
-  if (form.gender == "M") {
-    gender = "MALE";
-  } else if (form.gender == "F") {
-    gender = "FEMALE";
+  let birthYear = form.birthYear;
+
+  if (form.genderCheck) {
+    gender = "";
+    console.log("gender: true");
+  } else {
+    if (form.gender == "M") {
+      gender = "MALE";
+    } else if (form.gender == "F") {
+      gender = "FEMALE";
+    }
+    console.log("gender: false");
   }
+
+  if (form.birthCheck) {
+    birthYear = "";
+  } else {
+    birthYear = form.birthYear;
+  }
+
   const data = {
     bio: "안녕하세요",
-    birthYear: form.birthYear,
+    birthYear: birthYear,
     email: form.email,
     gender: gender,
     image: "",

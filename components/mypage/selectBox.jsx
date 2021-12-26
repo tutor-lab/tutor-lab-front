@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styles from "./selectBox.module.scss";
 const year = [];
 for (let i = 2002; i >= 1921; i--) {
@@ -39,16 +40,24 @@ const Selection = ({ title, opt, setValue }) => {
   );
 };
 
-const SelectionWithoutTitle = ({ opt, name, onChange }) => {
+const SelectionWithoutTitle = ({ opt, name, onChange, onChange2, form }) => {
   return (
     <section className={styles.selectBox2}>
       <select className={styles.sel} name={name} id={name} onChange={onChange}>
         {opt == 1 ? (
           <>
-            <option value="M" className={styles.option}>
+            <option
+              value="M"
+              className={styles.option}
+              selected={form.gender == "M" ? true : false}
+            >
               남자
             </option>
-            <option value="F" className={styles.option}>
+            <option
+              value="F"
+              className={styles.option}
+              selected={form.gender == "F" ? true : false}
+            >
               여자
             </option>
           </>
@@ -56,7 +65,12 @@ const SelectionWithoutTitle = ({ opt, name, onChange }) => {
           <>
             {year.map((data, i) => {
               return (
-                <option value={data} className={styles.option} key={i}>
+                <option
+                  value={data}
+                  className={styles.option}
+                  key={i}
+                  selected={form.birthYear == data ? true : false}
+                >
                   {data}
                 </option>
               );
@@ -64,6 +78,33 @@ const SelectionWithoutTitle = ({ opt, name, onChange }) => {
           </>
         )}
       </select>
+      {opt == 1 ? (
+        <div className={styles.checkSec}>
+          <input
+            type="checkbox"
+            id="genderCheck"
+            name="genderCheck"
+            onChange={onChange2}
+            checked={form.genderCheck}
+          />
+          <label htmlFor="genderCheck" className={styles.check}>
+            <span>성별 선택 안 함</span>
+          </label>
+        </div>
+      ) : (
+        <div className={styles.checkSec}>
+          <input
+            type="checkbox"
+            id="birthCheck"
+            name="birthCheck"
+            onChange={onChange2}
+            checked={form.birthCheck}
+          />
+          <label htmlFor="birthCheck" className={styles.check}>
+            <span>출생년도 선택 안 함</span>
+          </label>
+        </div>
+      )}
     </section>
   );
 };

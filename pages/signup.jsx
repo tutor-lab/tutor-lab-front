@@ -10,6 +10,8 @@ import {
 import Main from ".";
 
 const SignUpPage = () => {
+  const [gen, setGen] = useState(false);
+  const [birth, setBirth] = useState(false);
   const dispatch = useDispatch();
   const { form } = useSelector(({ SignUpR }) => ({
     form: SignUpR.signup,
@@ -55,6 +57,12 @@ const SignUpPage = () => {
         )?.id;
         if (value) hideState();
         setSelectS(selectS + 1);
+        break;
+      case "genderCheck":
+        value = document.querySelector('input[name="genderCheck"]').checked;
+        break;
+      case "birthCheck":
+        value = document.querySelector('input[name="birthCheck"]').checked;
         break;
       default:
         value = e.target.value;
@@ -144,6 +152,10 @@ const SignUpPage = () => {
           showState={showState}
           close={Close}
           loading={initialState}
+          gen={gen}
+          setGen={setGen}
+          birth={birth}
+          setBirth={setBirth}
         />
       );
     default:

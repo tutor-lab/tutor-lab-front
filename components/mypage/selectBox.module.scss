@@ -52,4 +52,21 @@
     line-height: 1.1875;
     color: #949bad;
   }
+
+  .checkSec {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .check {
+      font-family: Noto Sans KR;
+      font-size: 9px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.44;
+      letter-spacing: 0em;
+      color: #949bad;
+      text-align: left;
+    }
+  }
 }
