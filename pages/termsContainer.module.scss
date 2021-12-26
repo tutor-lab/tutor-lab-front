@@ -1,0 +1,78 @@
+.termsContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 375px;
+  height: 812px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 0 auto;
+  background-color: #fff;
+
+  .termsContent {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 25px 20px 0;
+
+    .agreeBtn {
+      width: 100%;
+      height: 44px;
+      padding: 5px 20px;
+      margin-bottom: 25px;
+      cursor: pointer;
+      background-color: #f3f5f8;
+      border: 1px solid #6595f4;
+      border-radius: 10px;
+
+      .agreeText {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.42;
+        color: #6595f4;
+      }
+    }
+
+    .c {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.41;
+      color: #434a58;
+    }
+
+    .agreeElem {
+      display: flex;
+      margin-bottom: 10px;
+
+      .elemText {
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.41;
+        color: #434a58;
+
+        .showBtn {
+          font-size: 10px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1.4;
+          color: #949bad;
+          text-decoration: underline;
+          cursor: pointer;
+          background-color: transparent;
+          border: 0;
+        }
+      }
+    }
+  }
+
+  .fixedTab {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    margin: 0;
+    transform: translateX(-50%);
+  }
+}

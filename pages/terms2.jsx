@@ -1,9 +1,8 @@
 import styles from "./terms.module.scss";
 import TopBar from "../components/signup/topBar";
-import BlueBtn from "../components/signup/button";
 import { useState } from "react";
-import router from "next/router";
-const Terms = () => {
+
+const Terms2 = () => {
   const [disable, setDisable] = useState(true);
   return (
     <section className={styles.termSection}>
@@ -334,4 +333,4 @@ const Terms = () => {
     </section>
   );
 };
-export default Terms;
+export default Terms2;
